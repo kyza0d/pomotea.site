@@ -1,0 +1,94 @@
+.bg-grid-texture {
+  background-image: url('/pattern.png');
+  background-repeat: repeat;
+  background-size: 9px;
+}
+
+.dual-inner-shadow-pseudo {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.dual-inner-shadow-pseudo::before,
+.dual-inner-shadow-pseudo::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.dual-inner-shadow-pseudo::before {
+  box-shadow: inset 0px 0px 60px 30px color-mix(in srgb, var(--color-theme-accent) 3%, transparent);
+}
+
+.dual-inner-shadow-pseudo::after {
+  box-shadow: inset 0px -30px 20px 10px color-mix(in srgb, var(--color-theme-accent) 3%, transparent);
+}
+
+.fade-box {
+  mask-image: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 1) 90px,
+      rgba(0, 0, 0, 1) calc(100% - 120px),
+      rgba(0, 0, 0, 0) calc(100% - 38px),
+      rgba(0, 0, 0, 0) 100%);
+}
+
+.fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+.fade-right {
+  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+@layer utilities {
+  .backdrop {
+    @apply w-fit relative items-center justify-between cursor-pointer hover:before:z-[-1] hover:before:absolute hover:before:h-12 hover:before:w-12 hover:before:bg-theme-border hover:before:opacity-40 hover:before:rounded-xl hover:before:left-1/2 hover:before:top-1/2 hover:before:-translate-x-1/2 hover:before:-translate-y-1/2
+  }
+  
+  .barber-stripes-bg {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0px,
+      transparent calc(25% - 0.5px),
+      var(--color-theme-accent) calc(25% + 0.5px),
+      var(--color-theme-accent) calc(50% - 0.5px),
+      transparent calc(50% + 0.5px)
+    );
+
+    background-size: 40px 40px;
+  }
+
+  .copy-fade-out {
+    animation: var(--animate-copy-fade-out);
+  }
+
+  .copy-fade-in {
+    animation: var(--animate-copy-fade-in);
+  }
+
+  .copy-stagger-1 {
+    animation-delay: 0.05s;
+  }
+
+  .copy-stagger-2 {
+    animation-delay: 0.1s;
+  }
+
+  .copy-stagger-3 {
+    animation-delay: 0.15s;
+  }
+
+  .copy-stagger-4 {
+    animation-delay: 0.2s;
+  }
+
+  .copy-stagger-5 {
+    animation-delay: 0.25s;
+  }
+}

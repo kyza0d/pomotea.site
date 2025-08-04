@@ -1,0 +1,23 @@
+strong {
+  color: var(--color-theme-subtitle)
+}
+
+.custom-text-sm {
+  font-size: var(--font-size-sm);
+}
+
+.custom-text-md {
+  font-size: var(--font-size-md);
+}
+
+.custom-text-lg {
+  font-size: var(--font-size-lg);
+}
+
+.custom-text-xl {
+  font-size: var(--font-size-xl);
+}
+
+.custom-text-2xl {
+  font-size: var(--font-size-2xl);
+}

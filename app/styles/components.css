@@ -1,0 +1,37 @@
+.progress-circle-stroke {
+  stroke: var(--color-landing-primary);
+}
+
+.session {
+  max-height: 12rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.session-exit-up {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out, max-height 0.5s ease-in-out, margin 0.5s ease-in-out;
+}
+
+.session-exit-up-active {
+  opacity: 0;
+  transform: translateY(-12rem);
+  max-height: 0;
+}
+
+.timeline-item {
+  opacity: 0.6;
+  transition: opacity 0.4s ease-in;
+}
+
+.timeline-item .timeline-text,
+.timeline-item .timeline-icon svg {
+  transition: color 0.5s ease-in;
+}
+
+.timeline-item.is-active {
+  opacity: 1;
+}
+
+.timeline-item.is-active .timeline-text,
+.timeline-item.is-active .timeline-icon svg {
+  color: var(--landing-primary);
+}
