@@ -9,16 +9,12 @@ import {
   TrendingUp,
   Users,
   Zap,
-  Lightbulb,
-  Activity,
-  Brain,
   BarChart3,
   Calendar,
   Clock,
-  ListTodo,
-  Flag,
-  Award
+  ListTodo
 } from "lucide-react";
+import { Mascot } from "@/components/ui/mascot";
 
 export const goalCards = [
   { icon: CheckCircle, title: "Task Management", description: "Break goals into actionable tasks with progress tracking" },
@@ -27,8 +23,8 @@ export const goalCards = [
 ];
 
 export const customizationItems = [
-  { icon: Palette, title: "15+ Focus", subtitle: "Optimized Themes" },
-  { icon: Sparkles, title: "14 Professional", subtitle: "Fonts" },
+  { icon: Palette, title: "10+", subtitle: "Themes" },
+  { icon: Sparkles, title: "Custom", subtitle: "Fonts" },
   { icon: Settings, title: "Background", subtitle: "Personalization" },
   { icon: Timer, title: "Custom Session", subtitle: "Durations" },
   { icon: CheckCircle, title: "Smart", subtitle: "Notifications" },
@@ -40,7 +36,7 @@ export const aiTools = [
   { name: "Task Generation", icon: ListTodo, category: "task" as const, description: "Automatically create tasks from conversations" },
   { name: "Smart Scheduling", icon: Calendar, category: "session" as const, description: "Generate optimal focus session timelines" },
   { name: "Progress Analysis", icon: TrendingUp, category: "insight" as const, description: "Track and analyze productivity patterns" },
-  { name: "Context Retention", icon: Brain, category: "insight" as const, description: "Remember and connect your work context" },
+  { name: "Context Retention", icon: Mascot, category: "insight" as const, description: "Remember and connect your work context" },
   { name: "Time Optimization", icon: Clock, category: "session" as const, description: "Optimize session lengths based on task complexity" },
 ];
 
@@ -95,7 +91,7 @@ export const goalMetrics = {
 
 export const goalWorkflowFeatures = [
   { icon: Target, title: "Natural Language", subtitle: "Goal Input" },
-  { icon: Brain, title: "AI-Powered", subtitle: "Task Breakdown" },
+  { icon: Mascot, title: "AI-Powered", subtitle: "Task Breakdown" },
   { icon: Timer, title: "Automatic", subtitle: "Session Scheduling" },
   { icon: BarChart3, title: "Real-time", subtitle: "Progress Tracking" }
 ];

@@ -15,7 +15,8 @@ import { ScrollProgressIndicator } from "./landing/scroll-progress";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FeatureItem } from "./landing/items";
-import { BarChart3, Brain, Timer } from "lucide-react";
+import { BarChart3, Timer } from "lucide-react";
+import { Mascot } from "@/components/ui/mascot";
 import { cn } from "@/lib/utils";
 import { SpotlightEffect } from "./landing/SpotlightEffect";
 
@@ -96,9 +97,9 @@ const LandingHero = () => {
               <Feature ref={el => itemRefs.current[0] = el}>
                 <FeatureItem
                   iconBgColor="bg-landing-secondary/10"
-                  icon={Brain}
-                  title="Auto Session"
-                  subtitle="Generation"
+                  icon={Mascot}
+                  title="AI Powered"
+                  subtitle="Productivity"
                   borderColor="border-none"
                 />
               </Feature>
@@ -107,8 +108,8 @@ const LandingHero = () => {
                 <FeatureItem
                   iconBgColor="bg-landing-secondary/10"
                   icon={Timer}
-                  title="Smart Timer"
-                  subtitle="System"
+                  title="Smart Time"
+                  subtitle="Blocking"
                   borderColor="border-none"
                 />
               </Feature>
@@ -117,8 +118,8 @@ const LandingHero = () => {
                 <FeatureItem
                   iconBgColor="bg-landing-secondary/10"
                   icon={BarChart3}
-                  title="Progress"
-                  subtitle="Tracking"
+                  title="Goal-Centric"
+                  subtitle="Workflow"
                   borderColor="border-none"
                 />
               </Feature>

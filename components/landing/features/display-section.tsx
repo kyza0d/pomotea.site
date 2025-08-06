@@ -8,6 +8,7 @@ import { tasksWorkflow } from "./tasks.workflow";
 import { aiWorkflow } from "./ai.workflow";
 import { goalsWorkflow } from "./goals.workflow";
 import { cn } from "@/lib/utils";
+import { settingsWorkflow } from "./settings.workflow";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,6 +82,8 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
           aiWorkflow(tl, data);
         } else if (data.workflowType === "goals") {
           goalsWorkflow(tl, data);
+        } else if (data.workflowType === "settings") {
+          settingsWorkflow(tl, data);
         }
       } else {
         // Non-workflow animations (no changes here)

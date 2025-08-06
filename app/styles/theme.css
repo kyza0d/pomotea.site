@@ -7,8 +7,6 @@
   --color-theme-base: var(--base);
   --color-theme-base-darker: var(--base-darker);
 
-  /* --font-family-heading: "DM Sans Variable", sans-serif; */
-
   --border-radius-lg: var(--radius);
   --border-radius-md: calc(var(--radius) - 2px);
   --border-radius-sm: calc(var(--radius) - 4px);

@@ -25,8 +25,8 @@ export const CtaSection = () => {
           <div className="py-6 mx-auto">
             <div className="mb-8 space-y-4">
               <h2 className="max-w-[24ch] text-3xl font-bold">Master your flow, make the most out of your time</h2>
-              <p className="max-w-[47ch]">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna
+              <p className="max-w-[38ch]">
+                Join our community and get latest updates, inside preview on the development of pomotea
               </p>
             </div>
             <Button

@@ -1,12 +1,9 @@
-"use client";
-
-import { useState } from "react";
-import { X, CheckCircle } from "lucide-react";
-// Import FaDiscord icon
-import { FaEnvelope, FaUser, FaDiscord } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { X } from "lucide-react";
+import { FaDiscord } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
+import { WaitlistForm, WaitlistStatus } from "../waitlist";
 
 interface WaitlistModalProps {
   isOpen: boolean;
@@ -14,39 +11,45 @@ interface WaitlistModalProps {
 }
 
 export const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  useEffect(() => {
+    // Check if user already has a session
+    const existingSessionId = localStorage.getItem("waitlist_session_id");
+    if (existingSessionId) {
+      setSessionId(existingSessionId);
+    }
+  }, []);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+  const handleWaitlistSuccess = (newSessionId: string) => {
+    setSessionId(newSessionId);
+  };
 
-    setIsSubmitting(false);
-    setIsSuccess(true);
-
-    // Auto close after success
-    setTimeout(() => {
-      onClose();
-      setIsSuccess(false);
-      setEmail("");
-    }, 2000);
+  const handleAccessGranted = () => {
+    // This could redirect to the app or show next steps
+    console.log("Access granted - redirect to app");
+    // Don't automatically close - let user close manually
   };
 
   const resetModal = () => {
-    setEmail("");
-    setIsSuccess(false);
-    setIsSubmitting(false);
+    setSessionId(null);
+    localStorage.removeItem("waitlist_session_id");
     onClose();
+  };
+
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed left-0 top-0 w-screen h-screen z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div
+      className="fixed left-0 top-0 w-screen h-screen z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+      onClick={handleBackdropClick}
+    >
       <div className="w-full max-w-md bg-landing-base border-4 border-landing-borders rounded-3xl overflow-hidden shadow-2xl">
 
         {/* Header */}
@@ -60,7 +63,7 @@ export const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
             </Text>
           </div>
           <button
-            onClick={resetModal}
+            onClick={onClose}
             className="p-2 hover:bg-landing-borders/30 rounded-xl transition-colors"
           >
             <X size={20} className="text-landing-foreground" />
@@ -69,55 +72,29 @@ export const WaitlistModal = ({ isOpen, onClose }: WaitlistModalProps) => {
 
         {/* Content */}
         <div className="p-6">
-          {isSuccess ? (
-            <div className="text-center space-y-4">
-              <CheckCircle size={48} className="mx-auto text-landing-primary" />
-              <Text variant="header" size="lg" className="text-landing-foreground">You're on the list!</Text>
-              <Text variant="subtitle" size="sm" className="text-landing-foreground/70">
-                We'll notify you when Pomotea launches.
-              </Text>
+          {sessionId ? (
+            <div className="space-y-4">
+              <WaitlistStatus
+                sessionId={sessionId}
+                onAccessGranted={handleAccessGranted}
+              />
             </div>
           ) : (
             <>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <FaEnvelope size={14} className="inline mx-2 mb-0.5" />
-                  <label className="text-sm font-medium">Email</label>
-                  <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="w-full mt-1 bg-landing-base border border-landing-borders"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    disabled={isSubmitting}
-                  />
-                </div>
+              <WaitlistForm onSuccess={handleWaitlistSuccess} />
 
-                {/* Button Container: Two-column grid layout */}
-                <div className="mt-6 grid grid-cols-2 gap-2">
-                  {/* Apply/Join Waitlist Button */}
-                  <Button
-                    type="submit"
-                    variant="primary"
-                    disabled={isSubmitting || !email || !name}
-                    className="w-full rounded-xl bg-landing-primary transition-colors duration-300 border-2 py-6 px-4 text-landing-base"
-                  >
-                    {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-                  </Button>
-
-                  {/* Discord Button */}
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-6 px-4 flex items-center justify-center gap-2 transition-colors"
-                    onClick={() => window.open('https://discord.gg/your-invite-link', '_blank')}
-                  >
-                    <FaDiscord size={20} />
-                    <span className="hidden sm:inline">Discord</span>
-                  </Button>
-                </div>
-              </form>
+              {/* Discord Button */}
+              <div className="mt-4 pt-4 border-t border-landing-borders">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-3 px-4 flex items-center justify-center gap-2 transition-colors"
+                  onClick={() => window.open('https://discord.gg/W8vrKhVJba', '_blank')}
+                >
+                  <FaDiscord size={20} />
+                  <span>Join our Discord</span>
+                </Button>
+              </div>
             </>
           )}
         </div>

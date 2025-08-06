@@ -9,6 +9,7 @@ import React from "react";
 import {
   MessageRow,
   MessageBubble,
+  TaskListCard,
   MultiLevelTaskListCard,
   type MultiLevelTask,
   MonthlySummaryCard,
@@ -71,7 +72,7 @@ const workflowStates: WorkflowState[] = [
       </MessageRow>,
       <MessageRow key="ai-reassurance" avatarIcon={Mascot} showTimeline={true} isJsx={true}>
         <MessageBubble isUser={false}>
-          I hear you. But you've been busy this past week—you completed <strong className="text-landing-primary">93 tasks!</strong> That's amazing progress. You've been on a roll, maybe take some time for yourself and come back recharged. You got this!
+          I hear you. But you've been busy this past week—you completed <strong className="text-landing-primary">93 tasks!</strong> That's amazing progress. You've got what it takes. Maybe take some time for yourself and come back recharged. You got this!
         </MessageBubble>
       </MessageRow>,
     ],
@@ -96,13 +97,13 @@ const workflowStates: WorkflowState[] = [
     phase: "task-generation",
     elements: [
       <MessageRow key="user-goal" isUser={true} isJsx={true}>
-        <div className="flex flex-col items-end gap-2">
-          <MessageBubble isUser={true}>Can you create a new goal for <br />working on this new idea?</MessageBubble>
+        <div className="flex flex-col items-end gap-2 text-right">
+          <MessageBubble isUser={true}>Can you create a new goal for working on this new idea?</MessageBubble>
           <FileAttachmentChip fileName="PRD.txt" />
         </div>
       </MessageRow>,
       <MessageRow key="ai-confirm" avatarIcon={Mascot} showTimeline={true}>
-        Sure! I'll put together a goal <br />with tasks that match your PRD.
+        Sure! I'll put together a goal with tasks that match your PRD.
       </MessageRow>,
       <MessageRow key="analyzing-card" avatarIcon={Target} showTimeline={true} isJsx={true}>
         <GoalPlanningCard />
@@ -144,7 +145,7 @@ const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[]
       <div className="col-span-3 overflow-hidden rounded-3xl border-3 border-landing-borders bg-landing-base">
         <div className="relative flex h-full">
           {workflowStates.map((state, stateIndex) => (
-            <div key={stateIndex} className="workflow-phase mb-40 absolute inset-0 top-4 px-4">
+            <div key={stateIndex} className="workflow-phase absolute inset-0 top-4 px-4">
               <div className="space-y-4 h-full overflow-y-auto">
                 {state.elements.map((element, elementIndex) => (
                   <div key={`${stateIndex}-${elementIndex}`} className={`workflow-child-${stateIndex}`}>
@@ -154,9 +155,9 @@ const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[]
               </div>
             </div>
           ))}
-          <div className="mt-auto m-3 z-10 flex min-h-14 border-landing-borders/50 bg-landing-base p-2 w-full rounded-2xl flex-col border-3">
+          <div className="mt-auto m-3 flex min-h-23 border-landing-borders/50 bg-theme-base p-2 w-full rounded-2xl flex-col border-3">
             <textarea
-              className="min-h-14 flex-1 px-3 py-2 focus:outline-none resize-none"
+              className="min-h-20 flex-1 px-3 py-2 bg-transparent focus:outline-none resize-none"
             />
             <div>
               <div className="flex justify-between">

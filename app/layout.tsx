@@ -1,5 +1,6 @@
 import "./globals.css";
 import "./fonts";
+import { ConvexClientProvider } from "@/lib/convex";
 
 export const metadata = {
   title: "pomotea - AI-Powered Focus Timer",
@@ -14,7 +15,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
       </head>
       <body>
-        {children}
+        <ConvexClientProvider>
+          {children}
+        </ConvexClientProvider>
       </body>
     </html>
   );

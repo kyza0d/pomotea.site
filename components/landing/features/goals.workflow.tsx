@@ -66,6 +66,7 @@ export function goalsWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
   const lastIndex = states.length - 1;
   const lastPhaseKey = states[lastIndex].phase;
   tl.addLabel('phase-1', '+=1.8');
+
   tl.to([`.workflow-child-${lastIndex}`, `.copy-phase-${lastPhaseKey}`], {
     duration: 0.6,
     autoAlpha: 1,

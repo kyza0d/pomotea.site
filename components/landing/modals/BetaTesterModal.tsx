@@ -170,7 +170,7 @@ export const BetaTesterModal = ({ isOpen, onClose }: BetaTesterModalProps) => {
                     type="button"
                     variant="outline"
                     className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-6 px-4 flex items-center justify-center gap-2 transition-colors"
-                    onClick={() => window.open('https://discord.gg/your-invite-link', '_blank')}
+                    onClick={() => window.open('https://discord.gg/W8vrKhVJba', '_blank')}
                   >
                     <FaDiscord size={20} />
                     <span className="hidden sm:inline">Discord</span>

@@ -30,7 +30,7 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
 }) => (
   <div className="flex items-center space-x-3">
     <div className={`${iconBgColor} ${padding} flex-shrink-0 items-center justify-center rounded-3xl border-2 ${borderColor}`}>
-      <Icon className={iconColor} />
+      <Icon size={28} className={iconColor} />
     </div>
     <span className="ml-2 whitespace-nowrap">
       {title} <br /> {subtitle}
