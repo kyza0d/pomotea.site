@@ -10,7 +10,7 @@ interface ScrollProgressIndicatorProps {
 
 export const ScrollProgressIndicator = ({ activeIndex, totalSections }: ScrollProgressIndicatorProps) => {
   return (
-    <div className="absolute left-4 flex flex-col gap-y-2">
+    <div className="hidden lg:visible absolute left-4 flex flex-col gap-y-2">
       {Array.from({ length: totalSections }).map((_, index) => (
         <div
           key={index}

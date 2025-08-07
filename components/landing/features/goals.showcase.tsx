@@ -134,7 +134,7 @@ const phaseContent: Record<string, PhaseContent> = {
 };
 
 const GoalsFeatureVisual = () => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-120 -skew-x-6 skew-y-3">
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-60 md:scale-120  -skew-x-6 skew-y-3">
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">
         <div className="space-y-4">

@@ -13,6 +13,7 @@ import {
   WorkflowDisplay
 } from "./shared/workflow-components";
 import { FaBars } from "react-icons/fa";
+import { cn } from "@/lib/utils";
 
 const colorThemes = {
   primary: { text: "text-landing-foreground", border: "border-landing-borders", bg: "bg-landing-base/30" },
@@ -117,7 +118,7 @@ type SessionCardProps = {
 
 const SessionCard = ({ id, timeId, icon: Icon, title, time, description, className, iconClassName }: SessionCardProps) => (
   <div className={clsx("session-card", id)}>
-    <SkewedCard className={clsx("h-30 w-150 flex items-center justify-between px-4 relative", className)}>
+    <SkewedCard className={clsx("h-30 w-120 md:w-130 flex items-center justify-between px-4 relative", className)}>
       <div className={clsx("absolute flex flex-row items-center top-0 -mt-8 text-sm", iconClassName || "text-landing-foreground")}>
         <Icon className="mr-4" size={16} />
         {title}
@@ -153,23 +154,55 @@ const phaseContent: Record<string, PhaseContent> = {
 
 const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
   <>
-    <div className="absolute top-8 left-8">
+    <div className="absolute origin-top-left scale-60 md:scale-80 lg:scale-100 top-2 left-2 md:top-5 md:left-5 lg:top-8 lg:left-8">
       <WorkflowDisplay workflowStates={workflowStates} />
     </div>
 
-    <div className="absolute ml-30 left-1/2 -translate-x-1/2 top-1/2 origin-right -skew-x-26 skew-y-12 scale-130">
-      <div className="absolute -top-32 left-0" id="timer-display-wrapper">
-        <div className="flex items-center space-x-8">
-          <CircularProgressSVG size={90} strokeWidth={8} progress={0} className="circular-progress-svg" />
-          <div className="space-y-0">
-            <span id="timer-session-type" className="text-sm text-landing-foreground">Focusing on:</span>
-            <h3 id="timer-task-name" className="text-3xl font-bold text-landing-headers">Clean workspace</h3>
+    <div className={cn(
+      // Base positioning
+      "absolute left-3/5 sm:left-2/4 md:left-1/2 -translate-x-1/2 top-1/4 sm:top-3/5 origin-right -skew-x-26 skew-y-12",
+
+      "sm:ml-8",
+      "md:ml-12",
+      "lg:ml-20",
+      "xl:ml-30",
+
+      "scale-75",
+      "sm:scale-85",
+      "md:scale-95",
+      "lg:scale-105",
+      "xl:scale-130"
+    )}>
+      <div className="absolute left-0 -top-8 sm:-top-10 md:-top-16 lg:-top-20 xl:-top-30" id="timer-display-wrapper">
+        <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6 lg:space-x-8">
+          <CircularProgressSVG
+            size={60}
+            strokeWidth={6}
+            progress={0}
+            className="circular-progress-svg sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[90px] lg:h-[90px]"
+          />
+          <div className="space-y-0 min-w-0 flex-1">
+            <span
+              id="timer-session-type"
+              className="text-xs sm:text-sm text-landing-foreground block"
+            >
+              Focusing on:
+            </span>
+            <h3
+              id="timer-task-name"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-landing-headers truncate"
+            >
+              Clean workspace
+            </h3>
           </div>
         </div>
       </div>
 
-      <div className="relative h-126 pt-8 overflow-hidden fade-box top-1/2 left-0">
-        <div id="session-cards-scroller" className="space-y-14 mt-10">
+      <div className="relative overflow-hidden fade-box top-1/2 left-0 h-96 sm:h-104 md:h-112 lg:h-120 xl:h-126 pt-4 sm:pt-6 md:pt-8">
+        <div
+          id="session-cards-scroller"
+          className="space-y-12 mt-16"
+        >
           {sessionCardData.map((card) => (
             <SessionCard key={card.id} {...card} />
           ))}

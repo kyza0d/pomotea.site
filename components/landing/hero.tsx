@@ -9,8 +9,8 @@ export const HeroSection = () => {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden mb-[-50px] mx-auto h-[90vh] max-h-240 w-full rounded-b-[2rem] border-4 border-t-0 border-landing-borders">
-        <div className="-mt-20  flex h-full flex-col items-center justify-center">
+      <section className="relative px-10 lg:px-0 isolate overflow-hidden mb-[-50px] mx-auto h-[90vh] max-h-380 w-full rounded-b-[2rem] border-4 border-t-0 border-landing-borders">
+        <div className="-mt-20 my-auto flex h-full flex-col items-center justify-center">
           <div className="space-y-4 z-10">
             <div className="rounded-xl border-landing-borders w-fit border-2 flex items-center space-x-2 h-fit py-1 px-1.5">
               <Orbit size={16} className="text-landing-primary mr-2" />
@@ -26,10 +26,10 @@ export const HeroSection = () => {
               Transform your goals into structured focus sessions. Pomotea automatically generates timer sessions from your
               tasks, helping you stay focused and make consistent progress.
             </p>
-            <div className="flex pt-8">
+            <div className="flex-wrap flex lg:pt-8">
               <Button
                 onClick={() => setIsWaitlistModalOpen(true)}
-                className="rounded-xl active:border-none bg-landing-primary py-6 px-12 text-landing-base"
+                className="rounded-xl active:border-none flex-1 bg-landing-primary py-6 px-12 text-landing-base"
               >
                 Join waitlist
               </Button>

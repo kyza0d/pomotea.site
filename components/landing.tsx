@@ -24,7 +24,10 @@ import { SpotlightEffect } from "./landing/SpotlightEffect";
 gsap.registerPlugin(ScrollTrigger);
 
 export const Feature = forwardRef<HTMLDivElement, { children: React.ReactNode, className?: string }>(({ children, className }, ref) => (
-  <div ref={ref} className={cn("relative backdrop-blur-xl border-landing-borders border-2 p-3 rounded-3xl z-10", className)}>
+  <div ref={ref} className={cn(
+    "relative backdrop-blur-xl border-landing-borders border-2 p-3 sm:p-4 md:p-5 rounded-3xl z-10",
+    className
+  )}>
     {children}
   </div>
 ));
@@ -85,12 +88,12 @@ const LandingHero = () => {
 
   return (
     <main id="landing-page">
-      <div className="mx-auto w-full max-w-[1340px] px-8 pt-0">
+      <div className="mx-auto w-full max-w-[1340px] px-2 sm:px-6 lg:px-8 pt-0">
         <article>
           <HeroSection />
 
-          <section className="z-10 sticky flex flex-col items-center -mt-60 mx-20">
-            <div ref={featuresContainerRef} className="relative mb-3 grid w-5/6 grid-cols-3 gap-8 py-4 px-5">
+          <section className="z-10 sticky flex flex-col items-center -mt-60 mx-4 sm:mx-8 md:mx-12 lg:mx-20">
+            <div ref={featuresContainerRef} className="relative mb-6 grid w-full md:w-full grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 py-4 px-2 sm:px-5 md:px-8 xl:gap-6">
               {/* <SpotlightEffect targetPosition={spotlightPos} /> */}
               <Feature ref={el => { itemRefs.current[0] = el; }}>
                 <FeatureItem
@@ -123,8 +126,8 @@ const LandingHero = () => {
               </Feature>
             </div>
 
-            <div className="landing-preview-image shadow-[0_0_35px_rgba(var(--color-landing-glow)/0.1))] z-20 sticky z-0 mx-auto rounded-[1rem] border-3 border-landing-borders bg-landing-base max-[1545px]:max-w-[85vw] w-full aspect-[16/9]">
-            </div>
+            <div className="landing-preview-image shadow-[0_0_35px_rgba(var(--color-landing-glow)/0.1))] z-20 sticky z-0 mx-auto rounded-[1rem] border-3 border-landing-borders bg-landing-base w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] xl:max-w-[75vw] aspect-[16/9]">
+              -              </div>
           </section>
 
           <Overview />
@@ -138,7 +141,7 @@ const LandingHero = () => {
         <SettingsScroll index={3} onActivate={setActiveIndex} />
       </div>
 
-      <div ref={indicatorRef} className="fixed top-1/2 left-1/2 -translate-x-1/2 w-screen max-w-[1340px] h-30 z-[101]">
+      <div ref={indicatorRef} className="fixed top-1/2 left-1/2 -translate-x-1/2 w-screen max-w-[95vw] sm:max-w-[1340px] h-30 z-[101]">
         <ScrollProgressIndicator activeIndex={activeIndex} totalSections={4} />
       </div>
 

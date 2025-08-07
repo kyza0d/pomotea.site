@@ -24,7 +24,7 @@ export const LandingThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="z-[250] ml-12 bg rounded-lg hover:bg-landing-base-lighter transition-colors duration-200 cursor-pointer"
+      className="z-[250] ml-0 lg:ml-12 bg rounded-lg hover:bg-landing-base-lighter transition-colors duration-200 cursor-pointer"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? (

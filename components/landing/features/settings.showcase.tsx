@@ -470,7 +470,7 @@ const AnalyticsContent = () => (
 );
 
 const SettingsPreview = () => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-300 scale-90 -skew-x-6 skew-y-3">
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-300 scale-50 md:scale-120 -skew-x-6 skew-y-3">
     <div className="grid grid-cols-3 gap-3">
       <div className='flex flex-col space-y-3 -translate-y-10'>
         <SettingsWindow className="settings-window-0">

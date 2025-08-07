@@ -145,7 +145,7 @@ const phaseContent: Record<string, PhaseContent> = {
 };
 
 const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-full max-w-[700px] scale-120 -skew-x-6 skew-y-3">
+  <div className="pointer-events-none absolute top-3/4 md:top-1/2 left-1/2 -translate-1/2 mt-15 w-full max-w-[700px] scale-70 md:scale-120 -skew-x-6 skew-y-3">
     <div className="grid grid-cols-5 gap-6 h-[600px]">
       <div className="col-span-3 overflow-hidden rounded-3xl border-3 border-landing-borders bg-landing-base">
         <div className="relative flex h-full">

@@ -36,17 +36,17 @@ const FeatureListing: React.FC<FeatureListingProps> = ({
   padding = "p-5 px-7",
 }) => {
   return (
-    <div className="flex items-start space-x-3">
-      <div className={`${iconBgColor} ${padding} flex-shrink-0 items-center justify-center rounded-3xl border-2 ${borderColor}`}>
-        <Icon size={32} className={iconColor} />
+    <div className="flex flex-col md:flex-row items-start space-x-3 sm:space-x-4">
+      <div className={`${iconBgColor} ${padding} mb-4 md:mb-0 flex-shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl border-2 ${borderColor}`}>
+        <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />
       </div>
-      <div className="ml-2">
-        <h4>{title}</h4>
-        <p className="text-landing-foreground/70 max-w-[70ch]">{subtitle}</p>
+      <div className="flex-1 min-w-0">
+        <h4 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">{title}</h4>
+        <p className="text-sm sm:text-base text-landing-foreground/70 leading-relaxed">{subtitle}</p>
         {details && details.length > 0 && (
-          <ul className="list-disc list-inside text-landing-foreground/60 mt-2 space-y-1">
+          <ul className="list-disc list-inside text-landing-foreground/60 mt-2 sm:mt-3 space-y-1 text-sm">
             {details.map((detail, i) => (
-              <li key={i}>{detail}</li>
+              <li key={i} className="leading-relaxed">{detail}</li>
             ))}
           </ul>
         )}
@@ -154,10 +154,10 @@ const customizationItems = [
 
 export default function FeaturesPage() {
   return (
-    <div className="bg-landing-base-darker pt-48">
+    <div className="bg-landing-base-darker pt-16 sm:pt-24 md:pt-32 lg:pt-48">
       {/* Header */}
       <header className="border-b border-landing-borders">
-        <div className="mx-auto max-w-4xl px-6 py-4">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3 sm:py-4">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-landing-foreground/60 hover:text-landing-foreground transition-colors text-sm"
@@ -169,23 +169,23 @@ export default function FeaturesPage() {
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-4xl px-6 py-8">
+      <main className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-8">
         {/* Page Title */}
-        <div className="mb-12">
-          <h1 className="text-3xl text-landing-headers mb-2">Features</h1>
-          <p className="text-landing-foreground/70">
+        <div className="mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-3xl text-landing-headers mb-2">Features</h1>
+          <p className="text-sm sm:text-base text-landing-foreground/70 leading-relaxed">
             Premium productivity capabilities that transform ambitious goals into systematic achievement through intelligent automation and deep personalization.
           </p>
         </div>
 
-        <div className="space-y-16">
+        <div className="space-y-10 sm:space-y-16">
           {/* AI-Powered Tools Section */}
           <section>
-            <div className="flex items-center mb-6">
-              <h2 className="text-xl text-landing-headers">AI Tools</h2>
-              <div className="flex-1 ml-6 h-px bg-landing-borders"></div>
+            <div className="flex items-center mb-4 sm:mb-6">
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">AI Tools</h2>
+              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
-            <div className="space-y-9">
+            <div className="space-y-6 sm:space-y-9">
               {aiTools.map((tool, index) => (
                 <FeatureListing
                   key={index}
@@ -196,7 +196,7 @@ export default function FeaturesPage() {
                   borderColor="border-none"
                   details={tool.details}
                   iconColor="text-landing-muted"
-                  padding="p-3"
+                  padding="p-2 sm:p-3"
                 />
               ))}
             </div>
@@ -204,11 +204,11 @@ export default function FeaturesPage() {
 
           {/* Goal Management Section */}
           <section>
-            <div className="flex items-center mb-6">
-              <h2 className="text-xl text-landing-headers">Goal Management</h2>
-              <div className="flex-1 ml-6 h-px bg-landing-borders"></div>
+            <div className="flex items-center mb-4 sm:mb-6">
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">Goal Management</h2>
+              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
-            <div className="space-y-9">
+            <div className="space-y-6 sm:space-y-9">
               {goalWorkflowFeatures.map((feature, index) => (
                 <FeatureListing
                   key={index}
@@ -219,7 +219,7 @@ export default function FeaturesPage() {
                   borderColor="border-none"
                   details={feature.details}
                   iconColor="text-landing-muted"
-                  padding="p-3"
+                  padding="p-2 sm:p-3"
                 />
               ))}
             </div>
@@ -227,11 +227,11 @@ export default function FeaturesPage() {
 
           {/* Progress Tracking Section */}
           <section>
-            <div className="flex items-center mb-6">
-              <h2 className="text-xl text-landing-headers">Progress Tracking</h2>
-              <div className="flex-1 ml-6 h-px bg-landing-borders"></div>
+            <div className="flex items-center mb-4 sm:mb-6">
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">Progress Tracking</h2>
+              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
-            <div className="space-y-9">
+            <div className="space-y-6 sm:space-y-9">
               {progressTrackingItems.map((item, index) => (
                 <FeatureListing
                   key={index}
@@ -241,7 +241,7 @@ export default function FeaturesPage() {
                   iconBgColor="bg-none"
                   borderColor="border-none"
                   iconColor="text-landing-muted"
-                  padding="p-3"
+                  padding="p-2 sm:p-3"
                 />
               ))}
             </div>
@@ -249,11 +249,11 @@ export default function FeaturesPage() {
 
           {/* Customization Section */}
           <section>
-            <div className="flex items-center mb-6">
-              <h2 className="text-xl text-landing-headers">Customization</h2>
-              <div className="flex-1 ml-6 h-px bg-landing-borders"></div>
+            <div className="flex items-center mb-4 sm:mb-6">
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">Customization</h2>
+              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
-            <div className="space-y-9">
+            <div className="space-y-6 sm:space-y-9">
               {customizationItems.map((item, index) => (
                 <FeatureListing
                   key={index}
@@ -263,7 +263,7 @@ export default function FeaturesPage() {
                   iconBgColor="bg-none"
                   borderColor="border-none"
                   iconColor="text-landing-muted"
-                  padding="p-3"
+                  padding="p-2 sm:p-3"
                 />
               ))}
             </div>

@@ -66,7 +66,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
           pin: true,
           scrub: 1,
           start: data.animation && data.animation.start || "center center",
-          end: data.animation && data.animation.end || "+=1400%",
+          end: data.animation && data.animation.end || "+=1400%", // Keep original scroll distance
           onEnter: () => onActivate(index),
           onEnterBack: () => onActivate(index),
         },
@@ -76,8 +76,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
         // Initial setup for workflow text
         const copyPhases = gsap.utils.toArray<HTMLElement>(".copy-phase");
 
-        gsap.set(copyPhases, { autoAlpha: 0, y: 15 });
-
+        gsap.set(copyPhases, { autoAlpha: 0, y: 15 }); // Keep original animation values
         gsap.set(copyPhases[0], { autoAlpha: 1, y: 0 });
 
         // Updated workflow routing logic
@@ -91,7 +90,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
           settingsWorkflow(tl, data);
         }
       } else {
-        // Non-workflow animations (no changes here)
+        // Non-workflow animations - keep original values
         tl.from(".anim-copy-feature-item", { autoAlpha: 0, y: 30 })
           .from(".anim-copy-desc", { autoAlpha: 0, y: 30 }, "-=0.3")
           .from(".anim-copy-item", { autoAlpha: 0, y: 20, stagger: 0.2 }, "-=0.2");
@@ -103,7 +102,6 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
             const position = order === "simultaneous" ? "<" : undefined;
             tl.from(visualItems, visualVars, position);
           }
-
         }
       }
     }, sectionRef);
@@ -122,10 +120,14 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
   };
 
   return (
-    <section ref={sectionRef} className="mx-auto pt-12 mt-40 grid max-w-[1950px] md:grid-cols-2">
-      <div className="flex items-center justify-end">
-        <div className="w-full max-w-[580px] pl-4 pr-8 md:pr-16">
-          <div className="space-y-6">
+    <section
+      ref={sectionRef}
+      className="mx-auto top-16! md:top:1/2 md:-translate-y-1/2 pt-8 sm:pt-12 mt-10 sm:mt-20 grid max-w-[1950px] gap-8 md:gap-0 md:grid-cols-2"
+    >
+      {/* Content Section */}
+      <div className="flex items-start md:items-center justify-start md:justify-end order-2 md:order-1">
+        <div className="w-full max-w-none sm:max-w-[580px] px-4 sm:pl-4 sm:pr-8 md:pr-16">
+          <div className="space-y-4 sm:space-y-6">
             <div>
               <FeatureItem
                 {...data}
@@ -133,15 +135,22 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
                 borderColor="border-none"
                 iconBgColor="bg-landing-secondary/10"
                 iconColor="text-landing-secondary"
-                padding="p-4 px-5"
+                padding="p-3 px-4 sm:p-4 sm:px-5"
               />
             </div>
             <div className="relative">
               {hasWorkflow ? (
                 Object.entries(data.phaseContent || {}).map(([phase, content], idx) => (
-                  <div key={phase} className={cn("copy-phase", `copy-phase-${phase}`, idx !== 0 && "absolute top-0 left-0 w-full")}>
+                  <div
+                    key={phase}
+                    className={cn(
+                      "copy-phase",
+                      `copy-phase-${phase}`,
+                      idx !== 0 && "absolute top-0 left-0 w-full"
+                    )}
+                  >
                     <h2
-                      className="max-w-[24ch] text-3xl font-bold"
+                      className="max-w-none sm:max-w-[24ch] text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
                       dangerouslySetInnerHTML={{
                         __html: content.heading.replace(
                           /optimize your workflow|gets things done/g,
@@ -149,11 +158,15 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
                         ),
                       }}
                     />
-                    <p className="max-w-[60ch] mt-3">{content.description}</p>
+                    <p className="max-w-none sm:max-w-[60ch] mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">
+                      {content.description}
+                    </p>
                     {content.listItems && (
-                      <ul className="list-disc space-y-4 pl-6 mt-4">
+                      <ul className="list-disc space-y-2 sm:space-y-4 pl-4 sm:pl-6 mt-3 sm:mt-4">
                         {content.listItems.map((item) => (
-                          <li key={item}>{item}</li>
+                          <li key={item} className="text-sm sm:text-base leading-relaxed">
+                            {item}
+                          </li>
                         ))}
                       </ul>
                     )}
@@ -162,7 +175,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
               ) : (
                 <>
                   <h2
-                    className="max-w-[24ch] text-3xl font-bold"
+                    className="max-w-none sm:max-w-[24ch] text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
                     dangerouslySetInnerHTML={{
                       __html: initialContent.heading.replace(
                         "Everything revolves around your goals",
@@ -170,22 +183,33 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
                       ),
                     }}
                   />
-                  <p className="max-w-[60ch] mt-3 anim-copy-desc">{initialContent.description}</p>
+                  <p className="max-w-none sm:max-w-[60ch] mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed anim-copy-desc">
+                    {initialContent.description}
+                  </p>
                 </>
               )}
             </div>
           </div>
-          {initialContent.children && <div>{initialContent.children}</div>}
+          {initialContent.children && (
+            <div className="mt-4 sm:mt-6">{initialContent.children}</div>
+          )}
         </div>
       </div>
-      <div className="relative h-225 pointer-events-none  max-h-[90vh] overflow-hidden rounded-l-4xl border-4 border-r-0 border-landing-borders">
-        {data.hasWorkflow ? <div className="workflow-container">{data.visual}</div> : data.visual}
-        {data.visualChildren && (
-          <div className="absolute inset-0 pointer-events-none p-8">{data.visualChildren}</div>
+
+      {/* Visual Section */}
+      <div className="relative order-1 mx-3 md:mx-0 md:order-2 h-64 sm:h-80 md:h-225 max-h-[50vh] sm:max-h-[60vh] md:max-h-[90vh] pointer-events-none overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-l-4xl border-2 sm:border-4 md:border-r-0 border-landing-borders">
+        {data.hasWorkflow ? (
+          <div className="workflow-container h-full">{data.visual}</div>
+        ) : (
+          <div className="h-full">{data.visual}</div>
         )}
-        <div className='-z-10 absolute landing-bg-grid-texture right-0 top-0 w-full h-[45vh] min-h-200 h-full'>
-          <div className='absolute landing-dual-inner-shadow-pseudo scale-y-200 origin-bottom right-0 top-0 w-full h-[45vh] min-h-200 h-full'>
+        {data.visualChildren && (
+          <div className="absolute inset-0 pointer-events-none p-4 sm:p-6 md:p-8">
+            {data.visualChildren}
           </div>
+        )}
+        <div className="-z-10 absolute landing-bg-grid-texture right-0 top-0 w-full h-full">
+          <div className="absolute landing-dual-inner-shadow-pseudo scale-y-150 sm:scale-y-200 origin-bottom right-0 top-0 w-full h-full" />
         </div>
       </div>
     </section>
