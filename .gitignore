@@ -8,7 +8,7 @@
 /coverage
 
 #convex
-convex/_generated
+# convex/_generated
 
 package-lock.json
 pnpm-lock.yaml
