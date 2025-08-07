@@ -1,5 +1,5 @@
 import React from "react";
-import { Clock, Coffee, Zap, CheckCircle, Timer as TimerIcon, Brain } from "lucide-react";
+import { Clock, Coffee, Zap, CheckCircle, Timer as TimerIcon, Brain, AlignLeft } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { clsx } from "clsx";
 import { SkewedCard, CircularProgressSVG } from "../items";
@@ -12,8 +12,7 @@ import {
   SessionIndicatorCard,
   WorkflowDisplay
 } from "./shared/workflow-components";
-
-
+import { FaBars } from "react-icons/fa";
 
 const colorThemes = {
   primary: { text: "text-landing-foreground", border: "border-landing-borders", bg: "bg-landing-base/30" },
@@ -145,8 +144,8 @@ const sessionCardData: SessionCardProps[] = [
 const phaseContent: Record<string, PhaseContent> = {
   "ai-interaction": { heading: "Start with Simple Conversations", description: "Tell Pomotea about your goals in natural language. The AI understands context and helps translate your ideas into actionable tasks.", listItems: ["Natural language goal processing", "Context-aware task interpretation", "Smart goal breakdown and analysis", "Conversational task planning"] },
   "task-generation": { heading: "Watch Tasks Generate Automatically", description: "From your conversation, Pomotea creates a structured task list with optimal ordering and clear priorities, ready for focused work sessions.", listItems: ["AI-driven task generation from goals", "Intelligent task prioritization", "Automatic task sequencing", "Context-based task structuring"] },
-  "session-start": { heading: "Focus Sessions Begin Seamlessly", description: "With tasks ready, Pomotea automatically starts focus sessions with optimal timing, keeping you in flow state without manual intervention.", listItems: ["Automated focus session scheduling", "Intelligent timer management", "Seamless session transitions", "Flow state optimization"] },
-  "session-complete": { heading: "Progress Tracking Made Effortless", description: "As you complete sessions, Pomotea tracks your progress and intelligently adjusts upcoming tasks and timers based on your productivity patterns.", listItems: ["Automatic progress tracking", "Intelligent timer adjustments", "Productivity pattern analysis", "Adaptive workflow optimization"] },
+  "session-start": { heading: "Focus Sessions <br/>Begin Seamlessly", description: "With tasks ready, Pomotea automatically starts focus sessions with optimal timing, keeping you in flow state without manual intervention.", listItems: ["Automated focus session scheduling", "Intelligent timer management", "Seamless session transitions", "Flow state optimization"] },
+  "session-complete": { heading: "Progress Tracking <br/>Made Effortless", description: "As you complete sessions, Pomotea tracks your progress and intelligently adjusts upcoming tasks and timers based on your productivity patterns.", listItems: ["Automatic progress tracking", "Intelligent timer adjustments", "Productivity pattern analysis", "Adaptive workflow optimization"] },
   "break-start": { heading: "Recharge with Smart Breaks", description: "After completing a focus session, Pomotea automatically schedules a break to help you rest and prepare for mindfulness activities.", listItems: ["Automatic break scheduling", "Customizable break durations", "Prevents burnout", "Prepares mind for mindfulness"] },
   "habit-start": { heading: "Integrate Healthy Habits", description: "Following your break, Pomotea encourages mindfulness with short, guided habits like meditation, helping you reset your focus effectively.", listItems: ["Seamless habit integration", "Guided mindfulness breaks", "Recharge and refocus", "Build consistent wellness routines"] },
   "session-start-2": { heading: "Maintain Your Momentum", description: "After a refreshing break, Pomotea seamlessly transitions you to the next task, helping you dive back into a state of deep focus effortlessly.", listItems: ["Automated next-task queuing", "Maintains productivity flow", "Reduces context-switching friction", "Keeps your goals on track"] }
@@ -181,8 +180,8 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
 );
 
 const featureData: FeatureData = {
-  icon: Mascot,
-  title: "AI-Powered",
+  icon: FaBars,
+  title: "Session based",
   subtitle: "Task Management",
   heading: "Automate Your Workflow, from Tasks to Timers",
   description: "Pomotea's AI doesn't just manage tasks; it builds your entire focus schedule. Describe your goals, and watch as it generates a structured task list and automatically schedules focus and break sessions, keeping you in a state of flow.",

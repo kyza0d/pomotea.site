@@ -88,7 +88,7 @@ export const BetaTesterModal = ({ isOpen, onClose }: BetaTesterModalProps) => {
           {isSuccess ? (
             <div className="text-center space-y-4">
               <CheckCircle size={48} className="mx-auto text-landing-primary" />
-              <Text variant="header" size="lg" className="text-landing-foreground">Application submitted!</Text>
+              <Text variant="h2" size="lg" className="text-landing-foreground">Application submitted!</Text>
               <Text variant="subtitle" size="sm" className="text-landing-foreground/70">
                 We'll review your application and get back to you within 48 hours with beta access details.
               </Text>

@@ -1,10 +1,13 @@
 // File: components/landing/items.tsx
-import { type LucideIcon } from "lucide-react";
+import { HelpCircle, type LucideIcon } from "lucide-react";
 import { FiCheck } from "react-icons/fi";
 import { cn } from "@/lib/utils";
+import { type ComponentType, type FC } from "react";
+import { type IconType } from "react-icons";
+import { MascotProps } from "../ui/mascot";
 
 export type FeatureItemProps = {
-  icon: LucideIcon;
+  icon: any;
   title: string;
   subtitle: string;
   iconBgColor?: string;
@@ -14,27 +17,27 @@ export type FeatureItemProps = {
 };
 
 export type CardProps = {
-  icon: LucideIcon;
+  icon: LucideIcon | IconType | FC<MascotProps>;
   title: string;
   description: string;
 };
 
 export const FeatureItem: React.FC<FeatureItemProps> = ({
-  icon: Icon,
+  icon: Icon = HelpCircle,
   title,
   subtitle,
-  iconBgColor = "bg-landing-secondary-shaded/20",
+  iconBgColor = "bg-landing-secondary/10",
   iconColor = "text-landing-secondary",
   borderColor = "border-landing-borders",
   padding = "p-5 px-7",
 }) => (
   <div className="flex items-center space-x-3">
     <div className={`${iconBgColor} ${padding} flex-shrink-0 items-center justify-center rounded-3xl border-2 ${borderColor}`}>
-      <Icon size={28} className={iconColor} />
+      {Icon && <Icon size={28} className={iconColor} />}
     </div>
-    <span className="ml-2 whitespace-nowrap">
+    <div className="ml-2 whitespace-nowrap">
       {title} <br /> {subtitle}
-    </span>
+    </div>
   </div>
 );
 
@@ -52,7 +55,7 @@ export const ChatBubble: React.FC<{ sender: "user" | "ai"; children: React.React
 );
 
 export const ContextualToolChip: React.FC<{
-  icon: LucideIcon;
+  icon: LucideIcon | IconType | FC<any>;
   name: string;
   category: "goal" | "task" | "session" | "insight";
   isActive?: boolean;
@@ -166,7 +169,7 @@ export const FeatureCard: React.FC<CardProps & { className?: string }> = ({ icon
 
 export const ChecklistItem: React.FC<{ children: React.ReactNode, className?: string }> = ({ children, className }) => (
   <div className={cn("mt-3 flex items-center space-x-4", className)}>
-    <div className="relative h-6 w-6 mr-2 flex-shrink-0 rounded-md border-2 border-landing-borders/70">
+    <div className="relative h-6 w-6 mr-2 flex-shrink-0 rounded-md border-2 border-landing-borders">
       <FiCheck className="absolute top-1/2 left-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 text-landing-primary" />
     </div>
     {children}

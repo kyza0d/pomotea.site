@@ -1,7 +1,7 @@
 import { Sparkles, Target, CheckCircle } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
-import { aiTools } from "./data";
+import { aiTools, aiPhaseTools } from "./data";
 import {
   ContextualToolChip,
 } from "../items";
@@ -91,9 +91,9 @@ const workflowStates: WorkflowState[] = [
       </MessageRow>,
     ],
   },
-  // Showcase 3: Comprehensive Task Generation
+  // Showcase 3: Document Analysis Phase
   {
-    phase: "task-generation",
+    phase: "document-analysis",
     elements: [
       <MessageRow key="user-goal" isUser={true} isJsx={true}>
         <div className="flex flex-col items-end gap-2">
@@ -107,6 +107,12 @@ const workflowStates: WorkflowState[] = [
       <MessageRow key="analyzing-card" avatarIcon={Target} showTimeline={true} isJsx={true}>
         <GoalPlanningCard />
       </MessageRow>,
+    ],
+  },
+  // Showcase 4: Task Completion Phase
+  {
+    phase: "task-completion",
+    elements: [
       <MessageRow key="ai-tasks-done" avatarIcon={Mascot} showTimeline={true}>
         All set! Here's the plan I've drafted for you.
       </MessageRow>,
@@ -122,16 +128,16 @@ const workflowStates: WorkflowState[] = [
 
 const phaseContent: Record<string, PhaseContent> = {
   "accountability-partner": {
-    heading: "Your Personal Accountability Partner",
+    heading: "Your Personal <br/>Accountability Partner",
     description: "Stay motivated with an AI that understands your progress and provides timely encouragement when you need it most. It's more than a tool—it's a partner in your success.",
     listItems: ["Contextual check-ins", "Progress-based motivation", "Reduces burnout", "Fosters consistency"],
   },
   "task-recall": {
-    heading: "Instant Recall of All Your Hard Work",
+    heading: "Instant Recall <br/>of All Your Hard Work",
     description: "Lose the 'what did I even do?' feeling. Your AI remembers every task and session, giving you a clear picture of your accomplishments and time allocation over any period.",
     listItems: ["Monthly & weekly reviews", "Time allocation summaries", "Cross-goal progress tracking", "Effort visualization"],
   },
-  "task-generation": {
+  "document-analysis": {
     heading: "From Complex Docs to Actionable Plans",
     description: "Drag in a document, and watch as your AI instantly analyzes it to create a comprehensive, multi-level task list. It understands your goals and structures the work for you.",
     listItems: ["AI-powered document analysis", "Multi-level task generation", "Intelligent project structuring", "Handles unstructured data"],
@@ -139,7 +145,7 @@ const phaseContent: Record<string, PhaseContent> = {
 };
 
 const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-full max-w-[700px] fade-bottom scale-120 -skew-x-6 skew-y-3">
+  <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-full max-w-[700px] scale-120 -skew-x-6 skew-y-3">
     <div className="grid grid-cols-5 gap-6 h-[600px]">
       <div className="col-span-3 overflow-hidden rounded-3xl border-3 border-landing-borders bg-landing-base">
         <div className="relative flex h-full">
@@ -181,15 +187,19 @@ const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[]
         </div>
       </div>
       <div className="col-span-2 space-y-4">
-        <div className="rounded-2xl border-landing-borders/40">
+        <div className="rounded-2xl border-landing-borders/40 relative">
           <div className="grid grid-cols-1 gap-3">
-            {aiTools.slice(0, 3).map((tool, index) => (
-              <ContextualToolChip
-                key={tool.name}
-                {...tool}
-                className={`tool-chip-${index} anim-copy-item text-xs`}
-                isActive={false}
-              />
+            {workflowStates.map((state, stateIndex) => (
+              <div key={stateIndex} className={`phase-tools-${state.phase} absolute inset-0`}>
+                {aiPhaseTools[state.phase as keyof typeof aiPhaseTools]?.map((tool, toolIndex) => (
+                  <ContextualToolChip
+                    key={`${state.phase}-${tool.name}`}
+                    {...tool}
+                    className={`tool-chip-${stateIndex}-${toolIndex} anim-copy-item text-xs mb-3`}
+                    isActive={false}
+                  />
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -200,7 +210,7 @@ const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[]
 );
 
 const featureData: FeatureData = {
-  icon: Sparkles,
+  icon: Mascot,
   title: "AI-Powered",
   subtitle: "Productivity",
   heading: "Your Personal Accountability Partner",
@@ -219,6 +229,7 @@ const featureData: FeatureData = {
   workflowType: "ai",
   workflowStates: workflowStates,
   phaseContent: phaseContent,
+  sharedCopyPhases: [["document-analysis", "task-completion"]],
 };
 
 export const AiFeaturesScroll = ({ index, onActivate }: { index: number; onActivate: (i: number) => void }) => (

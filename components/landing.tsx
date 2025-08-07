@@ -15,9 +15,10 @@ import { ScrollProgressIndicator } from "./landing/scroll-progress";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FeatureItem } from "./landing/items";
-import { BarChart3, Timer } from "lucide-react";
+import { Target } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { cn } from "@/lib/utils";
+import { FaBars } from "react-icons/fa";
 import { SpotlightEffect } from "./landing/SpotlightEffect";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -83,9 +84,7 @@ const LandingHero = () => {
   }, []);
 
   return (
-    <main id="landing-page" className="min-h-600 text-landing-foreground bg-landing-base-darker font-['Karla',sans-serif]">
-      <LandingHeader />
-
+    <main id="landing-page">
       <div className="mx-auto w-full max-w-[1340px] px-8 pt-0">
         <article>
           <HeroSection />
@@ -93,8 +92,7 @@ const LandingHero = () => {
           <section className="z-10 sticky flex flex-col items-center -mt-60 mx-20">
             <div ref={featuresContainerRef} className="relative mb-3 grid w-5/6 grid-cols-3 gap-8 py-4 px-5">
               {/* <SpotlightEffect targetPosition={spotlightPos} /> */}
-
-              <Feature ref={el => itemRefs.current[0] = el}>
+              <Feature ref={el => { itemRefs.current[0] = el; }}>
                 <FeatureItem
                   iconBgColor="bg-landing-secondary/10"
                   icon={Mascot}
@@ -104,20 +102,20 @@ const LandingHero = () => {
                 />
               </Feature>
 
-              <Feature ref={el => itemRefs.current[1] = el}>
+              <Feature ref={el => { itemRefs.current[1] = el; }}>
                 <FeatureItem
                   iconBgColor="bg-landing-secondary/10"
-                  icon={Timer}
+                  icon={FaBars}
                   title="Smart Time"
                   subtitle="Blocking"
                   borderColor="border-none"
                 />
               </Feature>
 
-              <Feature ref={el => itemRefs.current[2] = el}>
+              <Feature ref={el => { itemRefs.current[2] = el; }}>
                 <FeatureItem
                   iconBgColor="bg-landing-secondary/10"
-                  icon={BarChart3}
+                  icon={Target}
                   title="Goal-Centric"
                   subtitle="Workflow"
                   borderColor="border-none"

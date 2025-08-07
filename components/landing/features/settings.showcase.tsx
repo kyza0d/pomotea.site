@@ -1,16 +1,17 @@
 import { Palette, Clock, Flower, Image, Type, Brain, Target, Bell, Shield, Zap, BarChart3 } from 'lucide-react';
 import { DisplaySection, type FeatureData } from "./display-section";
-import { customizationItems } from "./data";
+import { customizationItemsLanding } from "./data";
 import { FeatureItem } from "../items";
+import { clsx } from "clsx";
 
 const SettingsWindow = ({ children, className = "" }: {
   children?: React.ReactNode;
   className?: string;
 }) => (
-  <div className={`
-    relative w-md max-h-120 bg-landing-base border-2 border-landing-borders rounded-xl p-4 settings-window
-    ${className}
-  `}>
+  <div className={clsx(
+    "settings-window border-3 p-4 rounded-xl bg-landing-base border-landing-borders/70",
+    className
+  )}>
     {children}
   </div>
 );
@@ -36,10 +37,14 @@ const MiniToggle = ({ checked }: { checked: boolean }) => (
   </div>
 );
 
-const MiniDropdown = ({ value, options }: { value: string; options: string[] }) => (
-  <select defaultValue="" className="text-xs bg-landing-base-darker border border-landing-borders rounded px-2 py-1 text-landing-headers">
+const MiniDropdown = ({ value, options, onChange }: { value: string; options: string[]; onChange?: (value: string) => void }) => (
+  <select
+    className="text-xs bg-landing-base-darker border border-landing-borders rounded px-2 py-1 text-landing-headers"
+    value={value}
+    onChange={(e) => onChange?.(e.target.value)}
+  >
     {options.map(option => (
-      <option key={option} value={option} selected={option === value}>
+      <option key={option} value={option}>
         {option}
       </option>
     ))}
@@ -86,16 +91,16 @@ const AppearanceContent = () => (
     </div>
     <div className="space-y-2">
       <h4 className="text-xs font-medium text-landing-headers flex items-center space-x-1">
-        <Image className="w-3 h-3" />
         <span>Background</span>
       </h4>
-      <div className="space-y-2 pl-4">
-        <div className="flex items-center gap-2">
-          <div className="h-6 w-8 rounded border border-landing-borders"></div>
-          <span className="text-xs text-landing-muted">Mountain Vista</span>
+      <div className="space-y-2 pl-4 flex">
+        <div className='p-3 bg-landing-borders/40'>
+          <Image className="w-7 h-7" />
         </div>
-        <MiniSlider label="Opacity" value={75} />
-        <MiniSlider label="Blur" value={2} max={5} />
+        <div className='w-full'>
+          <MiniSlider label="Opacity" value={75} />
+          <MiniSlider label="Blur" value={2} max={5} />
+        </div>
       </div>
     </div>
     <div className="space-y-2">
@@ -133,42 +138,42 @@ const ColorsContent = () => (
       <div className="pl-4">
         <div className="grid grid-cols-2 gap-1.5">
           <div className="relative group">
-            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 group-hover:opacity-100 pointer-events-none z-10">
+            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 pointer-events-none z-10">
               <div className="rounded-sm w-1 h-2 bg-green-400" />
               <div className="rounded-sm w-1 h-2 bg-gray-200" />
               <div className="rounded-sm w-1 h-2 bg-gray-400" />
             </div>
-            <div className="w-full text-xs py-1.5 px-2 relative overflow-hidden bg-landing-primary/10 border border-landing-primary rounded text-center">
+            <div className="w-full text-xs py-1.5 px-2 relative bg-landing-primary/10 border border-landing-primary rounded text-center">
               <span className="text-landing-primary font-medium">Ivy</span>
             </div>
           </div>
           <div className="relative group">
-            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 group-hover:opacity-100 pointer-events-none z-10">
+            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 pointer-events-none z-10">
               <div className="rounded-sm w-1 h-2 bg-orange-400" />
               <div className="rounded-sm w-1 h-2 bg-orange-100" />
               <div className="rounded-sm w-1 h-2 bg-orange-200" />
             </div>
-            <div className="w-full text-xs py-1.5 px-2 relative overflow-hidden bg-landing-base-darker border border-landing-borders rounded text-center">
+            <div className="w-full text-xs py-1.5 px-2 relative bg-landing-base-darker border border-landing-borders rounded text-center">
               <span className="text-landing-muted">Fall</span>
             </div>
           </div>
           <div className="relative group">
-            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 group-hover:opacity-100 pointer-events-none z-10">
+            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 pointer-events-none z-10">
               <div className="rounded-sm w-1 h-2 bg-cyan-300" />
               <div className="rounded-sm w-1 h-2 bg-white" />
               <div className="rounded-sm w-1 h-2 bg-blue-200" />
             </div>
-            <div className="w-full text-xs py-1.5 px-2 relative overflow-hidden bg-landing-base-darker border border-landing-borders rounded text-center">
+            <div className="w-full text-xs py-1.5 px-2 relative bg-landing-base-darker border border-landing-borders rounded text-center">
               <span className="text-landing-muted">Deep Space</span>
             </div>
           </div>
           <div className="relative group">
-            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 group-hover:opacity-100 pointer-events-none z-10">
+            <div className="absolute flex opacity-0 transition-opacity space-x-0.5 top-1/2 -translate-y-1/2 right-1 pointer-events-none z-10">
               <div className="rounded-sm w-1 h-2 bg-indigo-400" />
               <div className="rounded-sm w-1 h-2 bg-gray-300" />
               <div className="rounded-sm w-1 h-2 bg-gray-400" />
             </div>
-            <div className="w-full text-xs py-1.5 px-2 relative overflow-hidden bg-landing-base-darker border border-landing-borders rounded text-center">
+            <div className="w-full text-xs py-1.5 px-2 relative bg-landing-base-darker border border-landing-borders rounded text-center">
               <span className="text-landing-muted">Obsidian</span>
             </div>
           </div>
@@ -397,10 +402,10 @@ const DataPrivacyContent = () => (
       <h4 className="text-xs font-medium text-landing-headers">Data Export</h4>
       <div className="pl-4">
         <div className="grid grid-cols-2 gap-1">
-          <button className="p-1.5 bg-landing-base-darker border border-landing-borders rounded text-center hover:bg-landing-borders transition-colors">
+          <button className="p-1.5 bg-landing-base-darker border border-landing-borders rounded text-center transition-colors">
             <span className="text-xs text-landing-muted">Export JSON</span>
           </button>
-          <button className="p-1.5 bg-landing-base-darker border border-landing-borders rounded text-center hover:bg-landing-borders transition-colors">
+          <button className="p-1.5 bg-landing-base-darker border border-landing-borders rounded text-center transition-colors">
             <span className="text-xs text-landing-muted">Export CSV</span>
           </button>
         </div>
@@ -464,42 +469,36 @@ const AnalyticsContent = () => (
   </div>
 );
 
-// Restore the original skewed container layout
 const SettingsPreview = () => (
-  <div className="absolute left-1/4 -translate-x-30 w-[155%] p-4 scale-76 -skew-x-26 skew-y-12 origin-top-left">
-    <div className="grid grid-cols-3 gap-3 settings-grid">
-      {/* Column 1 */}
-      <div className="flex flex-col space-y-4">
-        <SettingsWindow>
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-300 scale-90 -skew-x-6 skew-y-3">
+    <div className="grid grid-cols-3 gap-3">
+      <div className='flex flex-col space-y-3 -translate-y-10'>
+        <SettingsWindow className="settings-window-0">
           <SessionsContent />
         </SettingsWindow>
-        <SettingsWindow>
+        <SettingsWindow className="settings-window-1">
           <DataPrivacyContent />
         </SettingsWindow>
-      </div>
-
-      {/* Column 2 - Offset */}
-      <div className="flex flex-col space-y-4 -translate-y-16">
-        <SettingsWindow>
+        <SettingsWindow className="settings-window-2">
           <AppearanceContent />
         </SettingsWindow>
-        <SettingsWindow>
+      </div>
+      <div className='flex flex-col space-y-3 -translate-y-20'>
+        <SettingsWindow className="settings-window-3">
           <GoalsTasksContent />
         </SettingsWindow>
-        <SettingsWindow>
+        <SettingsWindow className="settings-window-4">
           <AICompanionContent />
         </SettingsWindow>
-      </div>
-
-      {/* Column 3 - More offset */}
-      <div className="flex flex-col space-y-4 -translate-y-32">
-        <SettingsWindow>
+        <SettingsWindow className="settings-window-5">
           <ColorsContent />
         </SettingsWindow>
-        <SettingsWindow>
+      </div>
+      <div className='flex flex-col space-y-3 translate-y-35'>
+        <SettingsWindow className="settings-window-6">
           <NotificationsFocusContent />
         </SettingsWindow>
-        <SettingsWindow>
+        <SettingsWindow className="settings-window-7">
           <AnalyticsContent />
         </SettingsWindow>
       </div>
@@ -516,21 +515,57 @@ const featureData: FeatureData = {
     "Every detail crafted for extended focus sessions. From AI companion personality to deep focus modes, customize your perfect productivity environment.",
   hasWorkflow: true,
   workflowType: "settings",
+  workflowStates: [
+    {
+      phase: "settings-core",
+      elements: [
+        <div key="sessions" className="settings-window settings-window-0"><SessionsContent /></div>,
+        <div key="data-privacy" className="settings-window settings-window-1"><DataPrivacyContent /></div>,
+      ],
+    },
+    {
+      phase: "settings-personalization",
+      elements: [
+        <div key="appearance" className="settings-window settings-window-2"><AppearanceContent /></div>,
+        <div key="goals-tasks" className="settings-window settings-window-3"><GoalsTasksContent /></div>,
+        <div key="ai-companion" className="settings-window settings-window-4"><AICompanionContent /></div>,
+      ],
+    },
+    {
+      phase: "settings-advanced",
+      elements: [
+        <div key="colors" className="settings-window settings-window-5"><ColorsContent /></div>,
+        <div key="notifications" className="settings-window settings-window-6"><NotificationsFocusContent /></div>,
+        <div key="analytics" className="settings-window settings-window-7"><AnalyticsContent /></div>,
+      ],
+    },
+  ],
   phaseContent: {
-    intro: {
-      heading: "Craft Your Perfect Workspace",
-      description: "Every detail crafted for extended focus sessions. Start with the essentials - session timing, appearance, and colors.",
+    "settings-core": {
+      heading: "Core Settings",
+      description: "Configure essential settings like session timing and data privacy to get started.",
+      listItems: ["Session timing adjustments", "Privacy controls", "Basic customization"],
+    },
+    "settings-personalization": {
+      heading: "Personalize Your Experience",
+      description: "Tailor the appearance, goal management, and AI companion to suit your workflow.",
+      listItems: ["UI customization", "Goal and task settings", "AI personality tuning"],
+    },
+    "settings-advanced": {
+      heading: "Advanced Customization",
+      description: "Fine-tune colors, notifications, and analytics for a fully optimized workspace.",
+      listItems: ["Color theme selection", "Notification preferences", "Productivity insights"],
     },
   },
   animation: {
-    order: "simultaneous",
-    copy: { autoAlpha: 0, y: 0, stagger: 0.0 },
-    visual: { autoAlpha: 0, scale: 0.5, stagger: { each: 0.05, from: "random" } },
-    end: "+=300%",
+    order: "interleave",
+    visual: { autoAlpha: 0, y: 30 },
+    copy: { autoAlpha: 0, y: -30 },
+    end: "+=200%",
   },
   children: (
-    <div className="mt-6 grid grid-cols-2 gap-4">
-      {customizationItems.map((item) => (
+    <div className="mt-12 grid grid-cols-2 gap-4">
+      {customizationItemsLanding.map((item) => (
         <FeatureItem key={item.title} {...item} padding="p-4 px-5" />
       ))}
     </div>

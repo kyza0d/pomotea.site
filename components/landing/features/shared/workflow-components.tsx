@@ -4,6 +4,7 @@ import { FiCheck, FiChevronRight } from "react-icons/fi";
 import { User, Bot, BookOpen, Code } from "lucide-react";
 import { HiPaperClip } from "react-icons/hi2";
 import { Mascot } from "@/components/ui/mascot";
+import { WorkflowState } from "../display-section";
 
 
 const Text = ({ children, size, className }: { children: React.ReactNode; size?: 'sm' | 'xs'; className?: string }) => {
@@ -207,12 +208,12 @@ export const SessionIndicatorCard = ({ title, subtitle, icon: Icon, colorClass }
   </div>
 );
 
-export const WorkflowDisplay = ({ workflowStates }: { workflowStates: any[] }) => (
+export const WorkflowDisplay = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
   <div className="w-80 space-y-3 workflow-container relative h-[300px]">
     {workflowStates.map((state, stateIndex) => (
       <div key={stateIndex} className="workflow-phase absolute inset-0">
         <div className="space-y-1 flex flex-col">
-          {state.elements.map((element, elementIndex) => (
+          {state.elements.map((element: React.ReactNode, elementIndex: number) => (
             <div key={`${stateIndex}-${elementIndex}`} className={`workflow-child-${stateIndex} workflow-element`}>
               {element}
             </div>

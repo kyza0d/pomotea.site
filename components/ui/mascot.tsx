@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface MascotProps {
+export interface MascotProps {
   size?: number;
   className?: string;
 }

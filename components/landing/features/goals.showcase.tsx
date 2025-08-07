@@ -8,7 +8,7 @@ import { goalExamples } from "./data";
 const GoalCard = ({ goal, className = "", isActive = false }: { goal: typeof goalExamples[0]; className?: string; isActive?: boolean }) => {
   return (
     <div className={clsx(
-      "goal-card border-3 p-4 rounded-xl bg-landing-base w-110",
+      "goal-card border-3 p-4 rounded-xl bg-landing-base",
       isActive ? "border-landing-primary/60 shadow-lg scale-120" : "border-landing-borders/70",
       className
     )}>
@@ -49,7 +49,7 @@ const GoalCard = ({ goal, className = "", isActive = false }: { goal: typeof goa
 };
 
 const YearlyGoalView = ({ className = "" }: { className?: string }) => (
-  <div className={clsx("yearly-view p-6 rounded-2xl border-2 border-landing-borders/70 bg-landing-base", className)}>
+  <div className={clsx("yearly-view p-6 rounded-2xl border-3 border-landing-borders/70 bg-landing-base", className)}>
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-3">
         <Calendar className="w-5 h-5 text-landing-primary" />
@@ -82,7 +82,7 @@ const YearlyGoalView = ({ className = "" }: { className?: string }) => (
 );
 
 const MonthlyGoalView = ({ className = "" }: { className?: string }) => (
-  <div className={clsx("monthly-view p-6 rounded-2xl border-2 border-landing-borders bg-landing-base", className)}>
+  <div className={clsx("monthly-view p-6 rounded-2xl border-3 border-landing-borders/70 bg-landing-base", className)}>
     <div className="flex items-center gap-3 mb-6">
       <TrendingUp className="w-5 h-5 text-landing-primary" />
       <h2 className="text-xl font-bold text-landing-headers">January 2024</h2>
@@ -134,25 +134,23 @@ const phaseContent: Record<string, PhaseContent> = {
 };
 
 const GoalsFeatureVisual = () => (
-  <>
-    <div className="absolute right-30 -bottom-1/5 -skew-x-12 skew-y-6 scale-110">
-      <div className="goals-showcase-container space-y-6">
-        <div id="goals-grid" className="grid grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <YearlyGoalView className="yearly-view-card" />
-            <MonthlyGoalView className="monthly-view-card" />
-          </div>
-          <div className="space-y-4 -translate-y-40">
-            <div className="space-y-3">
-              {goalExamples.map((goal, index) => (
-                <GoalCard key={goal.id} goal={goal} className={`goal-card-${index}`} />
-              ))}
-            </div>
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-120 -skew-x-6 skew-y-3">
+    <div className="space-y-6">
+      <div className="grid grid-cols-2 gap-6">
+        <div className="space-y-4">
+          <YearlyGoalView className="yearly-view-card" />
+          <MonthlyGoalView className="monthly-view-card" />
+        </div>
+        <div className="space-y-4 -translate-y-40">
+          <div className="space-y-3">
+            {goalExamples.map((goal, index) => (
+              <GoalCard key={goal.id} goal={goal} className={`goal-card-${index}`} />
+            ))}
           </div>
         </div>
       </div>
     </div>
-  </>
+  </div>
 );
 
 const featureData: FeatureData = {

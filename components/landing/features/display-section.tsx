@@ -1,14 +1,16 @@
 // File: components/landing/features/display-section.tsx
-import React, { useLayoutEffect, useRef } from "react";
+import React, { FC, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FeatureItem } from "../items";
 import type { LucideIcon } from "lucide-react";
+import type { IconType } from "react-icons";
 import { tasksWorkflow } from "./tasks.workflow";
 import { aiWorkflow } from "./ai.workflow";
 import { goalsWorkflow } from "./goals.workflow";
-import { cn } from "@/lib/utils";
 import { settingsWorkflow } from "./settings.workflow";
+import { cn } from "@/lib/utils";
+import { MascotProps } from "@/components/ui/mascot";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,13 +34,13 @@ export type PhaseContent = {
 };
 
 export type FeatureData = {
-  icon: LucideIcon;
+  icon?: LucideIcon | IconType | FC<MascotProps>;
   title: string;
   subtitle: string;
   heading: string;
   description: string;
   listItems?: string[];
-  animation: AnimationConfig;
+  animation?: AnimationConfig;
   visual: React.ReactNode;
   children?: React.ReactNode;
   visualChildren?: React.ReactNode;
@@ -46,6 +48,7 @@ export type FeatureData = {
   hasWorkflow?: boolean;
   workflowType?: "tasks" | "ai" | "goals" | "settings";
   phaseContent?: Record<string, PhaseContent>;
+  sharedCopyPhases?: string[][];
 };
 
 export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActivate: (i: number) => void }> = ({
@@ -62,8 +65,8 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
           trigger: sectionRef.current,
           pin: true,
           scrub: 1,
-          start: data.animation.start || "center center",
-          end: data.animation.end || "+=2800%",
+          start: data.animation && data.animation.start || "center center",
+          end: data.animation && data.animation.end || "+=1400%",
           onEnter: () => onActivate(index),
           onEnterBack: () => onActivate(index),
         },
@@ -72,7 +75,9 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
       if (data.hasWorkflow && data.workflowStates && data.phaseContent) {
         // Initial setup for workflow text
         const copyPhases = gsap.utils.toArray<HTMLElement>(".copy-phase");
+
         gsap.set(copyPhases, { autoAlpha: 0, y: 15 });
+
         gsap.set(copyPhases[0], { autoAlpha: 1, y: 0 });
 
         // Updated workflow routing logic
@@ -88,15 +93,17 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
       } else {
         // Non-workflow animations (no changes here)
         tl.from(".anim-copy-feature-item", { autoAlpha: 0, y: 30 })
-          .from(".anim-copy-title", { autoAlpha: 0, y: 30 }, "-=0.3")
           .from(".anim-copy-desc", { autoAlpha: 0, y: 30 }, "-=0.3")
           .from(".anim-copy-item", { autoAlpha: 0, y: 20, stagger: 0.2 }, "-=0.2");
 
         const visualItems = gsap.utils.toArray<HTMLElement>(".anim-visual-item");
-        const { order, visual: visualVars } = data.animation;
-        if (visualItems.length > 0) {
-          const position = order === "simultaneous" ? "<" : undefined;
-          tl.from(visualItems, visualVars, position);
+        if (data?.animation) {
+          const { order, visual: visualVars } = data.animation;
+          if (visualItems.length > 0) {
+            const position = order === "simultaneous" ? "<" : undefined;
+            tl.from(visualItems, visualVars, position);
+          }
+
         }
       }
     }, sectionRef);
@@ -119,16 +126,19 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
       <div className="flex items-center justify-end">
         <div className="w-full max-w-[580px] pl-4 pr-8 md:pr-16">
           <div className="space-y-6">
-            <div className="anim-copy-feature-item">
+            <div>
               <FeatureItem
                 {...data}
+                icon={data.icon}
+                borderColor="border-none"
+                iconBgColor="bg-landing-secondary/10"
                 iconColor="text-landing-secondary"
                 padding="p-4 px-5"
               />
             </div>
             <div className="relative">
               {hasWorkflow ? (
-                Object.entries(data.phaseContent).map(([phase, content], idx) => (
+                Object.entries(data.phaseContent || {}).map(([phase, content], idx) => (
                   <div key={phase} className={cn("copy-phase", `copy-phase-${phase}`, idx !== 0 && "absolute top-0 left-0 w-full")}>
                     <h2
                       className="max-w-[24ch] text-3xl font-bold"
@@ -152,7 +162,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
               ) : (
                 <>
                   <h2
-                    className="max-w-[24ch] text-3xl font-bold anim-copy-title"
+                    className="max-w-[24ch] text-3xl font-bold"
                     dangerouslySetInnerHTML={{
                       __html: initialContent.heading.replace(
                         "Everything revolves around your goals",
@@ -165,10 +175,10 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
               )}
             </div>
           </div>
-          {initialContent.children && <div className="anim-copy-item">{initialContent.children}</div>}
+          {initialContent.children && <div>{initialContent.children}</div>}
         </div>
       </div>
-      <div className="relative h-225 max-h-[90vh] overflow-hidden rounded-l-4xl border-4 border-r-0 border-landing-borders">
+      <div className="relative h-225 pointer-events-none  max-h-[90vh] overflow-hidden rounded-l-4xl border-4 border-r-0 border-landing-borders">
         {data.hasWorkflow ? <div className="workflow-container">{data.visual}</div> : data.visual}
         {data.visualChildren && (
           <div className="absolute inset-0 pointer-events-none p-8">{data.visualChildren}</div>
