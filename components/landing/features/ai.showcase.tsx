@@ -1,11 +1,13 @@
-import { Sparkles, Target, CheckCircle } from "lucide-react";
+import { Target, CheckCircle } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
-import { aiTools, aiPhaseTools } from "./data";
+import { aiPhaseTools } from "./data";
+
 import {
   ContextualToolChip,
 } from "../items";
 import React from "react";
+
 import {
   MessageRow,
   MessageBubble,
@@ -14,6 +16,7 @@ import {
   MonthlySummaryCard,
   FileAttachmentChip
 } from "./shared/workflow-components";
+
 import { Button } from "@/components/ui/button";
 import { HiArrowUturnRight, HiPaperClip } from "react-icons/hi2";
 import { FaMicrophone } from "react-icons/fa";
@@ -59,7 +62,6 @@ const appDevelopmentTasks: MultiLevelTask[] = [
 ];
 
 const workflowStates: WorkflowState[] = [
-  // Showcase 1: Accountability Partner
   {
     phase: "accountability-partner",
     elements: [
@@ -138,20 +140,20 @@ const phaseContent: Record<string, PhaseContent> = {
     listItems: ["Monthly & weekly reviews", "Time allocation summaries", "Cross-goal progress tracking", "Effort visualization"],
   },
   "document-analysis": {
-    heading: "From Complex Docs to Actionable Plans",
+    heading: "From Complex Docs <br/>to Actionable Plans",
     description: "Drag in a document, and watch as your AI instantly analyzes it to create a comprehensive, multi-level task list. It understands your goals and structures the work for you.",
     listItems: ["AI-powered document analysis", "Multi-level task generation", "Intelligent project structuring", "Handles unstructured data"],
   },
 };
 
 const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="pointer-events-none absolute top-3/4 md:top-1/2 left-1/2 -translate-1/2 mt-15 w-full max-w-[700px] scale-70 md:scale-120 -skew-x-6 skew-y-3">
+  <div className="pointer-events-none absolute top-3/4 md:top-1/2 left-1/2 -translate-1/2 mt-15 w-[110%] lg:w-[115%] md:w-[120%] scale-65 md:scale-80 lg:scale-100 -skew-x-6 skew-y-3">
     <div className="grid grid-cols-5 gap-6 h-[600px]">
       <div className="col-span-3 overflow-hidden rounded-3xl border-3 border-landing-borders bg-landing-base">
         <div className="relative flex h-full">
           {workflowStates.map((state, stateIndex) => (
             <div key={stateIndex} className="workflow-phase mb-40 absolute inset-0 top-4 px-4">
-              <div className="space-y-4 h-full overflow-y-auto">
+              <div className="space-y-4 h-full overflow-y-hidden">
                 {state.elements.map((element, elementIndex) => (
                   <div key={`${stateIndex}-${elementIndex}`} className={`workflow-child-${stateIndex}`}>
                     {element}
@@ -160,7 +162,7 @@ const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[]
               </div>
             </div>
           ))}
-          <div className="mt-auto m-3 z-10 flex min-h-14 border-landing-borders/50 bg-landing-base p-2 w-full rounded-2xl flex-col border-3">
+          <div className="mt-auto m-3 z-10 flex min-h-14 border-landing-borders/50 bg-landing-base p-2 w-full rounded-2xl flex-col border-3  overflow-hidden">
             <textarea
               className="min-h-14 flex-1 px-3 py-2 focus:outline-none resize-none"
             />

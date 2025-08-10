@@ -60,11 +60,14 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // Check if we're on mobile to adjust scroll behavior
+      const isMobile = window.innerWidth < 768;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          pin: true,
-          scrub: 1,
+          pin: true, // Keep pin functionality on all devices
+          scrub: 1, // Keep consistent scrub behavior
           start: data.animation && data.animation.start || "center center",
           end: data.animation && data.animation.end || "+=1400%", // Keep original scroll distance
           onEnter: () => onActivate(index),
@@ -122,7 +125,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
   return (
     <section
       ref={sectionRef}
-      className="mx-auto top-16! md:top:1/2 md:-translate-y-1/2 pt-8 sm:pt-12 mt-10 sm:mt-20 grid max-w-[1950px] gap-8 md:gap-0 md:grid-cols-2"
+      className="mx-auto pt-8 sm:pt-12 mt-20 sm:mt-20 grid max-w-[1950px] gap-8 md:gap-0 md:grid-cols-2"
     >
       {/* Content Section */}
       <div className="flex items-start md:items-center justify-start md:justify-end order-2 md:order-1">
@@ -135,6 +138,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
                 borderColor="border-none"
                 iconBgColor="bg-landing-secondary/10"
                 iconColor="text-landing-secondary"
+                iconSize="w-7 h-7"
                 padding="p-3 px-4 sm:p-4 sm:px-5"
               />
             </div>
@@ -197,7 +201,7 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
       </div>
 
       {/* Visual Section */}
-      <div className="relative order-1 mx-3 md:mx-0 md:order-2 h-64 sm:h-80 md:h-225 max-h-[50vh] sm:max-h-[60vh] md:max-h-[90vh] pointer-events-none overflow-hidden rounded-2xl sm:rounded-3xl md:rounded-l-4xl border-2 sm:border-4 md:border-r-0 border-landing-borders">
+      <div className="relative order-1 mx-0 md:order-2 h-64 sm:h-80 md:h-225 max-h-[50vh] sm:max-h-[60vh] md:max-h-[90vh] pointer-events-none overflow-hidden rounded-none md:rounded-l-4xl border-0 border-y-3 md:border-3 border-landing-borders">
         {data.hasWorkflow ? (
           <div className="workflow-container h-full">{data.visual}</div>
         ) : (

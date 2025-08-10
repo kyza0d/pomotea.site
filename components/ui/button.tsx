@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-theme-800 text-theme-200",
-        primary: "bg-landing-primary text-white hover:bg-theme-accent-darker focus:ring-theme-accent",
+        primary: "bg-landing-primary text-landing-base rounded-2xl hover:bg-theme-accent-darker focus:ring-theme-accent",
         ghost: "bg-transparent hover:bg-theme-base dark:hover:bg-theme-800 focus:ring-theme-500",
         outline: "border-2 border-theme-border/70 text-theme-foreground hover:bg-theme-border/60 hover:text-theme-header focus:ring-theme-accent font-medium tracking-[0.015em]",
       },

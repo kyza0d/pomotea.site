@@ -1,8 +1,8 @@
 import React from "react";
-import { Clock, Coffee, Zap, CheckCircle, Timer as TimerIcon, Brain, AlignLeft } from "lucide-react";
+import { Brain, Clock, Coffee, Timer as TimerIcon } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { clsx } from "clsx";
-import { SkewedCard, CircularProgressSVG } from "../items";
+import { CircularProgressSVG } from "../items";
 import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
 import {
   TimerStatus,
@@ -12,7 +12,10 @@ import {
   SessionIndicatorCard,
   WorkflowDisplay
 } from "./shared/workflow-components";
-import { FaBars } from "react-icons/fa";
+
+import { SkewedSessionItem, type SkewedSessionItemProps } from "../shared/ui-components";
+
+import { FaCheckCircle, FaClock, FaList, FaStream } from "react-icons/fa";
 import { cn } from "@/lib/utils";
 
 const colorThemes = {
@@ -41,7 +44,7 @@ const workflowStates: WorkflowState[] = [
     phase: "task-generation",
     elements: [
       <MessageRow key="p2-ai-1" showTimeline>Here are your tasks for today:</MessageRow>,
-      <MessageRow avatarIcon={Zap} key="p2-tool-1" isJsx>
+      <MessageRow avatarIcon={FaList} key="p2-tool-1" isJsx>
         <TaskListCard title="Tasks for 'Website Development'" tasks={["Clean workspace and organize desk", "Review project files for efficiency"]} />
       </MessageRow>
     ]
@@ -61,7 +64,7 @@ const workflowStates: WorkflowState[] = [
   {
     phase: "session-complete",
     elements: [
-      <MessageRow avatarIcon={CheckCircle} key="p4-tool-1" isJsx>
+      <MessageRow avatarIcon={FaCheckCircle} key="p4-tool-1" isJsx>
         <TaskCompletedCard title="Focus session completed!" completedTasks={["Clean workspace and organize desk"]} />
       </MessageRow>
     ]
@@ -81,7 +84,7 @@ const workflowStates: WorkflowState[] = [
   {
     phase: "habit-start",
     elements: [
-      <MessageRow avatarIcon={Mascot} key="p6-tool-1" isJsx>
+      <MessageRow avatarIcon={Brain} key="p6-tool-1" isJsx>
         <SessionIndicatorCard
           title="Meditation Session"
           subtitle="Mindfulness break"
@@ -93,11 +96,10 @@ const workflowStates: WorkflowState[] = [
   {
     phase: "session-start-2",
     elements: [
-      <MessageRow avatarIcon={TimerIcon} key="p7-tool-1" isJsx>
+      <MessageRow avatarIcon={FaClock} key="p7-tool-1" isJsx>
         <SessionIndicatorCard
           title="Focus Session Started"
           subtitle="Review project files for efficiency"
-          icon={Clock}
           colorClass={clsx(colorThemes.primary.text, colorThemes.primary.border)}
         />
       </MessageRow>
@@ -105,35 +107,7 @@ const workflowStates: WorkflowState[] = [
   },
 ];
 
-type SessionCardProps = {
-  id: string;
-  timeId: string;
-  icon: React.ElementType;
-  title: string;
-  time: string;
-  description: string;
-  className?: string;
-  iconClassName?: string;
-};
-
-const SessionCard = ({ id, timeId, icon: Icon, title, time, description, className, iconClassName }: SessionCardProps) => (
-  <div className={clsx("session-card", id)}>
-    <SkewedCard className={clsx("h-30 w-120 md:w-130 flex items-center justify-between px-4 relative", className)}>
-      <div className={clsx("absolute flex flex-row items-center top-0 -mt-8 text-sm", iconClassName || "text-landing-foreground")}>
-        <Icon className="mr-4" size={16} />
-        {title}
-      </div>
-      <div className="text-2xl font-bold pl-4 text-landing-headers">
-        <span id={timeId} className="text-2xl font-bold text-landing-headers">{time}</span>
-      </div>
-      <div className="max-w-[300px] text-sm pr-4 text-landing-foreground/70">
-        {description}
-      </div>
-    </SkewedCard>
-  </div>
-);
-
-const sessionCardData: SessionCardProps[] = [
+const sessionCardData: SkewedSessionItemProps[] = [
   { id: "session-card-1", timeId: "timer-text-1", icon: Clock, title: "Focus", time: "25:00", description: "Clean your workspace, turn off notifications, and focus on one task at a time." },
   { id: "session-card-2", timeId: "timer-text-break", icon: Coffee, title: "Break", time: "05:00", description: "Take a short break to recharge. Stretch, hydrate, or take a quick walk." },
   { id: "session-card-habit", timeId: "timer-text-habit", icon: Brain, title: "Meditation", time: "05:00", description: "A short, guided session to clear your mind and reset your focus.", className: "border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-landing-base", iconClassName: "text-purple-400" },
@@ -160,7 +134,7 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
 
     <div className={cn(
       // Base positioning
-      "absolute left-3/5 sm:left-2/4 md:left-1/2 -translate-x-1/2 top-1/4 sm:top-3/5 origin-right -skew-x-26 skew-y-12",
+      "absolute left-3/5 sm:left-3/5 md:left-1/2 top-1/5 md:top-4/7 -translate-x-1/2 origin-right -skew-x-26 skew-y-12",
 
       "sm:ml-8",
       "md:ml-12",
@@ -173,10 +147,10 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
       "lg:scale-105",
       "xl:scale-130"
     )}>
-      <div className="absolute left-0 -top-8 sm:-top-10 md:-top-16 lg:-top-20 xl:-top-30" id="timer-display-wrapper">
+      <div className="absolute left-0" id="timer-display-wrapper">
         <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6 lg:space-x-8">
           <CircularProgressSVG
-            size={60}
+            size={80}
             strokeWidth={6}
             progress={0}
             className="circular-progress-svg sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[90px] lg:h-[90px]"
@@ -198,13 +172,13 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
         </div>
       </div>
 
-      <div className="relative overflow-hidden fade-box top-1/2 left-0 h-96 sm:h-104 md:h-112 lg:h-120 xl:h-126 pt-4 sm:pt-6 md:pt-8">
+      <div className="relative overflow-hidden fade-box mt-18 lg:mt-24 h-96 sm:h-104 md:h-112 lg:h-120 xl:h-126 pt-4 sm:pt-6 md:pt-8">
         <div
           id="session-cards-scroller"
           className="space-y-12 mt-16"
         >
           {sessionCardData.map((card) => (
-            <SessionCard key={card.id} {...card} />
+            <SkewedSessionItem key={card.id} {...card} />
           ))}
         </div>
       </div>
@@ -213,7 +187,7 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
 );
 
 const featureData: FeatureData = {
-  icon: FaBars,
+  icon: FaStream,
   title: "Session based",
   subtitle: "Task Management",
   heading: "Automate Your Workflow, from Tasks to Timers",

@@ -1,5 +1,6 @@
 import React from "react";
 import { clsx } from "clsx";
+import { cn } from "@/lib/utils";
 import { FiCheck, FiChevronRight } from "react-icons/fi";
 import { User, Bot, BookOpen, Code } from "lucide-react";
 import { HiPaperClip } from "react-icons/hi2";
@@ -109,7 +110,7 @@ export const UserAvatar = () => (
 
 export const AssistantAvatar = ({ icon: Icon = Mascot }: { icon?: React.ElementType }) => (
   <div className="mt-2 relative z-10 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-landing-borders/70 border border-landing-borders/20">
-    <Icon size={16} className="text-landing-foreground/80" />
+    <Icon size={18} className="text-landing-foreground/80" />
   </div>
 );
 
@@ -201,7 +202,7 @@ export const TaskCompletedCard = ({ title, completedTasks }: { title: string; co
 export const SessionIndicatorCard = ({ title, subtitle, icon: Icon, colorClass }: { title: string, subtitle: string, icon?: React.ElementType, colorClass: string }) => (
   <div className={clsx("p-3 rounded-xl border-2 w-full bg-landing-base", colorClass, "border-opacity-30")}>
     <div className={clsx("flex items-center gap-2 mb-1")}>
-      {Icon && <Icon size={12} />}
+      {Icon && <Icon size={14} />}
       <span className="text-xs font-medium">{title}</span>
     </div>
     <div className="text-xs text-landing-foreground/70">{subtitle}</div>
@@ -229,6 +230,93 @@ export const FileAttachmentChip = ({ fileName }: { fileName: string }) => (
     <HiPaperClip className="text-landing-foreground/80" size={16} />
     <span className="text-xs font-medium text-landing-foreground">{fileName}</span>
   </div>
+);
+
+export const ChecklistItem = ({
+  children,
+  className
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={clsx("flex items-center gap-2 sm:gap-3", className)}>
+    <div className="w-6 h-6 mt-0.5 sm:mt-0 rounded-md border sm:border-2 border-landing-borders flex-shrink-0 flex items-center justify-center">
+      <FiCheck size={16} className="sm:w-[15px] sm:h-[15px] text-landing-primary" />
+    </div>
+    <span className="text-sm sm:text-base text-landing-foreground/90">{children}</span>
+  </div>
+);
+
+export const RadioItem = ({
+  children,
+  name,
+  value,
+  checked,
+  onChange,
+  className,
+  description
+}: {
+  children: React.ReactNode;
+  name: string;
+  value: string;
+  checked: boolean;
+  onChange: (value: string) => void;
+  className?: string;
+  description?: string;
+}) => (
+  <label className={clsx(
+    "flex items-start gap-2 sm:gap-3 cursor-pointer p-3 rounded-lg hover:bg-landing-borders/20 transition-colors",
+    description && "border border-landing-borders/30",
+    className
+  )}>
+    <div className="w-6 h-6 mt-0.5 sm:mt-0 rounded-md border sm:border-2 border-landing-borders flex-shrink-0 flex items-center justify-center">
+      {checked && (
+        <div className="w-3 h-3 sm:w-[14px] sm:h-[14px] rounded-sm bg-landing-primary" />
+      )}
+    </div>
+    <div className="flex-1">
+      <span className="text-sm sm:text-base text-landing-foreground/90">{children}</span>
+      {description && (
+        <p className="text-xs sm:text-sm text-landing-foreground/70 mt-1">{description}</p>
+      )}
+    </div>
+    <input
+      type="radio"
+      name={name}
+      value={value}
+      checked={checked}
+      onChange={(e) => onChange(e.target.value)}
+      className="sr-only"
+    />
+  </label>
+);
+
+export const CheckboxItem = ({
+  children,
+  checked,
+  onChange,
+  className
+}: {
+  children: React.ReactNode;
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+  className?: string;
+}) => (
+  <label className={clsx(
+    "flex items-center gap-2 sm:gap-3 cursor-pointer p-3 rounded-lg hover:bg-landing-borders/20 transition-colors",
+    className
+  )}>
+    <div className="w-6 h-6 mt-0.5 sm:mt-0 rounded-md border sm:border-2 border-landing-borders flex-shrink-0 flex items-center justify-center">
+      {checked && <FiCheck size={16} className="sm:w-[15px] sm:h-[15px] text-landing-primary" />}
+    </div>
+    <span className="text-sm sm:text-base text-landing-foreground/90">{children}</span>
+    <input
+      type="checkbox"
+      checked={checked}
+      onChange={(e) => onChange(e.target.checked)}
+      className="sr-only"
+    />
+  </label>
 );
 
 export const MonthlySummaryCard = () => (

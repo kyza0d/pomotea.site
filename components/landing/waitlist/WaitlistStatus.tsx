@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Clock, Users, CheckCircle } from "lucide-react";
-import { FaDiscord } from "react-icons/fa";
+import { Clock, Users } from "lucide-react";
 import { Text } from "@/components/ui/text";
-import { Button } from "@/components/ui/button";
 import { useWaitlist } from "@/lib/hooks/useWaitlist";
 
 interface WaitlistStatusProps {
@@ -58,7 +56,6 @@ export const WaitlistStatus = ({ sessionId, onAccessGranted }: WaitlistStatusPro
   if (sessionStatus.status === "active") {
     return (
       <div className="text-start space-y-4">
-        <CheckCircle size={48} className="text-green-500" />
         <div>
           <Text variant="h2" size="xl" className="text-landing-foreground">
             You're on the waitlist!
@@ -67,15 +64,6 @@ export const WaitlistStatus = ({ sessionId, onAccessGranted }: WaitlistStatusPro
             We'll notify you when we launch! Join the Discord to get product updates and development previews.
           </Text>
         </div>
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-3 px-4 flex items-center justify-center gap-2 transition-colors"
-          onClick={() => window.open('https://discord.gg/W8vrKhVJba', '_blank')}
-        >
-          <FaDiscord size={20} />
-          <span>Join our Discord</span>
-        </Button>
       </div>
     );
   }

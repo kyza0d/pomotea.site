@@ -38,7 +38,7 @@ const FeatureListing: React.FC<FeatureListingProps> = ({
   return (
     <div className="flex flex-col md:flex-row items-start space-x-3 sm:space-x-4">
       <div className={`${iconBgColor} ${padding} mb-4 md:mb-0 flex-shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl border-2 ${borderColor}`}>
-        <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />
+{Icon && <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />}
       </div>
       <div className="flex-1 min-w-0">
         <h4 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">{title}</h4>
@@ -154,7 +154,7 @@ const customizationItems = [
 
 export default function FeaturesPage() {
   return (
-    <div className="bg-landing-base-darker pt-16 sm:pt-24 md:pt-32 lg:pt-48">
+    <div className="bg-landing-base-darker pt-28 md:pt-36 lg:pt-48">
       {/* Header */}
       <header className="border-b border-landing-borders">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3 sm:py-4">

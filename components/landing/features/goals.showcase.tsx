@@ -4,6 +4,7 @@ import { clsx } from "clsx";
 import { ChatBubble } from "../items";
 import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
 import { goalExamples } from "./data";
+import { FaFlag } from "react-icons/fa";
 
 const GoalCard = ({ goal, className = "", isActive = false }: { goal: typeof goalExamples[0]; className?: string; isActive?: boolean }) => {
   return (
@@ -127,14 +128,14 @@ const workflowStates: WorkflowState[] = [
 
 const phaseContent: Record<string, PhaseContent> = {
   "goal-input": {
-    heading: "Start with Natural Goal Setting",
-    description: "Simply describe your goal in conversation. Pomotea understands context, deadlines, and scope to create meaningful objectives.",
-    listItems: ["Natural language goal creation", "Intelligent deadline detection", "Automatic scope analysis", "Context-aware goal structuring"]
+    heading: "All Your Goals, In One Place",
+    description: "View and manage all your objectives effortlessly. Get a comprehensive overview of your progress and upcoming tasks.",
+    listItems: ["Centralized goal overview", "Easy progress tracking", "Quick access to all objectives", "Unified task management"]
   },
 };
 
 const GoalsFeatureVisual = () => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-60 md:scale-120  -skew-x-6 skew-y-3">
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-40 md:scale-60 lg:scale-90  -skew-x-6 skew-y-3">
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">
         <div className="space-y-4">
@@ -154,7 +155,7 @@ const GoalsFeatureVisual = () => (
 );
 
 const featureData: FeatureData = {
-  icon: Clock,
+  icon: FaFlag,
   title: "Goal-Centric",
   subtitle: "Design",
   heading: "Everything Connects to Your Bigger Picture",

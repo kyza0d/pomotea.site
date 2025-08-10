@@ -2,8 +2,8 @@ import { Logo } from "@/components/ui/logo";
 
 export const FooterSection = () => (
   <div className="p-9">
-    <footer className="sticky z-10 mx-auto mt-80 max-w-[1700px] rounded-2xl border-4 border-landing-borders bg-landing-base/90 p-12">
-      <div className="flex items-center space-x-12">
+    <footer className="sticky z-10 mx-auto max-w-[1700px] rounded-2xl border-4 border-landing-borders bg-landing-base/90 p-6 md:p-12">
+      <div className="flex flex-col items-start md:flex-row md:items-start space-y-8 md:space-x-12">
         <div className="space-y-4">
           <Logo size={32} />
           <div className="space-y-1">
@@ -16,7 +16,7 @@ export const FooterSection = () => (
           </div>
         </div>
 
-        <div className="flex space-x-12">
+        <div className="flex flex-col md:flex-row space-y-8 md:space-x-12">
           <div className="space-y-3">
             <h4 className="text-landing-foreground font-medium text-sm">Product</h4>
             <div className="space-y-2">

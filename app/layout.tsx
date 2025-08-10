@@ -4,8 +4,40 @@ import { ConvexClientProvider } from "@/lib/convex";
 import { LandingHeader } from "@/components/landing-header";
 
 export const metadata = {
-  title: "pomotea - AI-Powered Focus Timer",
-  description: "Transform your productivity with an AI-powered pomodoro timer that adapts to your workflow",
+  title: "Pomotea - AI-Powered Productivity Timer",
+  description: "Transform your productivity with an intelligent pomodoro timer that uses AI to break down goals, adapt to your workflow, and provide personalized insights. Experience smart task management, adaptive daily planning, and deep work analytics that evolve with your unique productivity patterns.",
+  keywords: "productivity, pomodoro timer, AI productivity, task management, goal tracking, focus timer, time management, work-life balance",
+  authors: [{ name: "Pomotea" }],
+  creator: "Pomotea",
+  publisher: "Pomotea",
+  robots: "index, follow",
+  openGraph: {
+    title: "Pomotea - AI-Powered Productivity Timer",
+    description: "Transform your productivity with an intelligent pomodoro timer that uses AI to break down goals, adapt to your workflow, and provide personalized insights.",
+    url: "https://pomotea.com",
+    siteName: "Pomotea",
+    type: "website",
+    images: [
+      {
+        url: "/logo.svg",
+        width: 200,
+        height: 200,
+        alt: "Pomotea Logo"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pomotea - AI-Powered Productivity Timer",
+    description: "Transform your productivity with an intelligent pomodoro timer that uses AI to break down goals and adapt to your workflow.",
+    images: ["/logo.svg"]
+  },
+  alternates: {
+    canonical: "https://pomotea.com"
+  },
+  other: {
+    "features-page": "https://pomotea.com/features"
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

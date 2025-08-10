@@ -1,21 +1,20 @@
 import { useState } from "react";
 import { FaEnvelope, FaUser } from "react-icons/fa";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Text } from "@/components/ui/text";
-import { useWaitlist } from "@/lib/hooks/useWaitlist";
+import { WaitlistFormData } from "../modals/WaitlistModal";
 
-interface WaitlistFormProps {
-  onSuccess: (sessionId: string) => void;
+interface WaitlistStep1Props {
+  onSuccess: (sessionId: string, data: { name: string; email: string }) => void;
+  formData: WaitlistFormData;
+  isSubmitting: boolean;
+  setIsSubmitting: (value: boolean) => void;
 }
 
-export const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+export const WaitlistStep1 = ({ onSuccess, formData, isSubmitting, setIsSubmitting }: WaitlistStep1Props) => {
+  const [email, setEmail] = useState(formData.email || "");
+  const [name, setName] = useState(formData.name || "");
   const [error, setError] = useState("");
-
-  const { joinWaitlist } = useWaitlist();
 
   const generateSessionId = () => {
     return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
@@ -27,28 +26,23 @@ export const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
     setError("");
 
     try {
+      // Generate a session ID for local storage
       const sessionId = generateSessionId();
-      const result = await joinWaitlist({
+
+      // Store form data locally instead of sending to backend
+      const formData = {
         sessionId,
         email: email.trim(),
         name: name.trim(),
-      });
+        timestamp: Date.now(),
+        step: 1
+      };
 
-      if (result.success) {
-        // Store session ID in localStorage for persistence
-        localStorage.setItem("waitlist_session_id", sessionId);
-        // Store signup status with timestamp
-        localStorage.setItem("waitlist_signup_completed", JSON.stringify({
-          timestamp: Date.now(),
-          email: email.trim(),
-          name: name.trim()
-        }));
+      localStorage.setItem("waitlist_form_data", JSON.stringify(formData));
+      localStorage.setItem("waitlist_session_id", sessionId);
 
-        // Store success and call onSuccess immediately for smoother UX
-        onSuccess(sessionId);
-      } else {
-        setError(result.error || "Failed to join waitlist");
-      }
+      // Proceed to next step without backend call
+      onSuccess(sessionId, { name: name.trim(), email: email.trim() });
     } catch (err) {
       setError("Something went wrong. Please try again.");
     } finally {
@@ -57,7 +51,13 @@ export const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="current-step-form space-y-4">
+      <div className="mb-4">
+        <Text size="sm" className="text-landing-foreground">
+          Let's start with your basic information
+        </Text>
+      </div>
+
       <div>
         <FaUser size={14} className="inline mx-2 mb-0.5" />
         <label className="text-sm font-medium">Name</label>
@@ -81,6 +81,7 @@ export const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
           className="w-full mt-1 bg-landing-base border border-landing-borders"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          autoComplete="email"
           required
           disabled={isSubmitting}
         />
@@ -94,14 +95,6 @@ export const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
         </div>
       )}
 
-      <Button
-        type="submit"
-        variant="primary"
-        disabled={isSubmitting || !email.trim() || !name.trim()}
-        className="w-full rounded-xl bg-landing-primary transition-colors duration-300 border-2 py-6 px-4 text-landing-base"
-      >
-        {isSubmitting ? 'Joining...' : 'Join Waitlist'}
-      </Button>
     </form>
   );
 };

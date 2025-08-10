@@ -7,8 +7,8 @@ export const LandingThemeToggle = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("landing-theme") as "light" | "dark" | null;
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+
+    const initialTheme = savedTheme || "light";
 
     setTheme(initialTheme);
     document.documentElement.setAttribute("data-theme", initialTheme);
@@ -24,7 +24,7 @@ export const LandingThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="z-[250] ml-0 lg:ml-12 bg rounded-lg hover:bg-landing-base-lighter transition-colors duration-200 cursor-pointer"
+      className="z-[250] mr-4 lg:mr-0 ml-0 lg:ml-12 bg rounded-lg hover:bg-landing-base-lighter transition-colors duration-200 cursor-pointer"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? (

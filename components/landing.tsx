@@ -1,7 +1,7 @@
 // File: components/landing.tsx
 
 "use client";
-import { LandingHeader } from "./landing-header";
+
 import { HeroSection } from "./landing/hero";
 import { Overview } from "./landing/overview";
 import { CtaSection } from "./landing/cta";
@@ -14,18 +14,38 @@ import { useState, useLayoutEffect, useEffect, useRef, forwardRef } from "react"
 import { ScrollProgressIndicator } from "./landing/scroll-progress";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FeatureItem } from "./landing/items";
-import { Target } from "lucide-react";
+import { FeatureItemProps } from "./landing/items";
+import { HelpCircle } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { cn } from "@/lib/utils";
-import { FaBars } from "react-icons/fa";
+import { FaRegFlag, FaStream } from "react-icons/fa";
 import { SpotlightEffect } from "./landing/SpotlightEffect";
+
+export const CoreFeature: React.FC<FeatureItemProps> = ({
+  icon: Icon = HelpCircle,
+  title,
+  subtitle,
+  iconBgColor = "lg:bg-landing-secondary/10",
+  iconColor = "text-landing-secondary",
+  borderColor = "lg:border-landing-borders",
+  padding = "p-0 px-0 lg:p-5 lg:px-6",
+  iconSize = "w-6 h-6", // New prop for configuring icon size
+}) => (
+  <div className="flex flex-row items-center space-x-3 space-y-3">
+    <div className={`${iconBgColor} ${padding} w-full my-auto md:w-auto sm:flex-0 items-center justify-center rounded-3xl border-2 ${borderColor}`}>
+      {Icon && <Icon className={`${iconColor} ${iconSize} mx-auto`} />}
+    </div>
+    <div className="text-xs md:text-sm sm:text-base whitespace-nowrap">
+      {title} <br /> {subtitle}
+    </div>
+  </div>
+);
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const Feature = forwardRef<HTMLDivElement, { children: React.ReactNode, className?: string }>(({ children, className }, ref) => (
   <div ref={ref} className={cn(
-    "relative backdrop-blur-xl border-landing-borders border-2 p-3 sm:p-4 md:p-5 rounded-3xl z-10",
+    "relative lg:backdrop-blur-xl lg:border-landing-borders lg:border-2 p-2 pb-4 sm:p-2 lg:p-3 lg:rounded-3xl z-10",
     className
   )}>
     {children}
@@ -92,13 +112,14 @@ const LandingHero = () => {
         <article>
           <HeroSection />
 
-          <section className="z-10 sticky flex flex-col items-center -mt-60 mx-4 sm:mx-8 md:mx-12 lg:mx-20">
-            <div ref={featuresContainerRef} className="relative mb-6 grid w-full md:w-full grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 py-4 px-2 sm:px-5 md:px-8 xl:gap-6">
+          <section className="z-10 sticky flex flex-col items-center -mt-70 md:-mt-60 mx-2 sm:mx-8 md:mx-12 lg:mx-20">
+
+            <div ref={featuresContainerRef} className="relative grid w-full md:w-full grid-cols-3 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 pb-0 lg:py-4 px-2 sm:px-5 md:px-8 xl:gap-6">
               {/* <SpotlightEffect targetPosition={spotlightPos} /> */}
               <Feature ref={el => { itemRefs.current[0] = el; }}>
-                <FeatureItem
-                  iconBgColor="bg-landing-secondary/10"
+                <CoreFeature
                   icon={Mascot}
+                  iconSize="w-8 h-8"
                   title="AI Powered"
                   subtitle="Productivity"
                   borderColor="border-none"
@@ -106,9 +127,8 @@ const LandingHero = () => {
               </Feature>
 
               <Feature ref={el => { itemRefs.current[1] = el; }}>
-                <FeatureItem
-                  iconBgColor="bg-landing-secondary/10"
-                  icon={FaBars}
+                <CoreFeature
+                  icon={FaStream}
                   title="Smart Time"
                   subtitle="Blocking"
                   borderColor="border-none"
@@ -116,9 +136,8 @@ const LandingHero = () => {
               </Feature>
 
               <Feature ref={el => { itemRefs.current[2] = el; }}>
-                <FeatureItem
-                  iconBgColor="bg-landing-secondary/10"
-                  icon={Target}
+                <CoreFeature
+                  icon={FaRegFlag}
                   title="Goal-Centric"
                   subtitle="Workflow"
                   borderColor="border-none"
@@ -126,10 +145,10 @@ const LandingHero = () => {
               </Feature>
             </div>
 
-            <div className="landing-preview-image shadow-[0_0_35px_rgba(var(--color-landing-glow)/0.1))] z-20 sticky z-0 mx-auto rounded-[1rem] border-3 border-landing-borders bg-landing-base w-full max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] xl:max-w-[75vw] aspect-[16/9]">
-              -              </div>
-          </section>
+            <div className="landing-preview-image shadow-[0_0_35px_rgba(var(--color-landing-glow)/0.1))] z-20 sticky z-0 mx-auto rounded-[1rem] border-3 border-landing-borders bg-landing-base w-full aspect-[16/9]">
+            </div>
 
+          </section>
           <Overview />
         </article>
       </div>

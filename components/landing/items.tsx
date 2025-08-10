@@ -7,11 +7,12 @@ import { type IconType } from "react-icons";
 import { MascotProps } from "../ui/mascot";
 
 export type FeatureItemProps = {
-  icon: any;
+  icon?: LucideIcon | IconType | FC<any>;
   title: string;
   subtitle: string;
   iconBgColor?: string;
   iconColor?: string;
+  iconSize?: string;
   borderColor?: string;
   padding?: string;
 };
@@ -30,10 +31,11 @@ export const FeatureItem: React.FC<FeatureItemProps> = ({
   iconColor = "text-landing-secondary",
   borderColor = "border-landing-borders",
   padding = "p-5 px-7",
+  iconSize = "w-6 h-6", // New prop for configuring icon size
 }) => (
   <div className="flex items-center space-x-3">
     <div className={`${iconBgColor} ${padding} flex-shrink-0 items-center justify-center rounded-3xl border-2 ${borderColor}`}>
-      {Icon && <Icon size={28} className={iconColor} />}
+      {Icon && <Icon className={`${iconColor} ${iconSize} mx-auto`} />}
     </div>
     <div className="ml-2 whitespace-nowrap">
       {title} <br /> {subtitle}

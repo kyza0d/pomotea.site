@@ -126,3 +126,95 @@ export const promoteWaitingUsers = mutation({
     return { promoted };
   },
 });
+
+export const updateWaitlistData = mutation({
+  args: { 
+    sessionId: v.string(),
+    productivityChallenge: v.optional(v.string()),
+    currentTools: v.optional(v.array(v.string())),
+    excitedFeature: v.optional(v.string()),
+    pricingPreference: v.optional(v.string()),
+    userRole: v.optional(v.string()),
+    source: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const { sessionId, ...data } = args;
+    const session = await ctx.db
+      .query("waitlist_sessions")
+      .withIndex("by_session_id", (q) => q.eq("sessionId", sessionId))
+      .first();
+
+    if (!session) {
+      throw new Error("Session not found");
+    }
+
+    await ctx.db.patch(session._id, { 
+      ...data,
+      lastActive: Date.now(),
+    });
+    return { success: true };
+  },
+});
+
+export const completeWaitlistSignup = mutation({
+  args: { 
+    sessionId: v.string(),
+    email: v.string(),
+    name: v.string(),
+    productivityChallenge: v.string(),
+    currentTools: v.array(v.string()),
+    excitedFeature: v.string(),
+    pricingPreference: v.string(),
+    userRole: v.string(),
+    source: v.string(),
+  },
+  handler: async (ctx, args) => {
+    // Check if email already exists
+    const existingEmail = await ctx.db
+      .query("waitlist_sessions")
+      .filter((q) => q.eq(q.field("email"), args.email))
+      .first();
+
+    if (existingEmail) {
+      return { success: false, error: "Email already registered for waitlist" };
+    }
+
+    // Get current active sessions count
+    const activeSessions = await ctx.db
+      .query("waitlist_sessions")
+      .withIndex("by_status", (q) => q.eq("status", "active"))
+      .collect();
+
+    const isActive = activeSessions.length < ACTIVE_SESSIONS_LIMIT;
+    const status = isActive ? "active" : "waiting";
+
+    // Get position for waiting users
+    let position = 0;
+    if (!isActive) {
+      const waitingSessions = await ctx.db
+        .query("waitlist_sessions")
+        .withIndex("by_status", (q) => q.eq("status", "waiting"))
+        .collect();
+      position = waitingSessions.length + 1;
+    }
+
+    // Create complete waitlist entry
+    const session = await ctx.db.insert("waitlist_sessions", {
+      sessionId: args.sessionId,
+      status,
+      position,
+      lastActive: Date.now(),
+      email: args.email,
+      name: args.name,
+      productivityChallenge: args.productivityChallenge,
+      currentTools: args.currentTools,
+      excitedFeature: args.excitedFeature,
+      pricingPreference: args.pricingPreference,
+      userRole: args.userRole,
+      source: args.source,
+    });
+
+    const sessionData = await ctx.db.get(session);
+    return { success: true, data: sessionData };
+  },
+});

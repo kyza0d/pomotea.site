@@ -3,6 +3,7 @@ import { DisplaySection, type FeatureData } from "./display-section";
 import { customizationItemsLanding } from "./data";
 import { FeatureItem } from "../items";
 import { clsx } from "clsx";
+import { FaPaintBrush } from 'react-icons/fa';
 
 const SettingsWindow = ({ children, className = "" }: {
   children?: React.ReactNode;
@@ -470,7 +471,7 @@ const AnalyticsContent = () => (
 );
 
 const SettingsPreview = () => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-300 scale-50 md:scale-120 -skew-x-6 skew-y-3">
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-15 w-300 scale-30 sm:scale-50 md:scale-70 -skew-x-6 skew-y-3">
     <div className="grid grid-cols-3 gap-3">
       <div className='flex flex-col space-y-3 -translate-y-10'>
         <SettingsWindow className="settings-window-0">
@@ -507,7 +508,7 @@ const SettingsPreview = () => (
 );
 
 const featureData: FeatureData = {
-  icon: Palette,
+  icon: FaPaintBrush,
   title: "Beautiful",
   subtitle: "Customization",
   heading: "Craft Your Perfect Workspace",
@@ -564,7 +565,7 @@ const featureData: FeatureData = {
     end: "+=200%",
   },
   children: (
-    <div className="mt-12 grid grid-cols-2 gap-4">
+    <div className="mt-12  grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 grid gap-4">
       {customizationItemsLanding.map((item) => (
         <FeatureItem key={item.title} {...item} padding="p-4 px-5" />
       ))}
