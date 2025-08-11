@@ -4,6 +4,7 @@ import { customizationItemsLanding } from "./data";
 import { FeatureItem } from "../items";
 import { clsx } from "clsx";
 import { FaPaintBrush } from 'react-icons/fa';
+import { showcaseData, showcaseExtras } from "@/copy/showcase";
 
 const SettingsWindow = ({ children, className = "" }: {
   children?: React.ReactNode;
@@ -60,8 +61,8 @@ const SessionsContent = () => (
         <span>Session Timing</span>
       </h4>
       <div className="space-y-2 pl-4">
-        <MiniSlider label="Focus Duration" value={25} max={120} />
-        <MiniSlider label="Break Duration" value={5} max={30} />
+        <MiniSlider label={showcaseExtras.settings.content.sessions.focusDuration.label} value={showcaseExtras.settings.content.sessions.focusDuration.value} max={showcaseExtras.settings.content.sessions.focusDuration.max} />
+        <MiniSlider label={showcaseExtras.settings.content.sessions.breakDuration.label} value={showcaseExtras.settings.content.sessions.breakDuration.value} max={showcaseExtras.settings.content.sessions.breakDuration.max} />
       </div>
     </div>
     <div className="space-y-2">
@@ -72,8 +73,8 @@ const SessionsContent = () => (
       <div className="pl-4">
         <div className="flex items-center justify-between">
           <div className="flex-1">
-            <span className="text-xs text-landing-headers">Healthy Habits</span>
-            <p className="text-xs text-landing-muted opacity-80 mt-0.5">Enable wellness breaks after cycles</p>
+            <span className="text-xs text-landing-headers">{showcaseExtras.settings.content.sessions.healthyHabits.label}</span>
+            <p className="text-xs text-landing-muted opacity-80 mt-0.5">{showcaseExtras.settings.content.sessions.healthyHabits.description}</p>
           </div>
           <MiniToggle checked={true} />
         </div>
@@ -509,11 +510,10 @@ const SettingsPreview = () => (
 
 const featureData: FeatureData = {
   icon: FaPaintBrush,
-  title: "Beautiful",
-  subtitle: "Customization",
-  heading: "Craft Your Perfect Workspace",
-  description:
-    "Every detail crafted for extended focus sessions. From AI companion personality to deep focus modes, customize your perfect productivity environment.",
+  title: showcaseData.settings.title,
+  subtitle: showcaseData.settings.subtitle,
+  heading: showcaseData.settings.heading,
+  description: showcaseData.settings.description,
   hasWorkflow: true,
   workflowType: "settings",
   workflowStates: [
@@ -541,23 +541,7 @@ const featureData: FeatureData = {
       ],
     },
   ],
-  phaseContent: {
-    "settings-core": {
-      heading: "Core Settings",
-      description: "Configure essential settings like session timing and data privacy to get started.",
-      listItems: ["Session timing adjustments", "Privacy controls", "Basic customization"],
-    },
-    "settings-personalization": {
-      heading: "Personalize Your Experience",
-      description: "Tailor the appearance, goal management, and AI companion to suit your workflow.",
-      listItems: ["UI customization", "Goal and task settings", "AI personality tuning"],
-    },
-    "settings-advanced": {
-      heading: "Advanced Customization",
-      description: "Fine-tune colors, notifications, and analytics for a fully optimized workspace.",
-      listItems: ["Color theme selection", "Notification preferences", "Productivity insights"],
-    },
-  },
+  phaseContent: showcaseData.settings.phaseContent,
   animation: {
     order: "interleave",
     visual: { autoAlpha: 0, y: 30 },

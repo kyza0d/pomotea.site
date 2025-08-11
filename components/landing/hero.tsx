@@ -5,6 +5,7 @@ import { WaitlistModal } from "./modals";
 import { Input } from "../ui/input";
 import { FaEnvelope } from "react-icons/fa";
 import { HiArrowUturnRight } from "react-icons/hi2";
+import { landingCopy } from "@/copy/landing";
 
 export const HeroSection = () => {
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
@@ -19,21 +20,20 @@ export const HeroSection = () => {
             <div className="rounded-xl border-landing-borders w-fit border-2 flex items-center space-x-2 h-fit py-1 px-1.5">
               <Orbit size={16} className="text-landing-primary mr-2" />
               <div className="mx-2 text-sm">
-                Where structure meets flow
+                {landingCopy.hero.tagline}
               </div>
             </div>
-            <h1>
-              <span>Stop forcing discipline.</span> <br />
-              <span className="text-landing-primary whitespace-nowrap">Start building structure.</span>
+            <h1 className="tracking-[-0.01em]">
+              <span>{landingCopy.hero.heading.main}</span> <br />
+              <span className="text-landing-primary whitespace-nowrap">{landingCopy.hero.heading.highlight}</span>
             </h1>
             <p className="max-w-[52ch]">
-              Transform your goals into structured focus sessions. Pomotea automatically generates timer sessions from your
-              tasks, helping you stay focused and make consistent progress.
+              {landingCopy.hero.description}
             </p>
             <div className="flex-col relative md:flex-row flex mt-8">
               <FaEnvelope className="absolute top-1/2 -translate-y-1/2 left-5 text-landing-muted" />
               <Input
-                placeholder="your@email.com"
+                placeholder={landingCopy.hero.emailPlaceholder}
                 className="w-full py-5 pl-14 pr-16 lg:pr-43 rounded-xl placeholder:text-landing-muted"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -43,7 +43,7 @@ export const HeroSection = () => {
                 onClick={() => setIsWaitlistModalOpen(true)}
                 className="absolute top-1/2 -translate-y-1/2 right-2 py-4 px-4 md:py-6 md:px-6 whitespace-nowrap active:border-none flex-1 bg-landing-primary text-landing-base"
               >
-                <HiArrowUturnRight /> <span className="hidden md:flex ml-4">Join waitlist</span>
+                <HiArrowUturnRight /> <span className="hidden md:flex ml-4">{landingCopy.hero.buttonText}</span>
               </Button>
             </div>
           </div>

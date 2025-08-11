@@ -13,13 +13,12 @@ import {
   PieChart,
   Settings,
   Palette,
-  Sliders,
-  Sparkles,
-  Timer
+  Sliders
 } from "lucide-react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { FeatureItemProps } from "@/components/landing/items";
+import { featuresPageContent } from "@/copy/features";
 
 interface FeatureListingProps extends FeatureItemProps {
   details?: string[];
@@ -38,7 +37,7 @@ const FeatureListing: React.FC<FeatureListingProps> = ({
   return (
     <div className="flex flex-col md:flex-row items-start space-x-3 sm:space-x-4">
       <div className={`${iconBgColor} ${padding} mb-4 md:mb-0 flex-shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl border-2 ${borderColor}`}>
-{Icon && <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />}
+        {Icon && <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />}
       </div>
       <div className="flex-1 min-w-0">
         <h4 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">{title}</h4>
@@ -58,98 +57,91 @@ const FeatureListing: React.FC<FeatureListingProps> = ({
 const aiTools = [
   {
     icon: Brain,
-    name: "Intelligent Task Breakdown",
-    description: "Transform overwhelming goals into perfectly-sized, actionable tasks with AI-powered estimation and smart prioritization that adapts to your working style.",
-    details: [
-      "Breaks down complex goals into manageable tasks.",
-      "Estimates effort for each task.",
-      "Prioritizes tasks based on importance and dependencies."
-    ]
+    ...featuresPageContent.sections.aiTools.items[0],
+    title: featuresPageContent.sections.aiTools.items[0].title || "Default AI Tool Title",
+    subtitle: featuresPageContent.sections.aiTools.items[0].subtitle || "Default AI Tool Subtitle",
   },
   {
     icon: Calendar,
-    name: "Adaptive Daily Planning",
-    description: "Experience personalized scheduling that learns your peak productivity hours and creates optimal focus-break cycles tailored to your unique rhythm.",
-    details: [
-      "Schedules tasks based on your energy levels.",
-      "Integrates smart breaks for optimal focus.",
-      "Adapts to changes in your schedule automatically."
-    ]
+    ...featuresPageContent.sections.aiTools.items[1],
+    title: featuresPageContent.sections.aiTools.items[1].title || "Default AI Tool Title",
+    subtitle: featuresPageContent.sections.aiTools.items[1].subtitle || "Default AI Tool Subtitle",
   },
   {
     icon: MessageSquare,
-    name: "Natural Goal Creation",
-    description: "Simply describe what you want to achieve in conversation - our AI instantly transforms your ideas into structured, executable action plans."
+    ...featuresPageContent.sections.aiTools.items[2],
+    title: featuresPageContent.sections.aiTools.items[2].title || "Default AI Tool Title",
+    subtitle: featuresPageContent.sections.aiTools.items[2].subtitle || "Default AI Tool Subtitle",
   },
   {
     icon: TrendingUp,
-    name: "Productivity Intelligence",
-    description: "Receive personalized insights and coaching based on your work patterns, with actionable recommendations to optimize your focus and eliminate productivity bottlenecks."
-  }
+    ...featuresPageContent.sections.aiTools.items[3],
+    title: featuresPageContent.sections.aiTools.items[3].title || "Default AI Tool Title",
+    subtitle: featuresPageContent.sections.aiTools.items[3].subtitle || "Default AI Tool Subtitle",
+  },
 ];
 
 const goalWorkflowFeatures = [
   {
     icon: Target,
-    title: "Hierarchical Goal Architecture",
-    subtitle: "Create unlimited goal depth with intelligent task nesting, automatic progress propagation, and dependency mapping that keeps complex projects organized.",
-    details: [
-      "Nested goals for complex projects.",
-      "Automatic progress updates.",
-      "Visual dependency mapping."
-    ]
+    ...featuresPageContent.sections.goalManagement.items[0],
+    title: featuresPageContent.sections.goalManagement.items[0].title || "Default Goal Title",
+    subtitle: featuresPageContent.sections.goalManagement.items[0].subtitle || "Default Goal Subtitle",
   },
   {
     icon: Workflow,
-    title: "Purpose-Driven Sessions",
-    subtitle: "Every focus session connects to meaningful objectives, providing clear context and motivation while ensuring consistent progress toward your bigger vision.",
-    details: [
-      "Sessions linked to specific goals.",
-      "Clear context for every work block.",
-      "Boosts motivation and focus."
-    ]
+    ...featuresPageContent.sections.goalManagement.items[1],
+    title: featuresPageContent.sections.goalManagement.items[1].title || "Default Goal Title",
+    subtitle: featuresPageContent.sections.goalManagement.items[1].subtitle || "Default Goal Subtitle",
   },
   {
     icon: BarChart3,
-    title: "Intelligent Progress Synthesis",
-    subtitle: "Watch goals evolve automatically as tasks complete, with visual progress indicators and milestone celebrations that maintain momentum and clarity."
-  }
+    ...featuresPageContent.sections.goalManagement.items[2],
+    title: featuresPageContent.sections.goalManagement.items[2].title || "Default Goal Title",
+    subtitle: featuresPageContent.sections.goalManagement.items[2].subtitle || "Default Goal Subtitle",
+  },
 ];
 
 const progressTrackingItems = [
   {
     icon: Activity,
-    title: "Deep Work Analytics",
-    subtitle: "Understand your productivity patterns with comprehensive session tracking, focus quality metrics, and personalized insights into your most effective working rhythms."
+    ...featuresPageContent.sections.progressTracking.items[0],
+    title: featuresPageContent.sections.progressTracking.items[0].title || "Default Progress Title",
+    subtitle: featuresPageContent.sections.progressTracking.items[0].subtitle || "Default Progress Subtitle",
   },
   {
     icon: LineChart,
-    title: "Visual Progress Intelligence",
-    subtitle: "Transform data into motivation with beautiful dashboards showing goal velocity, time investment trends, and achievement patterns that inspire continued progress."
+    ...featuresPageContent.sections.progressTracking.items[1],
+    title: featuresPageContent.sections.progressTracking.items[1].title || "Default Progress Title",
+    subtitle: featuresPageContent.sections.progressTracking.items[1].subtitle || "Default Progress Subtitle",
   },
   {
     icon: PieChart,
-    title: "Long-Term Performance Mastery",
-    subtitle: "Unlock productivity optimization through historical analysis, identifying peak performance windows and success patterns to systematically improve your effectiveness."
-  }
+    ...featuresPageContent.sections.progressTracking.items[2],
+    title: featuresPageContent.sections.progressTracking.items[2].title || "Default Progress Title",
+    subtitle: featuresPageContent.sections.progressTracking.items[2].subtitle || "Default Progress Subtitle",
+  },
 ];
 
 const customizationItems = [
   {
     icon: Settings,
-    title: "Intelligent Timer Adaptation",
-    subtitle: "Experience productivity sessions that evolve with you - customizable durations, wellness integration, and smart break suggestions that prevent burnout while maximizing flow."
+    ...featuresPageContent.sections.customization.items[0],
+    title: featuresPageContent.sections.customization.items[0].title || "Default Customization Title",
+    subtitle: featuresPageContent.sections.customization.items[0].subtitle || "Default Customization Subtitle",
   },
   {
     icon: Palette,
-    title: "Personal Environment Design",
-    subtitle: "Create your perfect productivity sanctuary with extensive theming options, custom color palettes, typography choices, and background personalization."
+    ...featuresPageContent.sections.customization.items[1],
+    title: featuresPageContent.sections.customization.items[1].title || "Default Customization Title",
+    subtitle: featuresPageContent.sections.customization.items[1].subtitle || "Default Customization Subtitle",
   },
   {
     icon: Sliders,
-    title: "Workflow Personalization Engine",
-    subtitle: "Fine-tune every aspect of your productivity experience with granular preference controls, notification customization, and behavioral adaptations that match your unique style."
-  }
+    ...featuresPageContent.sections.customization.items[2],
+    title: featuresPageContent.sections.customization.items[2].title || "Default Customization Title",
+    subtitle: featuresPageContent.sections.customization.items[2].subtitle || "Default Customization Subtitle",
+  },
 ];
 
 export default function FeaturesPage() {
@@ -163,7 +155,7 @@ export default function FeaturesPage() {
             className="inline-flex items-center gap-2 text-landing-foreground/60 hover:text-landing-foreground transition-colors text-sm"
           >
             <ArrowLeft size={16} />
-            Back
+            {featuresPageContent.navigation.backText}
           </Link>
         </div>
       </header>
@@ -172,9 +164,9 @@ export default function FeaturesPage() {
       <main className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-8">
         {/* Page Title */}
         <div className="mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl text-landing-headers mb-2">Features</h1>
+          <h1 className="text-2xl sm:text-3xl text-landing-headers mb-2">{featuresPageContent.pageTitle}</h1>
           <p className="text-sm sm:text-base text-landing-foreground/70 leading-relaxed">
-            Premium productivity capabilities that transform ambitious goals into systematic achievement through intelligent automation and deep personalization.
+            {featuresPageContent.pageDescription}
           </p>
         </div>
 
@@ -182,7 +174,7 @@ export default function FeaturesPage() {
           {/* AI-Powered Tools Section */}
           <section>
             <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">AI Tools</h2>
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.aiTools.title}</h2>
               <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
             <div className="space-y-6 sm:space-y-9">
@@ -190,8 +182,8 @@ export default function FeaturesPage() {
                 <FeatureListing
                   key={index}
                   icon={tool.icon}
-                  title={tool.name}
-                  subtitle={tool.description}
+                  title={tool.title}
+                  subtitle={tool.subtitle}
                   iconBgColor="bg-none"
                   borderColor="border-none"
                   details={tool.details}
@@ -205,7 +197,7 @@ export default function FeaturesPage() {
           {/* Goal Management Section */}
           <section>
             <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">Goal Management</h2>
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.goalManagement.title}</h2>
               <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
             <div className="space-y-6 sm:space-y-9">
@@ -228,7 +220,7 @@ export default function FeaturesPage() {
           {/* Progress Tracking Section */}
           <section>
             <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">Progress Tracking</h2>
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.progressTracking.title}</h2>
               <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
             <div className="space-y-6 sm:space-y-9">
@@ -250,7 +242,7 @@ export default function FeaturesPage() {
           {/* Customization Section */}
           <section>
             <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">Customization</h2>
+              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.customization.title}</h2>
               <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
             </div>
             <div className="space-y-6 sm:space-y-9">

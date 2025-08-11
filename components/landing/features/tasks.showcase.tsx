@@ -4,6 +4,7 @@ import { Mascot } from "@/components/ui/mascot";
 import { clsx } from "clsx";
 import { CircularProgressSVG } from "../items";
 import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
+import { showcaseData, workflowMessages, showcaseExtras } from "@/copy/showcase";
 import {
   TimerStatus,
   MessageRow,
@@ -28,14 +29,14 @@ const workflowStates: WorkflowState[] = [
   {
     phase: "ai-interaction",
     elements: [
-      <MessageRow isUser key="p1-user-1">Let's continue working on our website</MessageRow>,
-      <MessageRow key="p1-ai-1" showTimeline>Sounds good, I'll start a work session.</MessageRow>,
+      <MessageRow isUser key="p1-user-1">{workflowMessages.tasks.userStart}</MessageRow>,
+      <MessageRow key="p1-ai-1" showTimeline>{workflowMessages.tasks.aiSessionStart}</MessageRow>,
       <MessageRow avatarIcon={Mascot} key="p1-ai-2" isJsx>
         <TimerStatus
           duration={1500} // 25 min
           timeRemaining={1500}
           sessionType="work"
-          currentGoal="Preparing your session..."
+          currentGoal={workflowMessages.tasks.timerStatus}
         />
       </MessageRow>
     ]
@@ -43,9 +44,9 @@ const workflowStates: WorkflowState[] = [
   {
     phase: "task-generation",
     elements: [
-      <MessageRow key="p2-ai-1" showTimeline>Here are your tasks for today:</MessageRow>,
+      <MessageRow key="p2-ai-1" showTimeline>{workflowMessages.tasks.tasksIntro}</MessageRow>,
       <MessageRow avatarIcon={FaList} key="p2-tool-1" isJsx>
-        <TaskListCard title="Tasks for 'Website Development'" tasks={["Clean workspace and organize desk", "Review project files for efficiency"]} />
+        <TaskListCard title={workflowMessages.tasks.taskTitle} tasks={workflowMessages.tasks.exampleTasks} />
       </MessageRow>
     ]
   },
@@ -54,8 +55,8 @@ const workflowStates: WorkflowState[] = [
     elements: [
       <MessageRow avatarIcon={TimerIcon} key="p3-tool-1" isJsx>
         <SessionIndicatorCard
-          title="Focus Session Started"
-          subtitle="Clean workspace and organize desk"
+          title={workflowMessages.tasks.sessionStarted.title}
+          subtitle={workflowMessages.tasks.sessionStarted.subtitle}
           colorClass={clsx(colorThemes.primary.text, colorThemes.primary.border, colorThemes.primary.bg)}
         />
       </MessageRow>
@@ -65,7 +66,7 @@ const workflowStates: WorkflowState[] = [
     phase: "session-complete",
     elements: [
       <MessageRow avatarIcon={FaCheckCircle} key="p4-tool-1" isJsx>
-        <TaskCompletedCard title="Focus session completed!" completedTasks={["Clean workspace and organize desk"]} />
+        <TaskCompletedCard title={workflowMessages.tasks.sessionCompleted.title} completedTasks={workflowMessages.tasks.sessionCompleted.completedTasks} />
       </MessageRow>
     ]
   },
@@ -74,8 +75,8 @@ const workflowStates: WorkflowState[] = [
     elements: [
       <MessageRow avatarIcon={TimerIcon} key="p5-tool-1" isJsx>
         <SessionIndicatorCard
-          title="Break Session Started"
-          subtitle="Time to recharge"
+          title={workflowMessages.tasks.breakStarted.title}
+          subtitle={workflowMessages.tasks.breakStarted.subtitle}
           colorClass={clsx(colorThemes.primary.text, colorThemes.primary.border)}
         />
       </MessageRow>
@@ -86,8 +87,8 @@ const workflowStates: WorkflowState[] = [
     elements: [
       <MessageRow avatarIcon={Brain} key="p6-tool-1" isJsx>
         <SessionIndicatorCard
-          title="Meditation Session"
-          subtitle="Mindfulness break"
+          title={workflowMessages.tasks.habitStarted.title}
+          subtitle={workflowMessages.tasks.habitStarted.subtitle}
           colorClass={clsx(colorThemes.primary.text, colorThemes.primary.border)}
         />
       </MessageRow>
@@ -98,8 +99,8 @@ const workflowStates: WorkflowState[] = [
     elements: [
       <MessageRow avatarIcon={FaClock} key="p7-tool-1" isJsx>
         <SessionIndicatorCard
-          title="Focus Session Started"
-          subtitle="Review project files for efficiency"
+          title={workflowMessages.tasks.sessionStarted2.title}
+          subtitle={workflowMessages.tasks.sessionStarted2.subtitle}
           colorClass={clsx(colorThemes.primary.text, colorThemes.primary.border)}
         />
       </MessageRow>
@@ -116,15 +117,7 @@ const sessionCardData: SkewedSessionItemProps[] = [
   { id: "session-card-5", timeId: "timer-text-1", icon: Clock, title: "Focus", time: "25:00", description: "Clean your workspace, turn off notifications, and focus on one task at a time." },
 ];
 
-const phaseContent: Record<string, PhaseContent> = {
-  "ai-interaction": { heading: "Start with Simple Conversations", description: "Tell Pomotea about your goals in natural language. The AI understands context and helps translate your ideas into actionable tasks.", listItems: ["Natural language goal processing", "Context-aware task interpretation", "Smart goal breakdown and analysis", "Conversational task planning"] },
-  "task-generation": { heading: "Watch Tasks Generate Automatically", description: "From your conversation, Pomotea creates a structured task list with optimal ordering and clear priorities, ready for focused work sessions.", listItems: ["AI-driven task generation from goals", "Intelligent task prioritization", "Automatic task sequencing", "Context-based task structuring"] },
-  "session-start": { heading: "Focus Sessions <br/>Begin Seamlessly", description: "With tasks ready, Pomotea automatically starts focus sessions with optimal timing, keeping you in flow state without manual intervention.", listItems: ["Automated focus session scheduling", "Intelligent timer management", "Seamless session transitions", "Flow state optimization"] },
-  "session-complete": { heading: "Progress Tracking <br/>Made Effortless", description: "As you complete sessions, Pomotea tracks your progress and intelligently adjusts upcoming tasks and timers based on your productivity patterns.", listItems: ["Automatic progress tracking", "Intelligent timer adjustments", "Productivity pattern analysis", "Adaptive workflow optimization"] },
-  "break-start": { heading: "Recharge with Smart Breaks", description: "After completing a focus session, Pomotea automatically schedules a break to help you rest and prepare for mindfulness activities.", listItems: ["Automatic break scheduling", "Customizable break durations", "Prevents burnout", "Prepares mind for mindfulness"] },
-  "habit-start": { heading: "Integrate Healthy Habits", description: "Following your break, Pomotea encourages mindfulness with short, guided habits like meditation, helping you reset your focus effectively.", listItems: ["Seamless habit integration", "Guided mindfulness breaks", "Recharge and refocus", "Build consistent wellness routines"] },
-  "session-start-2": { heading: "Maintain Your Momentum", description: "After a refreshing break, Pomotea seamlessly transitions you to the next task, helping you dive back into a state of deep focus effortlessly.", listItems: ["Automated next-task queuing", "Maintains productivity flow", "Reduces context-switching friction", "Keeps your goals on track"] }
-};
+const phaseContent: Record<string, PhaseContent> = showcaseData.tasks.phaseContent;
 
 const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
   <>
@@ -160,13 +153,13 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
               id="timer-session-type"
               className="text-xs sm:text-sm text-landing-foreground block"
             >
-              Focusing on:
+{showcaseExtras.tasks.timerDisplay.sessionType}
             </span>
             <h3
               id="timer-task-name"
               className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-landing-headers truncate"
             >
-              Clean workspace
+              {showcaseExtras.tasks.timerDisplay.taskName}
             </h3>
           </div>
         </div>
@@ -188,10 +181,10 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
 
 const featureData: FeatureData = {
   icon: FaStream,
-  title: "Session based",
-  subtitle: "Task Management",
-  heading: "Automate Your Workflow, from Tasks to Timers",
-  description: "Pomotea's AI doesn't just manage tasks; it builds your entire focus schedule. Describe your goals, and watch as it generates a structured task list and automatically schedules focus and break sessions, keeping you in a state of flow.",
+  title: showcaseData.tasks.title,
+  subtitle: showcaseData.tasks.subtitle,
+  heading: showcaseData.tasks.heading,
+  description: showcaseData.tasks.description,
   animation: { order: "interleave", visual: { autoAlpha: 0, x: 30 }, copy: { autoAlpha: 0, x: -30 }, end: "+=1600%" },
   visual: <AIFeatureVisual workflowStates={workflowStates} />,
   hasWorkflow: true,

@@ -7,6 +7,7 @@ import {
   ChecklistItem,
   type Session
 } from './shared/ui-components';
+import { landingCopy } from '@/copy/landing';
 
 // Local session data
 const sessions: Session[] = [
@@ -40,18 +41,17 @@ export const Overview = () => {
         {/* Content Section */}
         <div className="flex flex-col justify-center py-2 sm:py-4 md:py-6 px-0 sm:px-2 md:px-4 lg:pr-6 lg:pl-0 lg:flex-1">
           <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">
-            Zero setup friction.
+            {landingCopy.overview.heading.main}
             <br />
-            <span className="text-landing-primary">Maximum productivity</span> output.
+            <span className="text-landing-primary">{landingCopy.overview.heading.highlight}</span>
           </h2>
           <p className="mt-2 sm:mt-3 text-sm sm:text-base max-w-full w-[45ch]">
-            Unlike traditional Pomodoro apps that require manual session planning, Pomotea automatically generates your timer
-            sessions from your goals and tasks.
+            {landingCopy.overview.description}
           </p>
           <div className="mt-4 sm:mt-6 flex flex-col gap-3">
-            <ChecklistItem>Automatic timer generation from your task list</ChecklistItem>
-            <ChecklistItem>Goal-centric approach with integrated deadlines</ChecklistItem>
-            <ChecklistItem>Real-time sync across all your devices</ChecklistItem>
+            {landingCopy.overview.features.map((feature, index) => (
+              <ChecklistItem key={index}>{feature}</ChecklistItem>
+            ))}
           </div>
         </div>
 

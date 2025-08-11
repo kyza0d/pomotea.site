@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { Logo } from "../ui/logo";
 import { WaitlistModal } from "./modals";
+import { landingCopy } from "@/copy/landing";
 
 export const CtaSection = () => {
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
@@ -23,16 +24,16 @@ export const CtaSection = () => {
 
           <div className="py-6 mx-auto pb-0 md:pb-2">
             <div className="mb-8 space-y-4">
-              <h2 className="max-w-[24ch] text-3xl font-bold">Master your flow, make the most out of your time</h2>
+              <h2 className="max-w-[24ch] text-3xl font-bold">{landingCopy.cta.heading}</h2>
               <p className="max-w-[38ch]">
-                Join our community and get latest updates, inside preview on the development of pomotea
+                {landingCopy.cta.description}
               </p>
             </div>
             <Button
               onClick={() => setIsWaitlistModalOpen(true)}
               className="w-full md:w-auto bg-landing-primary py-6 px-16 text-landing-base"
             >
-              Get started
+              {landingCopy.cta.buttonText}
             </Button>
           </div>
         </div>

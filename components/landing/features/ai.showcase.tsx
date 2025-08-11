@@ -2,6 +2,7 @@ import { Target, CheckCircle } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
 import { aiPhaseTools } from "./data";
+import { showcaseData, workflowMessages, showcaseExtras } from "@/copy/showcase";
 
 import {
   ContextualToolChip,
@@ -29,51 +30,35 @@ const GoalPlanningCard = () => (
     <div className="space-y-1">
       <div className="flex items-center gap-2 text-xs text-landing-foreground/80">
         <div className="w-1.5 h-1.5 bg-landing-primary rounded-full animate-pulse"></div>
-        Breaking down complex goal into manageable tasks
+{workflowMessages.ai["document-analysis"].analysisPhases.breakdown}
       </div>
       <div className="flex items-center gap-2 text-xs text-landing-foreground/80">
         <div className="w-1.5 h-1.5 bg-landing-primary rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-        Identifying key milestones from PRD
+{workflowMessages.ai["document-analysis"].analysisPhases.milestones}
       </div>
       <div className="flex items-center gap-2 text-xs text-landing-foreground/80">
         <div className="w-1.5 h-1.5 bg-landing-primary rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-        Structuring project phases
+{workflowMessages.ai["document-analysis"].analysisPhases.structuring}
       </div>
     </div>
   </div>
 );
 
-const appDevelopmentTasks: MultiLevelTask[] = [
-  {
-    title: "Phase 1: Project Setup & Core Features",
-    subtasks: [
-      { title: "Initialize new repository" },
-      { title: "Setup authentication (email/password)" },
-    ],
-  },
-  {
-    title: "Phase 2: UI/UX Development",
-    subtasks: [
-      { title: "Design dashboard layout" },
-      { title: "Create reusable component library" },
-    ],
-  },
-  { title: "Phase 3: Deployment" },
-];
+const appDevelopmentTasks: MultiLevelTask[] = showcaseExtras.ai.taskExample.phases;
 
 const workflowStates: WorkflowState[] = [
   {
     phase: "accountability-partner",
     elements: [
       <MessageRow key="ai-hello" avatarIcon={Mascot} showTimeline={true}>
-        Hey, what's up! How are things going with your projects?
+        {workflowMessages.ai["accountability-partner"].aiGreeting}
       </MessageRow>,
       <MessageRow key="user-overwhelmed" isUser={true}>
-        Feeling a bit overwhelmed... feels like there's just too much to do.
+        {workflowMessages.ai["accountability-partner"].userOverwhelmed}
       </MessageRow>,
       <MessageRow key="ai-reassurance" avatarIcon={Mascot} showTimeline={true} isJsx={true}>
         <MessageBubble isUser={false}>
-          I hear you. But you've been busy this past week—you completed <strong className="text-landing-primary">93 tasks!</strong> That's amazing progress. You've been on a roll, maybe take some time for yourself and come back recharged. You got this!
+          <span dangerouslySetInnerHTML={{ __html: workflowMessages.ai["accountability-partner"].aiReassurance }} />
         </MessageBubble>
       </MessageRow>,
     ],
@@ -83,10 +68,10 @@ const workflowStates: WorkflowState[] = [
     phase: "task-recall",
     elements: [
       <MessageRow key="user-recall" isUser={true}>
-        So, what have I actually done this past month?
+        {workflowMessages.ai["task-recall"].userQuery}
       </MessageRow>,
       <MessageRow key="ai-recall-intro" avatarIcon={Mascot} showTimeline={true}>
-        You've been hard at work on your courses and building that new app. Here's a quick overview of where your time went:
+        {workflowMessages.ai["task-recall"].aiResponse}
       </MessageRow>,
       <MessageRow key="ai-summary-card" avatarIcon={CheckCircle} isJsx={true} showTimeline={true}>
         <MonthlySummaryCard />
@@ -99,12 +84,14 @@ const workflowStates: WorkflowState[] = [
     elements: [
       <MessageRow key="user-goal" isUser={true} isJsx={true}>
         <div className="flex flex-col items-end gap-2">
-          <MessageBubble isUser={true}>Can you create a new goal for <br />working on this new idea?</MessageBubble>
+          <MessageBubble isUser={true}>
+            <span dangerouslySetInnerHTML={{ __html: workflowMessages.ai["document-analysis"].userRequest }} />
+          </MessageBubble>
           <FileAttachmentChip fileName="PRD.txt" />
         </div>
       </MessageRow>,
       <MessageRow key="ai-confirm" avatarIcon={Mascot} showTimeline={true}>
-        Sure! I'll put together a goal <br />with tasks that match your PRD.
+        <span dangerouslySetInnerHTML={{ __html: workflowMessages.ai["document-analysis"].aiConfirmation }} />
       </MessageRow>,
       <MessageRow key="analyzing-card" avatarIcon={Target} showTimeline={true} isJsx={true}>
         <GoalPlanningCard />
@@ -116,11 +103,11 @@ const workflowStates: WorkflowState[] = [
     phase: "task-completion",
     elements: [
       <MessageRow key="ai-tasks-done" avatarIcon={Mascot} showTimeline={true}>
-        All set! Here's the plan I've drafted for you.
+        {workflowMessages.ai["task-completion"].aiCompletion}
       </MessageRow>,
       <MessageRow key="tasks-created" avatarIcon={CheckCircle} showTimeline={true} isJsx={true}>
         <MultiLevelTaskListCard
-          title="Build New 'Sidekick' App"
+          title={workflowMessages.ai["task-completion"].goalTitle}
           tasks={appDevelopmentTasks}
         />
       </MessageRow>,
@@ -128,26 +115,10 @@ const workflowStates: WorkflowState[] = [
   },
 ];
 
-const phaseContent: Record<string, PhaseContent> = {
-  "accountability-partner": {
-    heading: "Your Personal <br/>Accountability Partner",
-    description: "Stay motivated with an AI that understands your progress and provides timely encouragement when you need it most. It's more than a tool—it's a partner in your success.",
-    listItems: ["Contextual check-ins", "Progress-based motivation", "Reduces burnout", "Fosters consistency"],
-  },
-  "task-recall": {
-    heading: "Instant Recall <br/>of All Your Hard Work",
-    description: "Lose the 'what did I even do?' feeling. Your AI remembers every task and session, giving you a clear picture of your accomplishments and time allocation over any period.",
-    listItems: ["Monthly & weekly reviews", "Time allocation summaries", "Cross-goal progress tracking", "Effort visualization"],
-  },
-  "document-analysis": {
-    heading: "From Complex Docs <br/>to Actionable Plans",
-    description: "Drag in a document, and watch as your AI instantly analyzes it to create a comprehensive, multi-level task list. It understands your goals and structures the work for you.",
-    listItems: ["AI-powered document analysis", "Multi-level task generation", "Intelligent project structuring", "Handles unstructured data"],
-  },
-};
+const phaseContent: Record<string, PhaseContent> = showcaseData.ai.phaseContent;
 
 const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="pointer-events-none absolute top-3/4 md:top-1/2 left-1/2 -translate-1/2 mt-15 w-[110%] lg:w-[115%] md:w-[120%] scale-65 md:scale-80 lg:scale-100 -skew-x-6 skew-y-3">
+  <div className="pointer-events-none absolute top-3/4 md:top-1/2 left-1/2 -translate-1/2 mt-15 w-[125%] lg:w-full scale-65 md:scale-80 lg:scale-100 -skew-x-6 skew-y-3">
     <div className="grid grid-cols-5 gap-6 h-[600px]">
       <div className="col-span-3 overflow-hidden rounded-3xl border-3 border-landing-borders bg-landing-base">
         <div className="relative flex h-full">
@@ -213,10 +184,10 @@ const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[]
 
 const featureData: FeatureData = {
   icon: Mascot,
-  title: "AI-Powered",
-  subtitle: "Productivity",
-  heading: "Your Personal Accountability Partner",
-  description: "Stay motivated with an AI that understands your progress and provides timely encouragement when you need it most. It's more than a tool—it's a partner in your success.",
+  title: showcaseData.ai.title,
+  subtitle: showcaseData.ai.subtitle,
+  heading: showcaseData.ai.heading,
+  description: showcaseData.ai.description,
   animation: {
     order: "visual-first",
     visual: { y: 30, stagger: 0.3 },

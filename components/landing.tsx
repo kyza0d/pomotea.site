@@ -19,7 +19,6 @@ import { HelpCircle } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { cn } from "@/lib/utils";
 import { FaRegFlag, FaStream } from "react-icons/fa";
-import { SpotlightEffect } from "./landing/SpotlightEffect";
 
 export const CoreFeature: React.FC<FeatureItemProps> = ({
   icon: Icon = HelpCircle,
@@ -45,7 +44,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export const Feature = forwardRef<HTMLDivElement, { children: React.ReactNode, className?: string }>(({ children, className }, ref) => (
   <div ref={ref} className={cn(
-    "relative lg:backdrop-blur-xl lg:border-landing-borders lg:border-2 p-2 pb-4 sm:p-2 lg:p-3 lg:rounded-3xl z-10",
+    "relative flex lg:backdrop-blur-xl lg:border-landing-borders lg:border-2 p-2 lg:rounded-3xl z-10",
     className
   )}>
     {children}
@@ -61,7 +60,7 @@ const LandingHero = () => {
   const featuresRef = useRef(null);
   const featuresContainerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [spotlightPos, setSpotlightPos] = useState({ x: 0.33, y: 0.8 });
+  const [_spotlightPos, setSpotlightPos] = useState({ x: 0.33, y: 0.8 });
 
   const indicatorRef = useRef(null);
 
@@ -119,7 +118,7 @@ const LandingHero = () => {
               <Feature ref={el => { itemRefs.current[0] = el; }}>
                 <CoreFeature
                   icon={Mascot}
-                  iconSize="w-8 h-8"
+                  iconSize="w-6 h-6 lg:w-8 lg:h-8"
                   title="AI Powered"
                   subtitle="Productivity"
                   borderColor="border-none"
@@ -129,6 +128,7 @@ const LandingHero = () => {
               <Feature ref={el => { itemRefs.current[1] = el; }}>
                 <CoreFeature
                   icon={FaStream}
+                  iconSize="w-6 h-6 lg:w-8 lg:h-8"
                   title="Smart Time"
                   subtitle="Blocking"
                   borderColor="border-none"
@@ -138,6 +138,7 @@ const LandingHero = () => {
               <Feature ref={el => { itemRefs.current[2] = el; }}>
                 <CoreFeature
                   icon={FaRegFlag}
+                  iconSize="w-6 h-6 lg:w-8 lg:h-8"
                   title="Goal-Centric"
                   subtitle="Workflow"
                   borderColor="border-none"
