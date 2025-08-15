@@ -9,7 +9,7 @@ import { MascotProps } from "../ui/mascot";
 export type FeatureItemProps = {
   icon?: LucideIcon | IconType | FC<any>;
   title: string;
-  subtitle: string;
+  description?: string;
   iconBgColor?: string;
   iconColor?: string;
   iconSize?: string;
@@ -89,20 +89,21 @@ export const GoalProgressBar: React.FC<{
   goalName: string;
   progress: number;
   totalTasks: number;
+  tasksCompleted: number;
   className?: string;
-}> = ({ goalName, progress, totalTasks, className }) => (
-  <div className={cn("space-y-2 p-4 rounded-xl bg-landing-secondary-shaded/20 border border-landing-borders/30", className)}>
+}> = ({ goalName, progress, totalTasks, tasksCompleted, className }) => (
+  <div className={cn("space-y-2 p-4 rounded-xl border border-landing-borders/30", className)}>
     <div className="flex items-center justify-between">
       <span className="text-sm font-medium text-landing-foreground">{goalName}</span>
       <span className="text-xs text-landing-primary">{Math.round(progress)}%</span>
     </div>
     <div className="w-full bg-landing-borders rounded-full h-2">
       <div
-        className="bg-gradient-to-r from-blue-500 to-blue-400 h-2 rounded-full transition-all duration-500"
+        className="bg-landing-primary h-2 rounded-full transition-all duration-500"
         style={{ width: `${progress}%` }}
       />
     </div>
-    <p className="text-xs text-landing-foreground/70">{totalTasks} tasks generated</p>
+    <p className="text-xs text-landing-foreground/70">{tasksCompleted}/{totalTasks}</p>
   </div>
 );
 

@@ -1,11 +1,9 @@
 /**
- * Centralized copy content for the Pomotea features page
- * Contains all text content, descriptions, and structured data for feature listings
+ * Copy content for Pomotea features page
  */
 
 import { LucideIcon } from "lucide-react";
 
-// Core types for feature content structure
 export interface FeatureItem {
   name?: string;
   title?: string;
@@ -33,147 +31,147 @@ export interface FeaturesPageContent {
   };
 }
 
-// AI Tools Section Copy
+// AI Tools
 export const aiToolsData: FeatureItem[] = [
   {
-    title: "Flow: Your AI Productivity Guide",
-    subtitle: "Flow, your AI companion, simplifies task chaos by organizing, prioritizing, and suggesting tools to keep you in the zone with minimal effort.",
+    title: "Flow: Your AI Assistant",
+    subtitle: "Flow helps organize your tasks, suggests the right tools, and keeps you focused without the hassle.",
     details: [
-      "Intelligently organizes tasks based on urgency and context.",
-      "Suggests optimal tools for each task.",
-      "Seamlessly handles scheduling and resource retrieval."
+      "Sorts tasks by what's most important",
+      "Recommends the best tools for each task",
+      "Handles scheduling automatically"
     ]
   },
   {
-    title: "Smart Task Decomposition",
-    subtitle: "Turn daunting goals into clear, actionable steps with Flow’s AI, which adapts to your work style and prioritizes what matters most.",
+    title: "Break Down Big Tasks",
+    subtitle: "Turn overwhelming projects into simple steps. Flow learns how you work and focuses on what matters most.",
     details: [
-      "Breaks down goals into manageable, bite-sized tasks.",
-      "Prioritizes tasks based on your goals and deadlines.",
-      "Adjusts dynamically to your evolving needs."
+      "Splits big goals into smaller, doable tasks",
+      "Puts tasks in order of importance",
+      "Changes as your needs change"
     ]
   },
   {
-    title: "Conversational Goal Setting",
-    subtitle: "Just tell Flow your aspirations in natural language, and it transforms them into structured, actionable plans tailored to your vision.",
+    title: "Talk to Set Goals",
+    subtitle: "Just tell Flow what you want to accomplish, and it creates a clear plan to get there.",
     details: [
-      "Creates plans from simple conversational input.",
-      "Aligns tasks with your broader objectives.",
-      "Adapts plans as your goals evolve."
+      "Makes plans from simple conversations",
+      "Connects tasks to your main goals",
+      "Updates plans when your goals change"
     ]
   },
   {
-    title: "Focus-Driven Insights",
-    subtitle: "Flow analyzes your work patterns to offer personalized tips, helping you stay in flow and overcome productivity hurdles effortlessly."
+    title: "Get Better at Focus",
+    subtitle: "Flow watches how you work and gives you tips to stay focused and get more done."
   }
 ];
 
-// Goal Management Section Copy
+// Goal Management
 export const goalManagementData: FeatureItem[] = [
   {
-    title: "Goal-Centric Workflows",
-    subtitle: "Map out your ambitions with flexible goal hierarchies, ensuring every task connects to your bigger picture for meaningful progress.",
+    title: "Connect Everything to Your Goals",
+    subtitle: "Set up your goals however works for you, and see how each task helps you get closer to what you want.",
     details: [
-      "Supports nested goals for complex projects.",
-      "Links daily tasks to long-term objectives.",
-      "Visualizes progress to keep you motivated."
+      "Break big goals into smaller ones",
+      "Connect daily tasks to long-term goals",
+      "See your progress to stay motivated"
     ]
   },
   {
-    title: "Session-Based Focus",
-    subtitle: "Dive into distraction-free work sessions that align with your goals, guiding you into flow for deeper, more intentional progress.",
+    title: "Focus Sessions",
+    subtitle: "Work on one thing at a time without distractions. Each session moves you closer to your goals.",
     details: [
-      "Focuses on one task per session.",
-      "Minimizes distractions with smart notifications.",
-      "Tracks session impact on your goals."
+      "Work on just one task per session",
+      "Blocks distractions with smart alerts",
+      "Shows how sessions help your goals"
     ]
   },
   {
-    title: "Dynamic Progress Updates",
-    subtitle: "See your goals come to life with real-time progress tracking and milestone celebrations that keep you inspired and on track."
+    title: "See Progress Happen",
+    subtitle: "Watch your goals come together in real-time and celebrate when you hit milestones."
   }
 ];
 
-// Progress Tracking Section Copy
+// Progress Tracking
 export const progressTrackingData: FeatureItem[] = [
   {
-    title: "Automatic Time Insights",
-    subtitle: "Gain clarity on how you spend your time with automatic session tracking, offering insights to refine your focus and habits.",
+    title: "Track Time Automatically",
+    subtitle: "See where your time goes without any extra work. Get insights to help you focus better.",
     details: [
-      "Logs time spent on tasks effortlessly.",
-      "Highlights focus patterns and distractions.",
-      "Provides actionable feedback for improvement."
+      "Tracks time on tasks automatically",
+      "Shows when you focus best and what distracts you",
+      "Gives tips to improve your focus"
     ]
   },
   {
-    title: "Motivational Progress Visuals",
-    subtitle: "Stay inspired with clear, visual dashboards that show your progress, goal velocity, and achievements in a glance.",
+    title: "Visual Progress",
+    subtitle: "See your progress clearly with simple charts and dashboards that show how you're doing.",
     details: [
-      "Displays goal progress in real time.",
-      "Tracks trends in your productivity.",
-      "Celebrates milestones to boost motivation."
+      "Shows goal progress in real-time",
+      "Tracks your productivity trends",
+      "Celebrates your wins"
     ]
   },
   {
-    title: "Reflective Performance Analytics",
-    subtitle: "Understand your work habits over time with insights that help you optimize focus and build sustainable productivity routines."
+    title: "Learn from Your Habits",
+    subtitle: "Understand how you work best with insights that help you build better habits and stay productive."
   }
 ];
 
-// Customization Section Copy
+// Customization
 export const customizationData: FeatureItem[] = [
   {
-    title: "Tailored Focus Sessions",
-    subtitle: "Craft work sessions that fit your rhythm with adjustable timers, smart break prompts, and wellness tips to sustain flow without burnout.",
+    title: "Work Sessions That Fit You",
+    subtitle: "Set up work and break times that match your rhythm. Get reminders to rest and stay healthy.",
     details: [
-      "Customizable session lengths and breaks.",
-      "Smart prompts to prevent fatigue.",
-      "Adapts to your preferred work cadence."
+      "Adjust session and break lengths",
+      "Get smart reminders to take breaks",
+      "Adapts to how you like to work"
     ]
   },
   {
-    title: "Personalized Work Environment",
-    subtitle: "Design a workspace that feels like yours with custom themes, colors, and layouts that enhance focus and comfort.",
+    title: "Make It Your Own",
+    subtitle: "Choose colors, themes, and layouts that help you focus and feel comfortable.",
     details: [
-      "Flexible theming and color options.",
-      "Customizable layouts for your workflow.",
-      "Personalized backgrounds for inspiration."
+      "Pick from different themes and colors",
+      "Arrange things the way you like",
+      "Add backgrounds that inspire you"
     ]
   },
   {
-    title: "Adaptive Workflow Controls",
-    subtitle: "Fine-tune Pomotea to match your unique style with customizable notifications, preferences, and behaviors that evolve with you."
+    title: "Settings That Learn",
+    subtitle: "Adjust how Pomotea works to match your style. It gets better at helping you over time."
   }
 ];
 
-// Complete features page content
+// Main content
 export const featuresPageContent: FeaturesPageContent = {
-  pageTitle: "Pomotea Features",
-  pageDescription: "Discover how Pomotea’s intelligent tools and deep customization guide you into flow, turning your ambitions into focused, meaningful progress.",
+  pageTitle: "What Pomotea Can Do",
+  pageDescription: "See how Pomotea helps you stay focused and reach your goals with smart tools that work the way you do.",
   navigation: {
     backText: "Back"
   },
   sections: {
     aiTools: {
-      title: "Flow: AI-Powered Productivity",
+      title: "AI That Actually Helps",
       items: aiToolsData
     },
     goalManagement: {
-      title: "Goal-Centric Planning",
+      title: "Goal Planning Made Easy",
       items: goalManagementData
     },
     progressTracking: {
-      title: "Insightful Progress Tracking",
+      title: "Track Your Progress",
       items: progressTrackingData
     },
     customization: {
-      title: "Deep Customization",
+      title: "Make It Yours",
       items: customizationData
     }
   }
 };
 
-// Export individual sections for easy access
+// Individual sections
 export const featureSections = {
   aiTools: aiToolsData,
   goalManagement: goalManagementData,

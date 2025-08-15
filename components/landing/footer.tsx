@@ -2,7 +2,7 @@ import { Logo } from "@/components/ui/logo";
 
 export const FooterSection = () => (
   <div className="p-9">
-    <footer className="sticky z-10 mx-auto max-w-[1700px] rounded-2xl border-4 border-landing-borders bg-landing-base/90 p-6 md:p-12">
+    <footer className="sticky z-10 mx-auto max-w-[1700px] rounded-2xl p-6 md:p-12">
       <div className="flex flex-col items-start md:flex-row md:items-start space-y-8 md:space-x-12">
         <div className="space-y-4">
           <Logo size={32} />
@@ -18,21 +18,34 @@ export const FooterSection = () => (
 
         <div className="flex flex-col md:flex-row space-y-8 md:space-x-12">
           <div className="space-y-3">
-            <h4 className="text-landing-foreground font-medium text-sm">Product</h4>
+            <h4 className="text-landing-foreground font-medium text-sm">
+              Product
+            </h4>
             <div className="space-y-2">
-              <a href="/features" className="block text-landing-foreground/70 hover:text-landing-primary text-sm transition-colors">
+              <a
+                href="/features"
+                className="block text-landing-foreground/70 hover:text-landing-primary text-sm transition-colors"
+              >
                 Features
               </a>
-              <a href="/sign-in" className="block text-landing-foreground/70 hover:text-landing-primary text-sm transition-colors">
+              <a
+                href="/sign-in"
+                className="block text-landing-foreground/70 hover:text-landing-primary text-sm transition-colors"
+              >
                 Sign In
               </a>
             </div>
           </div>
 
           <div className="space-y-3">
-            <h4 className="text-landing-foreground font-medium text-sm">Support</h4>
+            <h4 className="text-landing-foreground font-medium text-sm">
+              Support
+            </h4>
             <div className="space-y-2">
-              <a href="https://x.com/kyza_dev" className="block text-landing-foreground/70 hover:text-landing-primary text-sm transition-colors">
+              <a
+                href="https://x.com/kyza_dev"
+                className="block text-landing-foreground/70 hover:text-landing-primary text-sm transition-colors"
+              >
                 Contact
               </a>
             </div>

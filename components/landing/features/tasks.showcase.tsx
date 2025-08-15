@@ -10,18 +10,16 @@ import {
   MessageRow,
   TaskListCard,
   TaskCompletedCard,
-  SessionIndicatorCard,
-  WorkflowDisplay
+  SessionIndicatorCard
 } from "./shared/workflow-components";
 
 import { SkewedSessionItem, type SkewedSessionItemProps } from "../shared/ui-components";
 
-import { FaCheckCircle, FaClock, FaList, FaStream } from "react-icons/fa";
-import { cn } from "@/lib/utils";
+import { FaCheckCircle, FaClock, FaList, FaPause, FaStream } from "react-icons/fa";
 
 const colorThemes = {
   primary: { text: "text-landing-foreground", border: "border-landing-borders", bg: "bg-landing-base/30" },
-  purple: { text: "text-landing-foreground", border: "border-purple-500/30", bg: "bg-purple-500/10" },
+  purple: { text: "text-landing-foreground", border: "border-landing-secondary/30", bg: "bg-landing-secondary/10" },
   green: { text: "text-landing-primary/40", border: "border-green-500", bg: "bg-green-500" },
 };
 
@@ -111,7 +109,7 @@ const workflowStates: WorkflowState[] = [
 const sessionCardData: SkewedSessionItemProps[] = [
   { id: "session-card-1", timeId: "timer-text-1", icon: Clock, title: "Focus", time: "25:00", description: "Clean your workspace, turn off notifications, and focus on one task at a time." },
   { id: "session-card-2", timeId: "timer-text-break", icon: Coffee, title: "Break", time: "05:00", description: "Take a short break to recharge. Stretch, hydrate, or take a quick walk." },
-  { id: "session-card-habit", timeId: "timer-text-habit", icon: Brain, title: "Meditation", time: "05:00", description: "A short, guided session to clear your mind and reset your focus.", className: "border-purple-500/30 bg-gradient-to-br from-purple-500/10 to-landing-base", iconClassName: "text-purple-400" },
+  { id: "session-card-habit", timeId: "timer-text-habit", icon: Brain, title: "Meditation", time: "05:00", description: "A short, guided session to clear your mind and reset your focus.", className: "border-landing-secondary/30 bg-gradient-to-br from-landing-secondary/10 to-landing-base", iconClassName: "text-landing-secondary" },
   { id: "session-card-3", timeId: "timer-text-2", icon: Clock, title: "Focus", time: "25:00", description: "Review project files and identify areas for optimization and refactoring." },
   { id: "session-card-4", timeId: "timer-text-break", icon: Coffee, title: "Break", time: "05:00", description: "Take a short break to recharge. Stretch, hydrate, or take a quick walk." },
   { id: "session-card-5", timeId: "timer-text-1", icon: Clock, title: "Focus", time: "25:00", description: "Clean your workspace, turn off notifications, and focus on one task at a time." },
@@ -119,41 +117,26 @@ const sessionCardData: SkewedSessionItemProps[] = [
 
 const phaseContent: Record<string, PhaseContent> = showcaseData.tasks.phaseContent;
 
-const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <>
-    <div className="absolute origin-top-left scale-60 md:scale-80 lg:scale-100 top-2 left-2 md:top-5 md:left-5 lg:top-8 lg:left-8">
-      <WorkflowDisplay workflowStates={workflowStates} />
-    </div>
-
-    <div className={cn(
-      // Base positioning
-      "absolute left-3/5 sm:left-3/5 md:left-1/2 top-1/5 md:top-4/7 -translate-x-1/2 origin-right -skew-x-26 skew-y-12",
-
-      "sm:ml-8",
-      "md:ml-12",
-      "lg:ml-20",
-      "xl:ml-30",
-
-      "scale-75",
-      "sm:scale-85",
-      "md:scale-95",
-      "lg:scale-105",
-      "xl:scale-130"
-    )}>
-      <div className="absolute left-0" id="timer-display-wrapper">
+const TasksVisual = () => (
+  <div className="relative h-full hidden min-[1100px]:block">
+    <div className="absolute bottom-0 origin-bottom">
+      <div className="z-10" id="timer-display-wrapper">
         <div className="flex items-center space-x-3 sm:space-x-4 md:space-x-6 lg:space-x-8">
-          <CircularProgressSVG
-            size={80}
-            strokeWidth={6}
-            progress={0}
-            className="circular-progress-svg sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-[90px] lg:h-[90px]"
-          />
+          <div className="relative">
+            <CircularProgressSVG
+              size={80}
+              strokeWidth={6}
+              progress={0}
+              className="circular-progress-svg sm:w-16 sm:h-16"
+            />
+            <FaPause className="absolute inset-1/2 -translate-1/2" />
+          </div>
           <div className="space-y-0 min-w-0 flex-1">
             <span
               id="timer-session-type"
               className="text-xs sm:text-sm text-landing-foreground block"
             >
-{showcaseExtras.tasks.timerDisplay.sessionType}
+              {showcaseExtras.tasks.timerDisplay.sessionType}
             </span>
             <h3
               id="timer-task-name"
@@ -165,10 +148,12 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
         </div>
       </div>
 
-      <div className="relative overflow-hidden fade-box mt-18 lg:mt-24 h-96 sm:h-104 md:h-112 lg:h-120 xl:h-126 pt-4 sm:pt-6 md:pt-8">
+      <div className="relative overflow-hidden mt-6 fade-bottom h-110">
+        <div className="after:z-20 after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-6 after:bg-gradient-to-t after:from-transparent after:to-landing-base-darker after:pointer-events-none" />
+
         <div
           id="session-cards-scroller"
-          className="space-y-12 mt-16"
+          className="space-y-12 pt-14"
         >
           {sessionCardData.map((card) => (
             <SkewedSessionItem key={card.id} {...card} />
@@ -176,7 +161,55 @@ const AIFeatureVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }
         </div>
       </div>
     </div>
-  </>
+  </div>
+);
+
+const TasksVisualMobile = () => (
+  <div className="flex flex-row h-full overflow-hidden min-[1100px]:hidden">
+    <div className="absolute left-1/2 top-1/2 -translate-1/2 origin-bottom scale-70">
+      <div className="z-10" id="timer-display-wrapper">
+        <div className="flex items-center space-x-3">
+          <div className="relative">
+            <CircularProgressSVG
+              size={80}
+              strokeWidth={6}
+              progress={0}
+              className="circular-progress-svg sm:w-16 sm:h-16"
+            />
+            <FaPause className="absolute inset-1/2 -translate-1/2" />
+          </div>
+
+          <div className="space-y-0 min-w-0 flex-1">
+            <span
+              id="timer-session-type"
+              className="text-xs sm:text-sm text-landing-foreground block"
+            >
+              {showcaseExtras.tasks.timerDisplay.sessionType}
+            </span>
+            <h3
+              id="timer-task-name"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-landing-headers truncate"
+            >
+              {showcaseExtras.tasks.timerDisplay.taskName}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div className="relative overflow-hidden mt-4 fade-bottom h-96">
+        <div className="after:z-20 after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:h-6 after:bg-gradient-to-t after:from-transparent after:to-landing-base-darker after:pointer-events-none" />
+
+        <div
+          id="session-cards-scroller"
+          className="space-y-12 pt-14"
+        >
+          {sessionCardData.map((card) => (
+            <SkewedSessionItem key={card.id} {...card} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 const featureData: FeatureData = {
@@ -186,7 +219,12 @@ const featureData: FeatureData = {
   heading: showcaseData.tasks.heading,
   description: showcaseData.tasks.description,
   animation: { order: "interleave", visual: { autoAlpha: 0, x: 30 }, copy: { autoAlpha: 0, x: -30 }, end: "+=1600%" },
-  visual: <AIFeatureVisual workflowStates={workflowStates} />,
+  visual: (
+    <>
+      <TasksVisual />
+      <TasksVisualMobile />
+    </>
+  ),
   hasWorkflow: true,
   workflowType: "tasks",
   workflowStates,

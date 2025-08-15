@@ -20,11 +20,23 @@ export const metadata = {
     images: [
       {
         url: "/logo.svg",
-        width: 200,
-        height: 200,
-        alt: "Pomotea Logo"
+        width: 142,
+        height: 142,
+        alt: "Pomotea Logo",
+        type: "image/svg+xml"
       }
     ]
+  },
+  icons: {
+    icon: [
+      { url: "/logo.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/logo.svg", type: "image/svg+xml", sizes: "16x16" },
+      { url: "/logo.svg", type: "image/svg+xml", sizes: "32x32" },
+      { url: "/logo.svg", type: "image/svg+xml", sizes: "48x48" },
+      { url: "/logo.svg", type: "image/svg+xml", sizes: "64x64" }
+    ],
+    apple: { url: "/logo.svg", sizes: "180x180" },
+    shortcut: "/logo.svg"
   },
   twitter: {
     card: "summary_large_image",
@@ -45,7 +57,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" sizes="any" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" sizes="16x16" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" sizes="32x32" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" sizes="48x48" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" sizes="64x64" />
+        <link rel="apple-touch-icon" href="/logo.svg" sizes="180x180" />
+        <link rel="shortcut icon" href="/logo.svg" />
+        <meta name="msapplication-TileImage" content="/logo.svg" />
+        <meta name="msapplication-TileColor" content="#2C2C2C" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="font-['Karla',sans-serif] text-landing-foreground bg-landing-base-darker" >
         <ConvexClientProvider>

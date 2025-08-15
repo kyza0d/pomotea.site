@@ -1,11 +1,10 @@
 import React from "react";
 import { clsx } from "clsx";
-import { cn } from "@/lib/utils";
 import { FiCheck, FiChevronRight } from "react-icons/fi";
-import { User, Bot, BookOpen, Code } from "lucide-react";
-import { HiPaperClip } from "react-icons/hi2";
+import { User } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
 import { WorkflowState } from "../display-section";
+import { FaBook, FaPaperclip } from "react-icons/fa";
 
 
 const Text = ({ children, size, className }: { children: React.ReactNode; size?: 'sm' | 'xs'; className?: string }) => {
@@ -96,7 +95,7 @@ export const TimerStatus: React.FC<TimerStatusProps> = ({
 export const MessageBubble = ({ children, isUser, jsx = false }: { children: React.ReactNode; isUser: boolean; jsx?: boolean }) => (
   <div className={clsx(
     !jsx && "px-4 py-3 rounded-xl",
-    isUser ? "bg-landing-secondary-shaded/30 border-2 border-landing-borders" : "bg-landing-base border-2 border-landing-borders"
+    isUser ? "bg-landing-borders/30 border-2 border-landing-borders" : "bg-landing-base border-2 border-landing-borders"
   )}>
     <p className="text-xs text-landing-foreground break-words">{children}</p>
   </div>
@@ -104,13 +103,13 @@ export const MessageBubble = ({ children, isUser, jsx = false }: { children: Rea
 
 export const UserAvatar = () => (
   <div className="mt-2 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-landing-primary/20 text-landing-primary">
-    <User size={16} />
+    <User size={20} />
   </div>
 );
 
 export const AssistantAvatar = ({ icon: Icon = Mascot }: { icon?: React.ElementType }) => (
   <div className="mt-2 relative z-10 w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-landing-borders/70 border border-landing-borders/20">
-    <Icon size={18} className="text-landing-foreground/80" />
+    <Icon size={20} className="text-landing-foreground/80" />
   </div>
 );
 
@@ -148,12 +147,6 @@ export const MessageRow = ({
       ) : (
         <>
           <div className="w-8 flex-shrink-0 relative">
-            {showTimeline && (
-              <div
-                className="absolute left-4 w-px bg-landing-borders/30"
-                style={{ top: '2.5rem', bottom: '-0.75rem', zIndex: -1 }}
-              />
-            )}
             <AssistantAvatar icon={avatarIcon} />
           </div>
           {messageContent}
@@ -202,7 +195,7 @@ export const TaskCompletedCard = ({ title, completedTasks }: { title: string; co
 export const SessionIndicatorCard = ({ title, subtitle, icon: Icon, colorClass }: { title: string, subtitle: string, icon?: React.ElementType, colorClass: string }) => (
   <div className={clsx("p-3 rounded-xl border-2 w-full bg-landing-base", colorClass, "border-opacity-30")}>
     <div className={clsx("flex items-center gap-2 mb-1")}>
-      {Icon && <Icon size={14} />}
+      {Icon && <Icon size={13} />}
       <span className="text-xs font-medium">{title}</span>
     </div>
     <div className="text-xs text-landing-foreground/70">{subtitle}</div>
@@ -210,7 +203,7 @@ export const SessionIndicatorCard = ({ title, subtitle, icon: Icon, colorClass }
 );
 
 export const WorkflowDisplay = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="w-80 space-y-3 workflow-container relative h-[300px]">
+  <div className="w-80 space-y-3 workflow-container relative h-[200px]">
     {workflowStates.map((state, stateIndex) => (
       <div key={stateIndex} className="workflow-phase absolute inset-0">
         <div className="space-y-1 flex flex-col">
@@ -226,8 +219,8 @@ export const WorkflowDisplay = ({ workflowStates }: { workflowStates: WorkflowSt
 );
 
 export const FileAttachmentChip = ({ fileName }: { fileName: string }) => (
-  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-landing-secondary-shaded/40 border border-landing-borders">
-    <HiPaperClip className="text-landing-foreground/80" size={16} />
+  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-landing-borders/40 border border-landing-borders">
+    <FaPaperclip className="text-landing-foreground/80" size={16} />
     <span className="text-xs font-medium text-landing-foreground">{fileName}</span>
   </div>
 );
@@ -323,7 +316,7 @@ export const MonthlySummaryCard = () => (
   <div className="p-3 rounded-xl bg-landing-base border-2 border-landing-borders/80 w-full space-y-3">
     <div>
       <div className="flex items-center gap-2 text-xs font-semibold text-landing-headers mb-1">
-        <BookOpen size={14} />
+        <FaBook size={14} />
         <span>Advanced React Course</span>
       </div>
       <div className="text-xs text-landing-foreground/80 pl-6">
@@ -332,7 +325,7 @@ export const MonthlySummaryCard = () => (
     </div>
     <div>
       <div className="flex items-center gap-2 text-xs font-semibold text-landing-headers mb-1">
-        <Code size={14} />
+        <FaPaperclip size={13} />
         <span>New App Build</span>
       </div>
       <div className="text-xs text-landing-foreground/80 pl-6">

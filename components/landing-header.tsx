@@ -6,7 +6,7 @@ import { FaDiscord } from "react-icons/fa";
 export const LandingHeader = () => {
   return (
     <>
-      <div className="pointer-events-none fixed z-100 w-full h-30 bg-gradient-to-b from-landing-base from-0% from-landing-base via-80% to-transparent" />
+      <div className="pointer-events-none fixed z-100 w-full h-12 bg-gradient-to-b from-landing-base from-0% from-landing-base via-80% to-transparent" />
       <header className="fixed z-200 top-0 left-0 right-0 w-full max-w-[1450px] mx-auto h-16 flex items-center justify-end px-4 md:px-8">
         <Link href="/">
           <Logo />

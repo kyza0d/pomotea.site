@@ -40,7 +40,7 @@ export const landingCopy: LandingCopy = {
     },
     description: "Pomotea guides you into a state of flow with AI-driven task organization and focused work sessions, turning your goals into progress without the overwhelm.",
     emailPlaceholder: "your@email.com",
-    buttonText: "Join the waitlist",
+    buttonText: "Join waitlist",
     buttonTextShort: ""
   },
   overview: {

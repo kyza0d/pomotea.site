@@ -8,12 +8,12 @@ import type { IconType } from "react-icons";
 import { tasksWorkflow } from "./tasks.workflow";
 import { aiWorkflow } from "./ai.workflow";
 import { goalsWorkflow } from "./goals.workflow";
-import { settingsWorkflow } from "./settings.workflow";
 import { cn } from "@/lib/utils";
 import { MascotProps } from "@/components/ui/mascot";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Animation configuration types
 type AnimationConfig = {
   order: "visual-first" | "copy-first" | "interleave" | "simultaneous";
   visual: gsap.TweenVars;
@@ -51,68 +51,214 @@ export type FeatureData = {
   sharedCopyPhases?: string[][];
 };
 
-export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActivate: (i: number) => void }> = ({
-  data,
-  index,
-  onActivate,
-}) => {
-  const sectionRef = useRef<HTMLElement>(null);
+type DisplaySectionProps = {
+  data: FeatureData;
+  index: number;
+  onActivate: (index: number) => void;
+};
 
+// Constants for consistent styling
+const ANIMATION_CLASSES = {
+  copyFeatureItem: "anim-copy-feature-item",
+  copyDescription: "anim-copy-desc",
+  copyItem: "anim-copy-item",
+  visualItem: "anim-visual-item",
+  copyPhase: "copy-phase",
+  workflowContainer: "workflow-container"
+} as const;
+
+const SECTION_CLASSES = {
+  section: cn(
+    "mx-auto grid h-screen items-center px-0 min-[1100px]:px-10 min-[1100px]:max-h-screen",
+    "max-w-[1950px] gap-8 md:gap-0",
+    "min-[1100px]:grid-cols-2"
+  ),
+  contentWrapper: cn(
+    "flex items-start",
+    "justify-start",
+    "order-2 min-[1100px]:order-1"
+  ),
+  contentInner: cn(
+    "w-full sm:flex md:flex-col",
+    "px-4 sm:pl-4 sm:pr-8 md:pr-16"
+  ),
+  contentSpacing: "space-y-4 sm:space-y-6 h-110 w-full",
+  visualWrapper: cn(
+    "relative order-1 mx-0",
+    "min-[1100px]:order-2",
+    "h-[40vh] min-[1100px]:h-[60vh] lg:max-h-[70vh]",
+    "pointer-events-none rounded-none"
+  ),
+  visualOverlay: cn(
+    "absolute inset-0 pointer-events-none",
+    "p-4 sm:p-6 md:p-8"
+  )
+} as const;
+
+const TEXT_CLASSES = {
+  heading: cn(
+    "max-w-none sm:max-w-[24ch]",
+    "text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
+  ),
+  description: cn(
+    "max-w-none sm:max-w-[60ch]",
+    "mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed"
+  ),
+  listContainer: cn(
+    "list-disc space-y-2 sm:space-y-4",
+    "pl-4 sm:pl-6 mt-3 sm:mt-4"
+  ),
+  listItem: "text-sm sm:text-base leading-relaxed",
+  childrenContainer: "mt-4 sm:mt-6"
+} as const;
+
+/**
+ * Renders phase content for workflow sections
+ */
+const PhaseContentRenderer: FC<{
+  phaseContent: Record<string, PhaseContent>;
+}> = ({ phaseContent }) => (
+  <>
+    {Object.entries(phaseContent).map(([phase, content], idx) => (
+      <div
+        key={phase}
+        className={cn(
+          ANIMATION_CLASSES.copyPhase,
+          `copy-phase-${phase}`,
+          "absolute top-0 left-0 w-full gap-6 items-center grid grid-cols-2 min-[1100px]:block"
+        )}
+      >
+        <div>
+          <h2
+            className={TEXT_CLASSES.heading}
+            dangerouslySetInnerHTML={{
+              __html: content.heading.replace(
+                /optimize your workflow|gets things done/g,
+                "<span class='text-landing-primary'>$&</span>"
+              ),
+            }}
+          />
+          <p className={TEXT_CLASSES.description}>
+            {content.description}
+          </p>
+        </div>
+        {content.listItems && (
+          <ul className={TEXT_CLASSES.listContainer}>
+            {content.listItems.map((item) => (
+              <li key={item} className={TEXT_CLASSES.listItem}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))}
+  </>
+);
+
+/**
+ * Renders static content for non-workflow sections
+ */
+const StaticContentRenderer: FC<{
+  heading: string;
+  description: string;
+}> = ({ heading, description }) => (
+  <>
+    <h2
+      className={TEXT_CLASSES.heading}
+      dangerouslySetInnerHTML={{
+        __html: heading.replace(
+          "Everything revolves around your goals",
+          "<span>Everything revolves around your goals</span>"
+        ),
+      }}
+    />
+    <p className={cn(TEXT_CLASSES.description, ANIMATION_CLASSES.copyDescription)}>
+      {description}
+    </p>
+  </>
+);
+
+/**
+ * Sets up GSAP animations for the section
+ */
+const useDisplayAnimation = (
+  data: FeatureData,
+  index: number,
+  onActivate: (index: number) => void,
+  sectionRef: React.RefObject<HTMLElement>
+) => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Check if we're on mobile to adjust scroll behavior
-      const isMobile = window.innerWidth < 768;
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          pin: true, // Keep pin functionality on all devices
-          scrub: 1, // Keep consistent scrub behavior
-          start: data.animation && data.animation.start || "center center",
-          end: data.animation && data.animation.end || "+=1400%", // Keep original scroll distance
+          pin: true,
+          scrub: 1,
+          start: "top top",
+          end: data.animation?.end ?? "+=1400%",
           onEnter: () => onActivate(index),
           onEnterBack: () => onActivate(index),
         },
       });
 
       if (data.hasWorkflow && data.workflowStates && data.phaseContent) {
-        // Initial setup for workflow text
-        const copyPhases = gsap.utils.toArray<HTMLElement>(".copy-phase");
-
-        gsap.set(copyPhases, { autoAlpha: 0, y: 15 }); // Keep original animation values
-        gsap.set(copyPhases[0], { autoAlpha: 1, y: 0 });
-
-        // Updated workflow routing logic
-        if (data.workflowType === "tasks") {
-          tasksWorkflow(tl, data);
-        } else if (data.workflowType === "ai") {
-          aiWorkflow(tl, data);
-        } else if (data.workflowType === "goals") {
-          goalsWorkflow(tl, data);
-        } else if (data.workflowType === "settings") {
-          settingsWorkflow(tl, data);
-        }
+        setupWorkflowAnimation(tl, data);
       } else {
-        // Non-workflow animations - keep original values
-        tl.from(".anim-copy-feature-item", { autoAlpha: 0, y: 30 })
-          .from(".anim-copy-desc", { autoAlpha: 0, y: 30 }, "-=0.3")
-          .from(".anim-copy-item", { autoAlpha: 0, y: 20, stagger: 0.2 }, "-=0.2");
-
-        const visualItems = gsap.utils.toArray<HTMLElement>(".anim-visual-item");
-        if (data?.animation) {
-          const { order, visual: visualVars } = data.animation;
-          if (visualItems.length > 0) {
-            const position = order === "simultaneous" ? "<" : undefined;
-            tl.from(visualItems, visualVars, position);
-          }
-        }
+        setupStaticAnimation(tl, data);
       }
     }, sectionRef);
 
-    return () => {
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, [data, index, onActivate]);
+};
+
+/**
+ * Sets up workflow-specific animations
+ */
+const setupWorkflowAnimation = (tl: gsap.core.Timeline, data: FeatureData) => {
+  const copyPhases = gsap.utils.toArray<HTMLElement>(`.${ANIMATION_CLASSES.copyPhase}`);
+
+  gsap.set(copyPhases, { autoAlpha: 0, y: 15 });
+  gsap.set(copyPhases[0], { autoAlpha: 1, y: 0 });
+
+  const workflowMap = {
+    tasks: tasksWorkflow,
+    ai: aiWorkflow,
+    goals: goalsWorkflow,
+  } as const;
+
+  const workflowHandler = data.workflowType && workflowMap[data.workflowType];
+  if (workflowHandler) {
+    workflowHandler(tl, data);
+  }
+};
+
+/**
+ * Sets up static content animations
+ */
+const setupStaticAnimation = (tl: gsap.core.Timeline, data: FeatureData) => {
+  tl.from(`.${ANIMATION_CLASSES.copyFeatureItem}`, { autoAlpha: 0, y: 30 })
+    .from(`.${ANIMATION_CLASSES.copyDescription}`, { autoAlpha: 0, y: 30 }, "-=0.3")
+    .from(`.${ANIMATION_CLASSES.copyItem}`, { autoAlpha: 0, y: 20, stagger: 0.2 }, "-=0.2");
+
+  const visualItems = gsap.utils.toArray<HTMLElement>(`.${ANIMATION_CLASSES.visualItem}`);
+
+  if (data.animation && visualItems.length > 0) {
+    const { order, visual: visualVars } = data.animation;
+    const position = order === "simultaneous" ? "<" : undefined;
+    tl.from(visualItems, visualVars, position);
+  }
+};
+
+export const DisplaySection: FC<DisplaySectionProps> = ({
+  data,
+  index,
+  onActivate,
+}) => {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useDisplayAnimation(data, index, onActivate, sectionRef);
 
   const hasWorkflow = data.hasWorkflow && data.phaseContent;
   const initialContent = {
@@ -123,14 +269,12 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="mx-auto pt-8 sm:pt-12 mt-20 sm:mt-20 grid max-w-[1950px] gap-8 md:gap-0 md:grid-cols-2"
-    >
+    <section ref={sectionRef} className={SECTION_CLASSES.section}>
       {/* Content Section */}
-      <div className="flex items-start md:items-center justify-start md:justify-end order-2 md:order-1">
-        <div className="w-full max-w-none sm:max-w-[580px] px-4 sm:pl-4 sm:pr-8 md:pr-16">
-          <div className="space-y-4 sm:space-y-6">
+      <div className={SECTION_CLASSES.contentWrapper}>
+        <div className={SECTION_CLASSES.contentInner}>
+          <div className={SECTION_CLASSES.contentSpacing}>
+            {/* Feature Item */}
             <div>
               <FeatureItem
                 {...data}
@@ -142,79 +286,46 @@ export const DisplaySection: React.FC<{ data: FeatureData; index: number; onActi
                 padding="p-3 px-4 sm:p-4 sm:px-5"
               />
             </div>
+
+            {/* Dynamic Content */}
             <div className="relative">
               {hasWorkflow ? (
-                Object.entries(data.phaseContent || {}).map(([phase, content], idx) => (
-                  <div
-                    key={phase}
-                    className={cn(
-                      "copy-phase",
-                      `copy-phase-${phase}`,
-                      idx !== 0 && "absolute top-0 left-0 w-full"
-                    )}
-                  >
-                    <h2
-                      className="max-w-none sm:max-w-[24ch] text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
-                      dangerouslySetInnerHTML={{
-                        __html: content.heading.replace(
-                          /optimize your workflow|gets things done/g,
-                          "<span class='text-landing-primary'>$&</span>"
-                        ),
-                      }}
-                    />
-                    <p className="max-w-none sm:max-w-[60ch] mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">
-                      {content.description}
-                    </p>
-                    {content.listItems && (
-                      <ul className="list-disc space-y-2 sm:space-y-4 pl-4 sm:pl-6 mt-3 sm:mt-4">
-                        {content.listItems.map((item) => (
-                          <li key={item} className="text-sm sm:text-base leading-relaxed">
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                ))
+                <PhaseContentRenderer phaseContent={data.phaseContent!} />
               ) : (
-                <>
-                  <h2
-                    className="max-w-none sm:max-w-[24ch] text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
-                    dangerouslySetInnerHTML={{
-                      __html: initialContent.heading.replace(
-                        "Everything revolves around your goals",
-                        "<span>Everything revolves around your goals</span>"
-                      ),
-                    }}
-                  />
-                  <p className="max-w-none sm:max-w-[60ch] mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed anim-copy-desc">
-                    {initialContent.description}
-                  </p>
-                </>
+                <StaticContentRenderer
+                  heading={initialContent.heading}
+                  description={initialContent.description}
+                />
               )}
             </div>
           </div>
+
+          {/* Additional Children */}
           {initialContent.children && (
-            <div className="mt-4 sm:mt-6">{initialContent.children}</div>
+            <div className={TEXT_CLASSES.childrenContainer}>
+              {initialContent.children}
+            </div>
           )}
         </div>
       </div>
 
       {/* Visual Section */}
-      <div className="relative order-1 mx-0 md:order-2 h-64 sm:h-80 md:h-225 max-h-[50vh] sm:max-h-[60vh] md:max-h-[90vh] pointer-events-none overflow-hidden rounded-none md:rounded-l-4xl border-0 border-y-3 md:border-3 border-landing-borders">
+      <div className={SECTION_CLASSES.visualWrapper}>
         {data.hasWorkflow ? (
-          <div className="workflow-container h-full">{data.visual}</div>
+          <div className={cn(ANIMATION_CLASSES.workflowContainer, "h-full")}>
+            {data.visual}
+          </div>
         ) : (
-          <div className="h-full">{data.visual}</div>
+          <div className="h-full">
+            {data.visual}
+          </div>
         )}
+
         {data.visualChildren && (
-          <div className="absolute inset-0 pointer-events-none p-4 sm:p-6 md:p-8">
+          <div className={SECTION_CLASSES.visualOverlay}>
             {data.visualChildren}
           </div>
         )}
-        <div className="-z-10 absolute landing-bg-grid-texture right-0 top-0 w-full h-full">
-          <div className="absolute landing-dual-inner-shadow-pseudo scale-y-150 sm:scale-y-200 origin-bottom right-0 top-0 w-full h-full" />
-        </div>
       </div>
     </section>
   );

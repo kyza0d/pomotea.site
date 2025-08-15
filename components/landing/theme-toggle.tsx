@@ -1,13 +1,12 @@
 "use client";
-import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { HiMoon, HiSun } from "react-icons/hi2";
 
 export const LandingThemeToggle = () => {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("landing-theme") as "light" | "dark" | null;
-
     const initialTheme = savedTheme || "light";
 
     setTheme(initialTheme);
@@ -24,13 +23,13 @@ export const LandingThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="z-[250] mr-4 lg:mr-0 ml-0 lg:ml-12 bg rounded-lg hover:bg-landing-base-lighter transition-colors duration-200 cursor-pointer"
+      className="z-[250] cursor-pointer mr-4 lg:mr-0 ml-0 lg:ml-12 bg rounded-lg hover:bg-landing-base-lighter transition-colors duration-200"
       aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
     >
       {theme === "light" ? (
-        <Moon size={20} className="text-landing-subtitle" />
+        <HiMoon size={20} className="text-landing-subtitle" />
       ) : (
-        <Sun size={20} className="text-landing-subtitle" />
+        <HiSun size={20} className="text-landing-subtitle" />
       )}
     </button>
   );

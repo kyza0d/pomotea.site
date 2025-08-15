@@ -10,11 +10,7 @@ export function tasksWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
 
   const states = data.workflowStates;
 
-  states.forEach((_, index) => {
-    gsap.set(`.workflow-child-${index}`, { autoAlpha: 0, y: 25 });
-  });
-
-  const phaseDurations = [0.8, 1.4, 1.4, 1.4, 1.8, 1.8, 1.8];
+  const phaseDurations = [0.8, 1.4, 1.4, 1.4, 1.8, 1.8];
 
   states.forEach((state, index) => {
     const phaseDuration = phaseDurations[index] || 1.4;
@@ -46,7 +42,7 @@ export function tasksWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
     y: 20,
     stagger: 0.2,
     ease: "power2.out",
-  }, "phase-1");
+  }, "phase-0");
 
   const timerTaskName = document.querySelector("#timer-task-name");
   const timerSessionType = document.querySelector("#timer-session-type");
@@ -59,15 +55,12 @@ export function tasksWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
     tl.to("#session-cards-scroller", { y: "-22rem", ease: "power2.inOut" }, "phase-5");
     tl.to(timerTaskName, { textContent: "Meditation" }, "phase-5");
     tl.to(timerSessionType, { textContent: "Mindfulness:" }, "phase-5");
-
-    tl.to("#session-cards-scroller", { y: "-33rem", ease: "power2.inOut" }, "phase-6");
-    tl.to(timerTaskName, { textContent: "Review project files" }, "phase-6");
-    tl.to(timerSessionType, { textContent: "Focusing on:" }, "phase-6");
   }
 
   const lastIndex = states.length - 1;
   const lastPhaseKey = states[lastIndex].phase;
-  tl.addLabel('phase-7', '+=1.8');
+
+  tl.addLabel('phase-6', '+=1.8');
   tl.to([`.workflow-child-${lastIndex}`, `.copy-phase-${lastPhaseKey}`], {
     duration: 0.6,
     autoAlpha: 1,
@@ -120,6 +113,5 @@ export function tasksWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
     createProgressTrigger("phase-2", "phase-3", timerText1, timers.focus1);
     createProgressTrigger("phase-4", "phase-5", timerTextBreak, timers.break);
     createProgressTrigger("phase-5", "phase-6", timerTextHabit, timers.meditation);
-    createProgressTrigger("phase-6", "phase-7", timerText2, timers.focus2);
   }
 }

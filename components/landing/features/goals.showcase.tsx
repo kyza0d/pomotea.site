@@ -130,7 +130,7 @@ const workflowStates: WorkflowState[] = [
 const phaseContent: Record<string, PhaseContent> = showcaseData.goals.phaseContent;
 
 const GoalsFeatureVisual = () => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-40 md:scale-60 lg:scale-90  -skew-x-6 skew-y-3">
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-40 md:scale-50 lg:scale-80  -skew-x-6 skew-y-3">
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">
         <div className="space-y-4">

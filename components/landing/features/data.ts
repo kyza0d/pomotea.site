@@ -20,22 +20,18 @@ import {
 export const aiTools = [
   {
     icon: Brain,
-    name: "Intelligent Task Breakdown",
     description: "Transform overwhelming goals into perfectly-sized, actionable tasks with AI-powered estimation and smart prioritization that adapts to your working style."
   },
   {
     icon: Calendar,
-    name: "Adaptive Daily Planning",
     description: "Experience personalized scheduling that learns your peak productivity hours and creates optimal focus-break cycles tailored to your unique rhythm."
   },
   {
     icon: MessageSquare,
-    name: "Natural Goal Creation",
     description: "Simply describe what you want to achieve in conversation - our AI instantly transforms your ideas into structured, executable action plans."
   },
   {
     icon: TrendingUp,
-    name: "Productivity Intelligence",
     description: "Receive personalized insights and coaching based on your work patterns, with actionable recommendations to optimize your focus and eliminate productivity bottlenecks."
   }
 ];
@@ -44,19 +40,16 @@ export const aiPhaseTools = {
   "accountability-partner": [
     {
       icon: MessageSquare,
-      name: "Contextual Check-ins",
       category: "session" as const,
       description: "Get timely encouragement based on your actual progress and current challenges, not generic motivation."
     },
     {
       icon: TrendingUp,
-      name: "Progress Recognition",
       category: "insight" as const,
       description: "Celebrate your wins with intelligent recognition of your accomplishments and growth patterns."
     },
     {
       icon: Activity,
-      name: "Burnout Prevention",
       category: "insight" as const,
       description: "Receive smart suggestions for rest and recovery before you hit productivity walls."
     }
@@ -64,19 +57,16 @@ export const aiPhaseTools = {
   "task-recall": [
     {
       icon: BarChart3,
-      name: "Instant Summaries",
       category: "insight" as const,
       description: "Get comprehensive overviews of your work across any time period with zero manual tracking."
     },
     {
       icon: PieChart,
-      name: "Time Allocation Analysis",
       category: "insight" as const,
       description: "Understand where your effort goes with detailed breakdowns of focus time across projects."
     },
     {
       icon: LineChart,
-      name: "Achievement Visualization",
       category: "insight" as const,
       description: "See your productivity patterns and celebrate consistent progress with beautiful data insights."
     }
@@ -84,19 +74,16 @@ export const aiPhaseTools = {
   "document-analysis": [
     {
       icon: Brain,
-      name: "Document Intelligence",
       category: "task" as const,
       description: "Instantly extract actionable insights from any document format - PDFs, notes, requirements, or ideas."
     },
     {
       icon: Workflow,
-      name: "Structure Generation",
       category: "task" as const,
       description: "Automatically organize complex information into logical task hierarchies and project phases."
     },
     {
       icon: Target,
-      name: "Smart Prioritization",
       category: "goal" as const,
       description: "Get intelligent task ordering based on dependencies, effort estimation, and strategic importance."
     }
@@ -104,19 +91,16 @@ export const aiPhaseTools = {
   "task-completion": [
     {
       icon: Target,
-      name: "Multi-level Planning",
       category: "goal" as const,
       description: "Break down complex goals into phases, tasks, and subtasks with intelligent dependency mapping."
     },
     {
       icon: Calendar,
-      name: "Timeline Estimation",
       category: "task" as const,
       description: "Get realistic project timelines with AI-powered effort estimation based on task complexity."
     },
     {
       icon: Sparkles,
-      name: "Adaptive Refinement",
       category: "task" as const,
       description: "Continuously improve task breakdowns based on your completion patterns and feedback."
     }

@@ -5,7 +5,7 @@ export interface MascotProps {
   className?: string;
 }
 
-export const Mascot: React.FC<MascotProps> = ({ size = 40, className = "" }) => {
+export const Mascot: React.FC<MascotProps> = ({ size = 50, className = "" }) => {
   return (
     <svg
       width={size}

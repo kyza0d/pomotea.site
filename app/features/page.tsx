@@ -22,6 +22,7 @@ import { featuresPageContent } from "@/copy/features";
 
 interface FeatureListingProps extends FeatureItemProps {
   details?: string[];
+  subtitle?: string
 }
 
 const FeatureListing: React.FC<FeatureListingProps> = ({
@@ -31,12 +32,11 @@ const FeatureListing: React.FC<FeatureListingProps> = ({
   details,
   iconBgColor = "bg-landing-secondary/20",
   iconColor = "text-landing-secondary",
-  borderColor = "border-landing-borders",
   padding = "p-5 px-7",
 }) => {
   return (
     <div className="flex flex-col md:flex-row items-start space-x-3 sm:space-x-4">
-      <div className={`${iconBgColor} ${padding} mb-4 md:mb-0 flex-shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl border-2 ${borderColor}`}>
+      <div className={`${iconBgColor} ${padding} mb-4 md:mb-0 flex-shrink-0 items-center justify-center rounded-xl`}>
         {Icon && <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />}
       </div>
       <div className="flex-1 min-w-0">
@@ -184,10 +184,8 @@ export default function FeaturesPage() {
                   icon={tool.icon}
                   title={tool.title}
                   subtitle={tool.subtitle}
-                  iconBgColor="bg-none"
                   borderColor="border-none"
                   details={tool.details}
-                  iconColor="text-landing-muted"
                   padding="p-2 sm:p-3"
                 />
               ))}
@@ -207,10 +205,7 @@ export default function FeaturesPage() {
                   icon={feature.icon}
                   title={feature.title}
                   subtitle={feature.subtitle}
-                  iconBgColor="bg-none"
-                  borderColor="border-none"
                   details={feature.details}
-                  iconColor="text-landing-muted"
                   padding="p-2 sm:p-3"
                 />
               ))}
@@ -230,9 +225,6 @@ export default function FeaturesPage() {
                   icon={item.icon}
                   title={item.title}
                   subtitle={item.subtitle}
-                  iconBgColor="bg-none"
-                  borderColor="border-none"
-                  iconColor="text-landing-muted"
                   padding="p-2 sm:p-3"
                 />
               ))}
@@ -252,9 +244,7 @@ export default function FeaturesPage() {
                   icon={item.icon}
                   title={item.title}
                   subtitle={item.subtitle}
-                  iconBgColor="bg-none"
                   borderColor="border-none"
-                  iconColor="text-landing-muted"
                   padding="p-2 sm:p-3"
                 />
               ))}

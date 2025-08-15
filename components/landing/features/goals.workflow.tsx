@@ -9,11 +9,6 @@ export function goalsWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
 
   const states = data.workflowStates;
 
-  // Initialize workflow elements
-  states.forEach((_, index) => {
-    gsap.set(`.workflow-child-${index}`, { autoAlpha: 0, y: 25 });
-  });
-
   // Initialize individual goal elements, not the container
   gsap.set([".yearly-view-card", ".monthly-view-card", ".new-goal-card"], { autoAlpha: 0, y: 30 });
   gsap.set(".goal-card", { autoAlpha: 0, y: 30 });
@@ -28,12 +23,6 @@ export function goalsWorkflow(tl: gsap.core.Timeline, data: FeatureData) {
     if (index > 0) {
       const prevPhaseKey = states[index - 1].phase;
       tl.to(`.copy-phase-${prevPhaseKey}`, { autoAlpha: 0, y: -15, duration: 0.4 }, `phase-${index}-=1.0`);
-      tl.to(`.workflow-child-${index - 1}`, {
-        duration: 0.6,
-        autoAlpha: 0,
-        y: -15,
-        stagger: { each: 0.15, from: "end", ease: "power2.inOut" },
-      }, "<");
     }
 
     const currentPhaseKey = state.phase;

@@ -1,81 +1,50 @@
 @theme {
-  --color-landing-primary: #00a986;
-  --color-landing-secondary: #00a986;
-  --color-landing-secondary-saturated: #006fe6;
-  --color-landing-secondary-shaded: #ffffff;
-  --color-landing-headers: #142033;
-  --color-landing-foreground: #33486a;
-  --color-landing-muted: #6a7c97;
-  --color-landing-base: #ffffff;
-  --color-landing-base-darker: #f8faff;
-  --color-landing-base-secondary: #E9EEF5;
-  --color-landing-borders: #d4e1df;
+  --color-landing-primary: #8cbe8c;
+  --color-landing-secondary: #8cbe8c;
+  --color-landing-secondary-saturated: #7ab07a;
+  --color-landing-secondary-shaded: #333333;
+  --color-landing-headers: #333333;
+  --color-landing-foreground: #444444;
+  --color-landing-muted: #666666;
+  --color-landing-base: #f8f5ed;
+  --color-landing-base-darker: #edebe4;
+  --color-landing-base-secondary: #f0ede6;
+  --color-landing-borders: #C6C5C2;
 
-  --color-landing-glow: 207 229 255;
-  --color-landing-shadow: 207 229 255;
   --landing-preview-image: url("/preview-light.png");
 }
 
 @layer base {
   [data-theme="light"] {
-    --color-landing-primary: #00a986;
-    --color-landing-secondary: #00a986;
-    --color-landing-secondary-saturated: #006fe6;
-    --color-landing-secondary-shaded: #ffffff;
-    --color-landing-headers: #142033;
-    --color-landing-foreground: #33486a;
-    --color-landing-muted: #6a7c97;
-    --color-landing-base: #ffffff;
-    --color-landing-base-darker: #f8faff;
-    --color-landing-base-secondary: #E9EEF5;
-    --color-landing-borders: #dce3ec;
+    --color-landing-primary: #8cbe8c;
+    --color-landing-secondary: #8cbe8c;
+    --color-landing-secondary-saturated: #7ab07a;
+    --color-landing-secondary-shaded: #333333;
+    --color-landing-headers: #333333;
+    --color-landing-foreground: #444444;
+    --color-landing-muted: #666666;
+    --color-landing-base: #f8f5ed;
+    --color-landing-base-darker: #edebe4;
+    --color-landing-base-secondary: #f0ede6;
+    --color-landing-borders: #C6C5C2;
 
-    --color-landing-glow: 181 211 247;
-    --color-landing-shadow: 207 229 255;
     --landing-preview-image: url("/preview-light.png");
-
-    .landing-bg-grid-texture {
-      background-image: url("/pattern-light.png");
-      background-repeat: repeat;
-      background-size: 9px;
-    }
-
-    .landing-bg-grid-texture::after {
-      background-image: url("/pattern-light.png");
-      background-repeat: repeat;
-      background-size: 9px;
-    }
   }
 
   [data-theme="dark"] {
-    --color-landing-primary: #97f4da;
-    --color-landing-secondary: #71b3ff;
-    --color-landing-secondary-saturated: #5ea8ff;
-    --color-landing-secondary-shaded: #142033;
-    --color-landing-headers: #ceddff;
-    --color-landing-foreground: #a9c5f3;
-    --color-landing-muted: #33486a;
-    --color-landing-base: #05070b;
-    --color-landing-base-darker: #040506;
-    --color-landing-base-secondary: #0a0d11;
-    --color-landing-borders: #0e1826;
+--color-landing-primary: #8cbe8c;
+    --color-landing-secondary: #8cbe8c;
+    --color-landing-secondary-saturated: #7ab07a;
+    --color-landing-secondary-shaded: #1e1e1e;
+    --color-landing-headers: #eeeeee;
+    --color-landing-foreground: #dddddd;
+    --color-landing-muted: #cccccc;
+    --color-landing-base: #282828;
+    --color-landing-base-darker: #1e1e1e;
+    --color-landing-base-secondary: #222222;
+    --color-landing-borders: #3a3a3a;
 
-    --color-landing-glow: 56 149 255;
-    --color-landing-shadow: 97 136 198;
     --landing-preview-image: url("/preview-dark.png");
-
-
-    .landing-bg-grid-texture {
-      background-image: url("/pattern.png");
-      background-repeat: repeat;
-      background-size: 9px;
-    }
-
-    .landing-bg-grid-texture::after {
-      background-image: url("/pattern.png");
-      background-repeat: repeat;
-      background-size: 9px;
-    }
   }
 }
 
@@ -108,7 +77,7 @@
     font-size: 1.7rem;
     color: var(--color-landing-headers);
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.3;
 
     @media (max-width: 768px) {
       font-size: 1.5rem;
@@ -137,29 +106,6 @@
       font-size: 0.85rem;
     }
   }
-}
-
-.landing-dual-inner-shadow-pseudo {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.landing-dual-inner-shadow-pseudo::before,
-.landing-dual-inner-shadow-pseudo::after {
-  content: "";
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  border-radius: inherit;
-}
-
-.landing-dual-inner-shadow-pseudo::before {
-  box-shadow: inset 0px 0px 40px 20px rgba(var(--color-landing-shadow) / 0.05);
-}
-
-.landing-dual-inner-shadow-pseudo::after {
-  box-shadow: inset 0px 0px 20px 6px rgba(var(--color-landing-shadow) / 0.1);
 }
 
 .landing-preview-image {

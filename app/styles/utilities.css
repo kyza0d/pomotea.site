@@ -1,32 +1,3 @@
-.bg-grid-texture {
-  background-image: url('/pattern.png');
-  background-repeat: repeat;
-  background-size: 9px;
-}
-
-.dual-inner-shadow-pseudo {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-
-.dual-inner-shadow-pseudo::before,
-.dual-inner-shadow-pseudo::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-  inset: 0;
-  border-radius: inherit;
-}
-
-.dual-inner-shadow-pseudo::before {
-  box-shadow: inset 0px 0px 60px 30px color-mix(in srgb, var(--color-theme-accent) 3%, transparent);
-}
-
-.dual-inner-shadow-pseudo::after {
-  box-shadow: inset 0px -30px 20px 10px color-mix(in srgb, var(--color-theme-accent) 3%, transparent);
-}
-
 .fade-box {
   mask-image: linear-gradient(to bottom,
       rgba(0, 0, 0, 0) 0px,
