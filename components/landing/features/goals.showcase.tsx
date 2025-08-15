@@ -50,39 +50,6 @@ const GoalCard = ({ goal, className = "", isActive = false }: { goal: typeof goa
   );
 };
 
-const YearlyGoalView = ({ className = "" }: { className?: string }) => (
-  <div className={clsx("yearly-view p-6 rounded-2xl border-3 border-landing-borders/70 bg-landing-base", className)}>
-    <div className="flex items-center justify-between mb-6">
-      <div className="flex items-center gap-3">
-        <Calendar className="w-5 h-5 text-landing-primary" />
-        <h3 className="text-md font-bold text-landing-headers">{showcaseExtras.goals.viewLabels.yearlyView.title}</h3>
-      </div>
-      <div className="flex items-center gap-2 text-sm text-landing-foreground/70">
-        <span>{showcaseExtras.goals.viewLabels.yearlyView.completedStatus}</span>
-      </div>
-    </div>
-
-    <div className="grid gap-4">
-      {goalExamples.slice(0, 2).map((goal, index) => (
-        <div key={goal.id} className="flex items-center gap-4 p-3 rounded-lg bg-landing-secondary-shaded/10">
-          <div className="flex-1">
-            <span className="text-sm font-medium text-landing-foreground">{goal.title}</span>
-            <div className="flex items-center gap-2 mt-1">
-              <div className="w-full bg-landing-borders/30 rounded-full h-2">
-                <div
-                  className="bg-landing-primary h-2 rounded-full"
-                  style={{ width: `${goal.progress}%` }}
-                />
-              </div>
-              <span className="text-xs text-landing-foreground/60">{goal.progress}%</span>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
 const MonthlyGoalView = ({ className = "" }: { className?: string }) => (
   <div className={clsx("monthly-view p-6 rounded-2xl border-3 border-landing-borders/70 bg-landing-base", className)}>
     <div className="flex items-center gap-3 mb-6">
@@ -130,15 +97,22 @@ const workflowStates: WorkflowState[] = [
 const phaseContent: Record<string, PhaseContent> = showcaseData.goals.phaseContent;
 
 const GoalsFeatureVisual = () => (
-  <div className="absolute top-1/2 left-1/2 -translate-1/2 mt-25 w-180 scale-40 md:scale-50 lg:scale-80  -skew-x-6 skew-y-3">
+  <div className="absolute top-1/2 left-1/2 -translate-1/2 origin-center min-[1100px]:origin-bottom mt-14 w-200 min-[1100px]:w-180 scale-50 lg:scale-80">
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <YearlyGoalView className="yearly-view-card" />
-          <MonthlyGoalView className="monthly-view-card" />
+
+      <div className="gap-6 grid grid-rows-2 min-[1100px]:hidden">
+        <MonthlyGoalView className="monthly-view-card w-full" />
+        <div className="gap-6 flex">
+          {goalExamples.map((goal, index) => (
+            <GoalCard key={goal.id} goal={goal} className={`goal-card-${index}`} />
+          ))}
         </div>
-        <div className="space-y-4 -translate-y-40">
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 hidden min-[1100px]:grid">
+        <div className="space-y-4 -translate-y-40 scale-80">
           <div className="space-y-3">
+            <MonthlyGoalView className="monthly-view-card" />
             {goalExamples.map((goal, index) => (
               <GoalCard key={goal.id} goal={goal} className={`goal-card-${index}`} />
             ))}

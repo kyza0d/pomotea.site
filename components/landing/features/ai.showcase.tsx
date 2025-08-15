@@ -108,7 +108,7 @@ const workflowStates: WorkflowState[] = [
 const phaseContent: Record<string, PhaseContent> = showcaseData.ai.phaseContent;
 
 const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="w-full pointer-events-none min-[1100px]:scale-100 flex p-5">
+  <div className="w-full pointer-events-none min-[1100px]:scale-100 flex p-5 pt-12">
     <div className="grid w-full">
       <div>
         <div className="relative flex h-full">
