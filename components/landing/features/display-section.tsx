@@ -46,7 +46,7 @@ export type FeatureData = {
   visualChildren?: React.ReactNode;
   workflowStates?: WorkflowState[];
   hasWorkflow?: boolean;
-  workflowType?: "tasks" | "ai" | "goals" | "settings";
+  workflowType?: "tasks" | "ai" | "goals";
   phaseContent?: Record<string, PhaseContent>;
   sharedCopyPhases?: string[][];
 };
@@ -186,7 +186,7 @@ const useDisplayAnimation = (
   data: FeatureData,
   index: number,
   onActivate: (index: number) => void,
-  sectionRef: React.RefObject<HTMLElement>
+  sectionRef: React.RefObject<HTMLElement | null>
 ) => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {

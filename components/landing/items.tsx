@@ -9,6 +9,7 @@ import { MascotProps } from "../ui/mascot";
 export type FeatureItemProps = {
   icon?: LucideIcon | IconType | FC<any>;
   title: string;
+  subtitle?: string;
   description?: string;
   iconBgColor?: string;
   iconColor?: string;
