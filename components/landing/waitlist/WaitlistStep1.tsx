@@ -64,7 +64,7 @@ export const WaitlistStep1 = ({ onSuccess, formData, isSubmitting, setIsSubmitti
         <Input
           type="text"
           placeholder="Your name"
-          className="w-full mt-1 bg-landing-base border border-landing-borders"
+          className="w-full"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -78,7 +78,7 @@ export const WaitlistStep1 = ({ onSuccess, formData, isSubmitting, setIsSubmitti
         <Input
           type="email"
           placeholder="your@email.com"
-          className="w-full mt-1 bg-landing-base border border-landing-borders"
+          className="w-full"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"

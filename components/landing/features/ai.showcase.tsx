@@ -1,7 +1,16 @@
 import { Target, CheckCircle, SearchIcon } from "lucide-react";
 import { Mascot } from "@/components/ui/mascot";
-import { DisplaySection, type FeatureData, type WorkflowState, type PhaseContent } from "./display-section";
-import { showcaseData, workflowMessages, showcaseExtras } from "@/copy/showcase";
+import {
+  DisplaySection,
+  type FeatureData,
+  type WorkflowState,
+  type PhaseContent,
+} from "./display-section";
+import {
+  showcaseData,
+  workflowMessages,
+  showcaseExtras,
+} from "@/copy/showcase";
 
 import React from "react";
 
@@ -11,7 +20,7 @@ import {
   MultiLevelTaskListCard,
   type MultiLevelTask,
   MonthlySummaryCard,
-  FileAttachmentChip
+  FileAttachmentChip,
 } from "./shared/workflow-components";
 import { FaList } from "react-icons/fa";
 
@@ -34,7 +43,8 @@ const GoalPlanningCard = () => (
   </div>
 );
 
-const appDevelopmentTasks: MultiLevelTask[] = showcaseExtras.ai.taskExample.phases;
+const appDevelopmentTasks: MultiLevelTask[] =
+  showcaseExtras.ai.taskExample.phases;
 
 const workflowStates: WorkflowState[] = [
   {
@@ -46,9 +56,19 @@ const workflowStates: WorkflowState[] = [
       <MessageRow key="user-overwhelmed" isUser={true}>
         {workflowMessages.ai["accountability-partner"].userOverwhelmed}
       </MessageRow>,
-      <MessageRow key="ai-reassurance" avatarIcon={Mascot} showTimeline={true} isJsx={true}>
+      <MessageRow
+        key="ai-reassurance"
+        avatarIcon={Mascot}
+        showTimeline={true}
+        isJsx={true}
+      >
         <MessageBubble isUser={false}>
-          <span dangerouslySetInnerHTML={{ __html: workflowMessages.ai["accountability-partner"].aiReassurance }} />
+          <span
+            dangerouslySetInnerHTML={{
+              __html:
+                workflowMessages.ai["accountability-partner"].aiReassurance,
+            }}
+          />
         </MessageBubble>
       </MessageRow>,
     ],
@@ -63,7 +83,12 @@ const workflowStates: WorkflowState[] = [
       <MessageRow key="ai-recall-intro" avatarIcon={Mascot} showTimeline={true}>
         {workflowMessages.ai["task-recall"].aiResponse}
       </MessageRow>,
-      <MessageRow key="ai-summary-card" avatarIcon={SearchIcon} isJsx={true} showTimeline={true}>
+      <MessageRow
+        key="ai-summary-card"
+        avatarIcon={SearchIcon}
+        isJsx={true}
+        showTimeline={true}
+      >
         <MonthlySummaryCard />
       </MessageRow>,
     ],
@@ -75,15 +100,28 @@ const workflowStates: WorkflowState[] = [
       <MessageRow key="user-goal" isUser={true} isJsx={true}>
         <div className="flex flex-col items-end gap-2">
           <MessageBubble isUser={true}>
-            <span dangerouslySetInnerHTML={{ __html: workflowMessages.ai["document-analysis"].userRequest }} />
+            <span
+              dangerouslySetInnerHTML={{
+                __html: workflowMessages.ai["document-analysis"].userRequest,
+              }}
+            />
           </MessageBubble>
           <FileAttachmentChip fileName="PRD.txt" />
         </div>
       </MessageRow>,
       <MessageRow key="ai-confirm" avatarIcon={Mascot} showTimeline={true}>
-        <span dangerouslySetInnerHTML={{ __html: workflowMessages.ai["document-analysis"].aiConfirmation }} />
+        <span
+          dangerouslySetInnerHTML={{
+            __html: workflowMessages.ai["document-analysis"].aiConfirmation,
+          }}
+        />
       </MessageRow>,
-      <MessageRow key="analyzing-card" avatarIcon={Target} showTimeline={true} isJsx={true}>
+      <MessageRow
+        key="analyzing-card"
+        avatarIcon={Target}
+        showTimeline={true}
+        isJsx={true}
+      >
         <GoalPlanningCard />
       </MessageRow>,
     ],
@@ -95,7 +133,12 @@ const workflowStates: WorkflowState[] = [
       <MessageRow key="ai-tasks-done" avatarIcon={Mascot} showTimeline={true}>
         {workflowMessages.ai["task-completion"].aiCompletion}
       </MessageRow>,
-      <MessageRow key="tasks-created" avatarIcon={FaList} showTimeline={true} isJsx={true}>
+      <MessageRow
+        key="tasks-created"
+        avatarIcon={FaList}
+        showTimeline={true}
+        isJsx={true}
+      >
         <MultiLevelTaskListCard
           title={workflowMessages.ai["task-completion"].goalTitle}
           tasks={appDevelopmentTasks}
@@ -107,16 +150,26 @@ const workflowStates: WorkflowState[] = [
 
 const phaseContent: Record<string, PhaseContent> = showcaseData.ai.phaseContent;
 
-const AIAssistantVisual = ({ workflowStates }: { workflowStates: WorkflowState[] }) => (
-  <div className="w-full pointer-events-none min-[1100px]:scale-100 flex p-5 pt-12">
+const AIAssistantVisual = ({
+  workflowStates,
+}: {
+  workflowStates: WorkflowState[];
+}) => (
+  <div className="w-full pointer-events-none min-[1100px]:scale-100 flex p-5 pt-15">
     <div className="grid w-full">
       <div>
         <div className="relative flex h-full">
           {workflowStates.map((state, stateIndex) => (
-            <div key={stateIndex} className="workflow-phase absolute inset-0 top-4 px-4">
+            <div
+              key={stateIndex}
+              className="workflow-phase absolute inset-0 top-4 px-4"
+            >
               <div className="space-y-4 h-full">
                 {state.elements.map((element, elementIndex) => (
-                  <div key={`${stateIndex}-${elementIndex}`} className={`workflow-child-${stateIndex}`}>
+                  <div
+                    key={`${stateIndex}-${elementIndex}`}
+                    className={`workflow-child-${stateIndex}`}
+                  >
                     {element}
                   </div>
                 ))}
@@ -149,6 +202,12 @@ const featureData: FeatureData = {
   sharedCopyPhases: [["document-analysis", "task-completion"]],
 };
 
-export const AiFeaturesScroll = ({ index, onActivate }: { index: number; onActivate: (i: number) => void }) => (
+export const AiFeaturesScroll = ({
+  index,
+  onActivate,
+}: {
+  index: number;
+  onActivate: (i: number) => void;
+}) => (
   <DisplaySection data={featureData} index={index} onActivate={onActivate} />
 );

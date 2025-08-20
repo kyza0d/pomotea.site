@@ -44,3 +44,16 @@ export const getWaitlistStats = query({
     };
   },
 });
+
+export const getWaitlistCount = query({
+  args: {},
+  handler: async (ctx) => {
+    const allSessions = await ctx.db
+      .query("waitlist_sessions")
+      .collect();
+    
+    return {
+      totalCount: allSessions.length,
+    };
+  },
+});

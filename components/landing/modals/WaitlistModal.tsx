@@ -37,6 +37,22 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
   const [isCompleted, setIsCompleted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Handle body scroll lock when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      // Save current body overflow style
+      const originalStyle = window.getComputedStyle(document.body).overflow;
+
+      // Prevent scrolling
+      document.body.style.overflow = 'hidden';
+
+      // Cleanup function to restore scroll when modal closes
+      return () => {
+        document.body.style.overflow = originalStyle;
+      };
+    }
+  }, [isOpen]);
+
   useEffect(() => {
     // Check if user already has a completed session
     const completedSignup = localStorage.getItem("waitlist_signup_completed");
@@ -150,12 +166,26 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
 
   if (!isOpen) return null;
 
+  const Discord = () => {
+    return (
+      <Button
+        type="button"
+        variant="outline"
+        className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-3 px-4 flex items-center justify-center gap-2 transition-colors"
+        onClick={() => window.open('https://discord.gg/W8vrKhVJba', '_blank')}
+      >
+        <FaDiscord size={20} />
+        <span>Join our Discord</span>
+      </Button>
+    );
+  };
+
   return (
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-auto"
       onClick={handleBackdropClick}
     >
-      <div className="w-full max-w-md bg-landing-base border-4 border-landing-borders rounded-3xl overflow-hidden shadow-2xl mx-auto my-8 max-h-[calc(100vh-4rem)] flex flex-col">
+      <div className="w-full max-w-md bg-landing-base border-4 border-landing-borders rounded-3xl overflow-hidden shadow-2xl mx-auto my-8 max-h-[calc(80vh-4rem)] flex flex-col">
 
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-landing-borders">
@@ -204,7 +234,7 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
         </div>
 
         {/* Fixed Footer for Navigation */}
-        <div className="border-t border-landing-borders bg-landing-base p-2 flex-shrink-0">
+        <div className="border-t border-landing-borders bg-landing-base px-3 py-2 flex-shrink-0">
           <div className="flex justify-between items-center">
             {/* Previous Button */}
             {!isCompleted && step > 1 && (
@@ -212,7 +242,7 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
                 type="button"
                 variant="outline"
                 onClick={handlePreviousStep}
-                className="flex items-center gap-2 hover:bg-landing-borders/30 border-landing-borders text-landing-foreground transition-colors"
+                className="flex items-center gap-2 hover:bg-landing-borders/30 rounded-xl border-landing-borders text-landing-foreground transition-colors"
               >
                 <ChevronLeft size={16} />
                 Previous
@@ -226,24 +256,21 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
                 variant="primary"
                 onClick={handleContinue}
                 disabled={isSubmitting}
-                className="flex items-center gap-2 bg-landing-primary transition-colors duration-300 border-2 py-3 px-4 text-landing-base ml-auto"
+                className="flex items-center gap-2 rounded-xl bg-landing-primary transition-colors duration-300 border-2 py-3 px-4 text-landing-base ml-auto"
               >
                 {step === 5 ? (isSubmitting ? 'Completing...' : 'Complete Signup') : (isSubmitting ? 'Saving...' : 'Continue')}
                 {step < 5 && <ChevronRight size={16} />}
               </Button>
             )}
-
-            {/* Discord Button */}
             {isCompleted && (
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-3 px-4 flex items-center justify-center gap-2 transition-colors"
-                onClick={() => window.open('https://discord.gg/W8vrKhVJba', '_blank')}
-              >
-                <FaDiscord size={20} />
-                <span>Join our Discord</span>
-              </Button>
+              <>
+                {/* <Discord /> */}
+                <Button
+                  onClick={onClose}
+                  className=" flex items-center gap-2 rounded-xl bg-landing-primary transition-colors duration-300 border-2 py-3 px-4 text-landing-base ml-auto" >
+                  Close
+                </Button>
+              </>
             )}
           </div>
         </div>

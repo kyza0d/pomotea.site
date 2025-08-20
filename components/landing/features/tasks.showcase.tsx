@@ -166,7 +166,7 @@ const TasksVisual = () => (
 
 const TasksVisualMobile = () => (
   <div className="flex flex-row h-full overflow-hidden min-[1100px]:hidden">
-    <div className="absolute left-1/2 top-1/2 -translate-1/2 origin-bottom scale-70">
+    <div className="absolute left-1/2 top-1/2 -translate-1/2 origin-center scale-70">
       <div className="z-10" id="timer-display-wrapper">
         <div className="flex items-center space-x-3">
           <div className="relative">

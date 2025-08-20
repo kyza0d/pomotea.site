@@ -78,7 +78,7 @@ export const WaitlistForm = ({ onSuccess }: WaitlistFormProps) => {
         <Input
           type="email"
           placeholder="your@email.com"
-          className="w-full mt-1 bg-landing-base border border-landing-borders"
+          className="w-full placeholder-opacity-50 mt-1 bg-landing-base border border-landing-borders"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required

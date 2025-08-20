@@ -1,257 +1,92 @@
 "use client";
 
-import {
-  Brain,
-  Calendar,
-  MessageSquare,
-  TrendingUp,
-  Target,
-  Workflow,
-  BarChart3,
-  Activity,
-  LineChart,
-  PieChart,
-  Settings,
-  Palette,
-  Sliders
-} from "lucide-react";
+import { Zap, Workflow, BarChart3 } from "lucide-react";
+import { Mascot } from "@/components/ui/mascot";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { FeatureItemProps } from "@/components/landing/items";
-import { featuresPageContent } from "@/copy/features";
 
-interface FeatureListingProps extends FeatureItemProps {
-  details?: string[];
-  subtitle?: string
-}
-
-const FeatureListing: React.FC<FeatureListingProps> = ({
-  icon: Icon,
-  title,
-  subtitle,
-  details,
-  iconBgColor = "bg-landing-secondary/20",
-  iconColor = "text-landing-secondary",
-  padding = "p-5 px-7",
-}) => {
-  return (
-    <div className="flex flex-col md:flex-row items-start space-x-3 sm:space-x-4">
-      <div className={`${iconBgColor} ${padding} mb-4 md:mb-0 flex-shrink-0 items-center justify-center rounded-xl`}>
-        {Icon && <Icon size={24} className={`${iconColor} sm:w-8 sm:h-8`} />}
-      </div>
-      <div className="flex-1 min-w-0">
-        <h4 className="text-base sm:text-lg font-medium mb-1 sm:mb-2">{title}</h4>
-        <p className="text-sm sm:text-base text-landing-foreground/70 leading-relaxed">{subtitle}</p>
-        {details && details.length > 0 && (
-          <ul className="list-disc list-inside text-landing-foreground/60 mt-2 sm:mt-3 space-y-1 text-sm">
-            {details.map((detail, i) => (
-              <li key={i} className="leading-relaxed">{detail}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </div>
-  );
-};
-
-const aiTools = [
+const featuresData = [
   {
-    icon: Brain,
-    ...featuresPageContent.sections.aiTools.items[0],
-    title: featuresPageContent.sections.aiTools.items[0].title || "Default AI Tool Title",
-    subtitle: featuresPageContent.sections.aiTools.items[0].subtitle || "Default AI Tool Subtitle",
+    id: "productivity-agent",
+    slug: "productivity-agent",
+    icon: Mascot,
+    title: "Productivity Agent",
+    description: "Manage and plan your tasks hands-free with our intelligent agent"
   },
   {
-    icon: Calendar,
-    ...featuresPageContent.sections.aiTools.items[1],
-    title: featuresPageContent.sections.aiTools.items[1].title || "Default AI Tool Title",
-    subtitle: featuresPageContent.sections.aiTools.items[1].subtitle || "Default AI Tool Subtitle",
+    id: "optimized-flow",
+    slug: "optimized-flow",
+    icon: Zap,
+    title: "Optimized for Flow",
+    description: "Smart cycles promote deep focus and minimize distractions"
   },
   {
-    icon: MessageSquare,
-    ...featuresPageContent.sections.aiTools.items[2],
-    title: featuresPageContent.sections.aiTools.items[2].title || "Default AI Tool Title",
-    subtitle: featuresPageContent.sections.aiTools.items[2].subtitle || "Default AI Tool Subtitle",
-  },
-  {
-    icon: TrendingUp,
-    ...featuresPageContent.sections.aiTools.items[3],
-    title: featuresPageContent.sections.aiTools.items[3].title || "Default AI Tool Title",
-    subtitle: featuresPageContent.sections.aiTools.items[3].subtitle || "Default AI Tool Subtitle",
-  },
-];
-
-const goalWorkflowFeatures = [
-  {
-    icon: Target,
-    ...featuresPageContent.sections.goalManagement.items[0],
-    title: featuresPageContent.sections.goalManagement.items[0].title || "Default Goal Title",
-    subtitle: featuresPageContent.sections.goalManagement.items[0].subtitle || "Default Goal Subtitle",
-  },
-  {
+    id: "session-workflow",
+    slug: "session-workflow",
     icon: Workflow,
-    ...featuresPageContent.sections.goalManagement.items[1],
-    title: featuresPageContent.sections.goalManagement.items[1].title || "Default Goal Title",
-    subtitle: featuresPageContent.sections.goalManagement.items[1].subtitle || "Default Goal Subtitle",
+    title: "Session-based Workflow",
+    description: "Tasks align with goals through purpose-driven sessions"
   },
   {
+    id: "progress-tracking",
+    slug: "progress-tracking",
     icon: BarChart3,
-    ...featuresPageContent.sections.goalManagement.items[2],
-    title: featuresPageContent.sections.goalManagement.items[2].title || "Default Goal Title",
-    subtitle: featuresPageContent.sections.goalManagement.items[2].subtitle || "Default Goal Subtitle",
-  },
-];
-
-const progressTrackingItems = [
-  {
-    icon: Activity,
-    ...featuresPageContent.sections.progressTracking.items[0],
-    title: featuresPageContent.sections.progressTracking.items[0].title || "Default Progress Title",
-    subtitle: featuresPageContent.sections.progressTracking.items[0].subtitle || "Default Progress Subtitle",
-  },
-  {
-    icon: LineChart,
-    ...featuresPageContent.sections.progressTracking.items[1],
-    title: featuresPageContent.sections.progressTracking.items[1].title || "Default Progress Title",
-    subtitle: featuresPageContent.sections.progressTracking.items[1].subtitle || "Default Progress Subtitle",
-  },
-  {
-    icon: PieChart,
-    ...featuresPageContent.sections.progressTracking.items[2],
-    title: featuresPageContent.sections.progressTracking.items[2].title || "Default Progress Title",
-    subtitle: featuresPageContent.sections.progressTracking.items[2].subtitle || "Default Progress Subtitle",
-  },
-];
-
-const customizationItems = [
-  {
-    icon: Settings,
-    ...featuresPageContent.sections.customization.items[0],
-    title: featuresPageContent.sections.customization.items[0].title || "Default Customization Title",
-    subtitle: featuresPageContent.sections.customization.items[0].subtitle || "Default Customization Subtitle",
-  },
-  {
-    icon: Palette,
-    ...featuresPageContent.sections.customization.items[1],
-    title: featuresPageContent.sections.customization.items[1].title || "Default Customization Title",
-    subtitle: featuresPageContent.sections.customization.items[1].subtitle || "Default Customization Subtitle",
-  },
-  {
-    icon: Sliders,
-    ...featuresPageContent.sections.customization.items[2],
-    title: featuresPageContent.sections.customization.items[2].title || "Default Customization Title",
-    subtitle: featuresPageContent.sections.customization.items[2].subtitle || "Default Customization Subtitle",
-  },
+    title: "Track Your Progress",
+    description: "Analytics turn productivity data into actionable insights"
+  }
 ];
 
 export default function FeaturesPage() {
   return (
-    <div className="bg-landing-base-darker pt-28 md:pt-36 lg:pt-48">
-      {/* Header */}
-      <header className="border-b border-landing-borders">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3 sm:py-4">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-landing-foreground/60 hover:text-landing-foreground transition-colors text-sm"
-          >
-            <ArrowLeft size={16} />
-            {featuresPageContent.navigation.backText}
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen text-landing-foreground">
+      <div className="max-w-[1050px] mx-auto px-6 py-24">
+        <article className="flex flex-col justify-between min-h-[calc(100vh-12rem)]">
+          <div>
+            {/* Header */}
+            <header className="mb-16">
+              <h1 className="text-3xl font-normal mb-4 text-landing-headers leading-tight">
+                Features
+              </h1>
+              <p className="text-lg text-landing-foreground leading-relaxed">
+                Discover how Pomotea's intelligent features work together to create a focused,
+                productive workflow that adapts to your unique needs.
+              </p>
+            </header>
 
-      {/* Main Content */}
-      <main className="mx-auto max-w-4xl px-4 sm:px-6 py-6 sm:py-8">
-        {/* Page Title */}
-        <div className="mb-8 sm:mb-12">
-          <h1 className="text-2xl sm:text-3xl text-landing-headers mb-2">{featuresPageContent.pageTitle}</h1>
-          <p className="text-sm sm:text-base text-landing-foreground/70 leading-relaxed">
-            {featuresPageContent.pageDescription}
-          </p>
-        </div>
+            {/* Features List */}
+            <div className="gap-6 grid grid-cols-1 min-[600px]:grid-cols-2">
+              {featuresData.map((feature) => {
+                const IconComponent = feature.icon;
+                return (
+                  <article key={feature.id}>
+                    <Link href={`/features/${feature.slug}`} className="block group h-full bg-landing-base/60 hover:bg-landing-base/90 rounded-xl p-2 border-2 border-landing-borders/70">
+                      <div className="flex-shrink-0 mb-2 p-4 w-full h-32 bg-landing-borders/70 rounded-lg flex items-end justify-start group-hover:bg-landing-borders/90 transition-colors">
+                        <IconComponent className="w-9 h-9 text-landing-muted" />
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="flex-1">
+                          <h2 className="text-lg font-medium text-landing-headers mb-1 transition-colors">
+                            {feature.title}
+                          </h2>
+                          <p className="text-landing-foreground leading-relaxed">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </article>
+                );
+              })}
+            </div>
+          </div >
 
-        <div className="space-y-10 sm:space-y-16">
-          {/* AI-Powered Tools Section */}
-          <section>
-            <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.aiTools.title}</h2>
-              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
-            </div>
-            <div className="space-y-6 sm:space-y-9">
-              {aiTools.map((tool, index) => (
-                <FeatureListing
-                  key={index}
-                  icon={tool.icon}
-                  title={tool.title}
-                  subtitle={tool.subtitle}
-                  borderColor="border-none"
-                  details={tool.details}
-                  padding="p-2 sm:p-3"
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Goal Management Section */}
-          <section>
-            <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.goalManagement.title}</h2>
-              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
-            </div>
-            <div className="space-y-6 sm:space-y-9">
-              {goalWorkflowFeatures.map((feature, index) => (
-                <FeatureListing
-                  key={index}
-                  icon={feature.icon}
-                  title={feature.title}
-                  subtitle={feature.subtitle}
-                  details={feature.details}
-                  padding="p-2 sm:p-3"
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Progress Tracking Section */}
-          <section>
-            <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.progressTracking.title}</h2>
-              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
-            </div>
-            <div className="space-y-6 sm:space-y-9">
-              {progressTrackingItems.map((item, index) => (
-                <FeatureListing
-                  key={index}
-                  icon={item.icon}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  padding="p-2 sm:p-3"
-                />
-              ))}
-            </div>
-          </section>
-
-          {/* Customization Section */}
-          <section>
-            <div className="flex items-center mb-4 sm:mb-6">
-              <h2 className="text-lg text-landing-headers whitespace-nowrap">{featuresPageContent.sections.customization.title}</h2>
-              <div className="flex-1 ml-4 sm:ml-6 h-px bg-landing-borders"></div>
-            </div>
-            <div className="space-y-6 sm:space-y-9">
-              {customizationItems.map((item, index) => (
-                <FeatureListing
-                  key={index}
-                  icon={item.icon}
-                  title={item.title}
-                  subtitle={item.subtitle}
-                  borderColor="border-none"
-                  padding="p-2 sm:p-3"
-                />
-              ))}
-            </div>
-          </section>
-        </div>
-      </main>
+          {/* Footer */}
+          <footer className="mt-16 pt-8 border-t border-landing-borders">
+            <p className="text-landing-muted text-sm">
+              Ready to get started? <Link href="/" className="underline hover:no-underline">Return to homepage</Link>
+            </p>
+          </footer>
+        </article>
+      </div>
     </div>
   );
 }

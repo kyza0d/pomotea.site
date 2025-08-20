@@ -1,18 +1,22 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { LandingThemeToggle } from "./landing/theme-toggle";
 import { Logo } from "./ui/logo";
-import { FaDiscord } from "react-icons/fa";
+import { FeaturesDropdown } from "./landing/features-dropdown";
+import { ResourcesDropdown } from "./landing/resources-dropdown";
+import { ChevronDown } from "lucide-react";
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
 export const LandingHeader = () => {
   const headerBackgroundRef = useRef<HTMLDivElement>(null);
+  const [isFeatureDropdownOpen, setIsFeatureDropdownOpen] = useState(false);
+  const [isResourcesDropdownOpen, setIsResourcesDropdownOpen] = useState(false);
 
   useEffect(() => {
     if (!headerBackgroundRef.current) return;
@@ -49,23 +53,33 @@ export const LandingHeader = () => {
         className="pointer-events-none fixed z-150 top-0 left-0 right-0 w-full h-16 bg-landing-base-darker border-b-3 border-landing-borders/40 opacity-0"
       />
 
-      <header className="fixed z-200 top-0 left-0 right-0 w-full max-w-[1450px] mx-auto h-16 flex items-center justify-end px-4 md:px-8">
+      <header className="fixed z-200 top-0 left-0 right-0 w-full max-w-[1050px] mx-auto h-16 flex items-center justify-end px-4 md:px-8">
         <Link href="/" className="transition-opacity hover:opacity-80">
           <Logo />
         </Link>
         <nav className="space-x-10 flex text-sm ml-auto">
-          <Link
-            href="/features"
-            className="hover:underline transition-all duration-200 hover:text-foreground/80"
+          <div
+            className="relative z-50"
+            onMouseEnter={() => setIsFeatureDropdownOpen(true)}
+            onMouseLeave={() => setIsFeatureDropdownOpen(false)}
           >
-            Features
-          </Link>
-          <a
-            href="https://discord.gg/W8vrKhVJba"
-            className="hover:underline transition-all duration-200 hover:text-foreground/80 flex items-center"
+            <div className="cursor-default">
+              Features
+              <ChevronDown size={16} className="inline ml-4 transition-transform duration-200" style={{ rotate: isFeatureDropdownOpen ? "180deg" : "0deg" }} />
+            </div>
+            {isFeatureDropdownOpen && <FeaturesDropdown />}
+          </div>
+          <div
+            className="relative z-50"
+            onMouseEnter={() => setIsResourcesDropdownOpen(true)}
+            onMouseLeave={() => setIsResourcesDropdownOpen(false)}
           >
-            <FaDiscord className="inline mr-2" /> Discord
-          </a>
+            <div className="cursor-default">
+              Resources
+              <ChevronDown size={16} className="inline ml-4 transition-transform duration-200" style={{ rotate: isResourcesDropdownOpen ? "180deg" : "0deg" }} />
+            </div>
+            {isResourcesDropdownOpen && <ResourcesDropdown />}
+          </div>
           <LandingThemeToggle />
         </nav>
       </header>

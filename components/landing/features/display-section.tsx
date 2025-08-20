@@ -1,4 +1,3 @@
-// File: components/landing/features/display-section.tsx
 import React, { FC, useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -57,61 +56,6 @@ type DisplaySectionProps = {
   onActivate: (index: number) => void;
 };
 
-// Constants for consistent styling
-const ANIMATION_CLASSES = {
-  copyFeatureItem: "anim-copy-feature-item",
-  copyDescription: "anim-copy-desc",
-  copyItem: "anim-copy-item",
-  visualItem: "anim-visual-item",
-  copyPhase: "copy-phase",
-  workflowContainer: "workflow-container"
-} as const;
-
-const SECTION_CLASSES = {
-  section: cn(
-    "mx-auto grid h-screen items-center px-0 min-[1100px]:px-10 min-[1100px]:max-h-screen",
-    "max-w-[1950px] gap-8 md:gap-0",
-    "min-[1100px]:grid-cols-2"
-  ),
-  contentWrapper: cn(
-    "flex items-start",
-    "justify-start",
-    "order-2 min-[1100px]:order-1"
-  ),
-  contentInner: cn(
-    "w-full sm:flex md:flex-col",
-    "px-4 sm:pl-4 sm:pr-8 md:pr-16"
-  ),
-  contentSpacing: "space-y-4 sm:space-y-6 h-110 w-full",
-  visualWrapper: cn(
-    "relative order-1 mx-0",
-    "min-[1100px]:order-2",
-    "h-[40vh] min-[1100px]:h-[60vh] lg:max-h-[70vh]",
-    "pointer-events-none rounded-none"
-  ),
-  visualOverlay: cn(
-    "absolute inset-0 pointer-events-none",
-    "p-4 sm:p-6 md:p-8"
-  )
-} as const;
-
-const TEXT_CLASSES = {
-  heading: cn(
-    "max-w-none sm:max-w-[24ch]",
-    "text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
-  ),
-  description: cn(
-    "max-w-none sm:max-w-[60ch]",
-    "mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed"
-  ),
-  listContainer: cn(
-    "list-disc space-y-2 sm:space-y-4",
-    "pl-4 sm:pl-6 mt-3 sm:mt-4"
-  ),
-  listItem: "text-sm sm:text-base leading-relaxed",
-  childrenContainer: "mt-4 sm:mt-6"
-} as const;
-
 /**
  * Renders phase content for workflow sections
  */
@@ -123,29 +67,29 @@ const PhaseContentRenderer: FC<{
       <div
         key={phase}
         className={cn(
-          ANIMATION_CLASSES.copyPhase,
+          "copy-phase",
           `copy-phase-${phase}`,
-          "absolute top-0 left-0 w-full gap-6 items-center grid grid-cols-2 min-[1100px]:block"
+          "absolute top-0 left-0 w-full"
         )}
       >
         <div>
           <h2
-            className={TEXT_CLASSES.heading}
+            className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
             dangerouslySetInnerHTML={{
               __html: content.heading.replace(
                 /optimize your workflow|gets things done/g,
-                "<span class='text-landing-primary'>$&</span>"
+                "<span class='text-landing-primary'>$&</span>",
               ),
             }}
           />
-          <p className={TEXT_CLASSES.description}>
+          <p className="mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">
             {content.description}
           </p>
         </div>
         {content.listItems && (
-          <ul className={TEXT_CLASSES.listContainer}>
+          <ul className="list-disc space-y-2 sm:space-y-4 pl-4 sm:pl-6 mt-3 sm:mt-4">
             {content.listItems.map((item) => (
-              <li key={item} className={TEXT_CLASSES.listItem}>
+              <li key={item} className="text-sm sm:text-base leading-relaxed">
                 {item}
               </li>
             ))}
@@ -165,15 +109,15 @@ const StaticContentRenderer: FC<{
 }> = ({ heading, description }) => (
   <>
     <h2
-      className={TEXT_CLASSES.heading}
+      className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight"
       dangerouslySetInnerHTML={{
         __html: heading.replace(
           "Everything revolves around your goals",
-          "<span>Everything revolves around your goals</span>"
+          "<span>Everything revolves around your goals</span>",
         ),
       }}
     />
-    <p className={cn(TEXT_CLASSES.description, ANIMATION_CLASSES.copyDescription)}>
+    <p className="anim-copy-desc mt-2 sm:mt-3 text-sm sm:text-base leading-relaxed">
       {description}
     </p>
   </>
@@ -186,7 +130,7 @@ const useDisplayAnimation = (
   data: FeatureData,
   index: number,
   onActivate: (index: number) => void,
-  sectionRef: React.RefObject<HTMLElement | null>
+  sectionRef: React.RefObject<HTMLElement | null>,
 ) => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -217,7 +161,7 @@ const useDisplayAnimation = (
  * Sets up workflow-specific animations
  */
 const setupWorkflowAnimation = (tl: gsap.core.Timeline, data: FeatureData) => {
-  const copyPhases = gsap.utils.toArray<HTMLElement>(`.${ANIMATION_CLASSES.copyPhase}`);
+  const copyPhases = gsap.utils.toArray<HTMLElement>(".copy-phase");
 
   gsap.set(copyPhases, { autoAlpha: 0, y: 15 });
   gsap.set(copyPhases[0], { autoAlpha: 1, y: 0 });
@@ -238,11 +182,11 @@ const setupWorkflowAnimation = (tl: gsap.core.Timeline, data: FeatureData) => {
  * Sets up static content animations
  */
 const setupStaticAnimation = (tl: gsap.core.Timeline, data: FeatureData) => {
-  tl.from(`.${ANIMATION_CLASSES.copyFeatureItem}`, { autoAlpha: 0, y: 30 })
-    .from(`.${ANIMATION_CLASSES.copyDescription}`, { autoAlpha: 0, y: 30 }, "-=0.3")
-    .from(`.${ANIMATION_CLASSES.copyItem}`, { autoAlpha: 0, y: 20, stagger: 0.2 }, "-=0.2");
+  tl.from(".anim-copy-feature-item", { autoAlpha: 0, y: 30 })
+    .from(".anim-copy-desc", { autoAlpha: 0, y: 30 }, "-=0.3")
+    .from(".anim-copy-item", { autoAlpha: 0, y: 20, stagger: 0.2 }, "-=0.2");
 
-  const visualItems = gsap.utils.toArray<HTMLElement>(`.${ANIMATION_CLASSES.visualItem}`);
+  const visualItems = gsap.utils.toArray<HTMLElement>(".anim-visual-item");
 
   if (data.animation && visualItems.length > 0) {
     const { order, visual: visualVars } = data.animation;
@@ -269,11 +213,31 @@ export const DisplaySection: FC<DisplaySectionProps> = ({
   };
 
   return (
-    <section ref={sectionRef} className={SECTION_CLASSES.section}>
-      {/* Content Section */}
-      <div className={SECTION_CLASSES.contentWrapper}>
-        <div className={SECTION_CLASSES.contentInner}>
-          <div className={SECTION_CLASSES.contentSpacing}>
+    <section
+      ref={sectionRef}
+      className="mx-auto flex flex-col h-screen items-center min-[1100px]:items-auto px-0 min-[1100px]:px-10 max-w-[1950px] min-[1100px]:grid min-[1100px]:grid-cols-2 min-[1100px]:gap-8"
+    >
+      {/* Visual Section - 4/7 of viewport height on mobile, positioned first */}
+      <div className="relative order-1 mx-0 min-[1100px]:order-2 h-[57.14vh] min-[1100px]:h-[60vh] lg:max-h-[70vh] w-full pointer-events-none rounded-none">
+        {data.hasWorkflow ? (
+          <div className="workflow-container h-full">
+            {data.visual}
+          </div>
+        ) : (
+          <div className="h-full">{data.visual}</div>
+        )}
+
+        {data.visualChildren && (
+          <div className="absolute inset-0 pointer-events-none p-4 sm:p-6 md:p-8">
+            {data.visualChildren}
+          </div>
+        )}
+      </div>
+
+      {/* Content Section - 3/7 of viewport height on mobile, positioned at bottom */}
+      <div className="flex items-start justify-center order-2 min-[1100px]:order-1 h-[42.86vh] min-[1100px]:h-[36vh] w-full">
+        <div className="w-full px-4 sm:pl-4 sm:pr-8 md:pr-16 h-full flex flex-col justify-start">
+          <div className="space-y-4 sm:space-y-6 w-full">
             {/* Feature Item */}
             <div>
               <FeatureItem
@@ -302,30 +266,11 @@ export const DisplaySection: FC<DisplaySectionProps> = ({
 
           {/* Additional Children */}
           {initialContent.children && (
-            <div className={TEXT_CLASSES.childrenContainer}>
+            <div className="mt-4 sm:mt-6">
               {initialContent.children}
             </div>
           )}
         </div>
-      </div>
-
-      {/* Visual Section */}
-      <div className={SECTION_CLASSES.visualWrapper}>
-        {data.hasWorkflow ? (
-          <div className={cn(ANIMATION_CLASSES.workflowContainer, "h-full")}>
-            {data.visual}
-          </div>
-        ) : (
-          <div className="h-full">
-            {data.visual}
-          </div>
-        )}
-
-        {data.visualChildren && (
-          <div className={SECTION_CLASSES.visualOverlay}>
-            {data.visualChildren}
-          </div>
-        )}
       </div>
     </section>
   );

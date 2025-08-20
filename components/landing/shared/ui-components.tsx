@@ -330,13 +330,27 @@ export const SkewedSessionItem = ({
 }: SkewedSessionItemProps) => (
   <div className={clsx("session-card", id)}>
     <div className={clsx("bg-landing-base border-3 border-landing-borders/60 rounded-2xl h-30 w-120 md:w-130 flex items-center justify-between px-4 relative", className)}>
+      {/* Icon and title on the left, positioned absolute */}
       <div className={clsx("absolute flex flex-row items-center top-0 -mt-8 text-sm", iconClassName || "text-landing-foreground")}>
         <Icon className="mr-4" size={16} />
-        {title}
+        <div>{title}</div>
       </div>
+
+      {/* Extra details (48x or 2/7) on the right, positioned absolute */}
+      {(title === "Meditation" || (title !== "Break" && title !== "Meditation")) && (
+        <div className={clsx("absolute top-0 -mt-8 right-0 pr-4 text-sm font-bold", iconClassName || "text-landing-foreground", {
+          "tracking-[0.2em]": title !== "Meditation" && title !== "Break"
+        })}>
+          {title === "Meditation" ? "48x" : "2/7"}
+        </div>
+      )}
+
+      {/* Time display */}
       <div className="text-2xl font-bold pl-4 text-landing-headers">
         <span id={timeId} className="text-2xl font-bold text-landing-headers">{time}</span>
       </div>
+
+      {/* Description */}
       <div className="max-w-[300px] text-sm pr-4 text-landing-foreground/70">
         {description}
       </div>

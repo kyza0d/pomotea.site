@@ -32,7 +32,7 @@
   }
 
   [data-theme="dark"] {
---color-landing-primary: #8cbe8c;
+    --color-landing-primary: #8cbe8c;
     --color-landing-secondary: #8cbe8c;
     --color-landing-secondary-saturated: #7ab07a;
     --color-landing-secondary-shaded: #1e1e1e;
@@ -57,6 +57,10 @@
 
   @media (max-width: 768px) {
     --text-4xl: 2rem;
+  }
+
+  p {
+    max-width: 50ch
   }
 
   h1 {

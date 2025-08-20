@@ -61,7 +61,7 @@ export const WaitlistStatus = ({ sessionId, onAccessGranted }: WaitlistStatusPro
             You're on the waitlist!
           </Text>
           <Text variant="body" size="sm" className="text-landing-foreground/70 mt-1">
-            We'll notify you when we launch! Join the Discord to get product updates and development previews.
+            We'll notify you when we launch!
           </Text>
         </div>
       </div>
