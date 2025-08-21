@@ -120,7 +120,7 @@ export const goalsShowcase: FeatureShowcaseContent = {
   subtitle: "Design",
   heading: "Connect Every Effort to Your Vision",
   description:
-    "Turn broad ambitions into a clear path forward. Pomotea's goal-focused system ensures each session and task aligns with your bigger picture, helping you build momentum toward what truly matters.",
+    "Turn broad ambitions into a clear path forward. pomotea's goal-focused system ensures each session and task aligns with your bigger picture, helping you build momentum toward what truly matters.",
   phaseContent: {
     "goal-input": {
       heading: "All Your Goals, Unified",
@@ -162,12 +162,12 @@ export const tasksShowcase: FeatureShowcaseContent = {
   subtitle: "Task Management",
   heading: "Streamline Your Path to Flow",
   description:
-    "Pomotea's AI goes beyond task lists—it curates your entire workflow. Share your goals, and it crafts a tailored task structure while seamlessly scheduling focus and recharge sessions to sustain your natural flow.",
+    "pomotea's AI goes beyond task lists—it curates your entire workflow. Share your goals, and it crafts a tailored task structure while seamlessly scheduling focus and recharge sessions to sustain your natural flow.",
   phaseContent: {
     "ai-interaction": {
       heading: "Begin with Natural Dialogue",
       description:
-        "Describe your goals conversationally to Pomotea. The AI grasps nuances and converts your thoughts into fluid, actionable steps.",
+        "Describe your goals conversationally to pomotea. The AI grasps nuances and converts your thoughts into fluid, actionable steps.",
       listItems: [
         "Conversational goal input",
         "Nuance-aware task mapping",
@@ -178,7 +178,7 @@ export const tasksShowcase: FeatureShowcaseContent = {
     "task-generation": {
       heading: "See Tasks Emerge Effortlessly",
       description:
-        "Drawing from your input, Pomotea assembles a coherent task flow with thoughtful sequencing and priorities, primed for immersive sessions.",
+        "Drawing from your input, pomotea assembles a coherent task flow with thoughtful sequencing and priorities, primed for immersive sessions.",
       listItems: [
         "AI-guided task creation",
         "Thoughtful prioritization",
@@ -189,7 +189,7 @@ export const tasksShowcase: FeatureShowcaseContent = {
     "session-start": {
       heading: "Dive into Sessions <br/>Without Friction",
       description:
-        "With your path clear, Pomotea initiates focus sessions at the right moments, minimizing disruptions to help you slip into flow.",
+        "With your path clear, pomotea initiates focus sessions at the right moments, minimizing disruptions to help you slip into flow.",
       listItems: [
         "Smart session initiation",
         "Adaptive timing",
@@ -200,7 +200,7 @@ export const tasksShowcase: FeatureShowcaseContent = {
     "session-complete": {
       heading: "Track Momentum <br/>Intuitively",
       description:
-        "Upon session end, Pomotea logs your advances and refines future tasks and timings based on your evolving patterns.",
+        "Upon session end, pomotea logs your advances and refines future tasks and timings based on your evolving patterns.",
       listItems: [
         "Seamless progress capture",
         "Pattern-based adjustments",
@@ -211,7 +211,7 @@ export const tasksShowcase: FeatureShowcaseContent = {
     "break-start": {
       heading: "Refresh with Intentional Pauses",
       description:
-        "Post-focus, Pomotea cues a break to restore energy, setting the stage for mindful recharge.",
+        "Post-focus, pomotea cues a break to restore energy, setting the stage for mindful recharge.",
       listItems: [
         "Timed break prompts",
         "Flexible durations",
@@ -222,7 +222,7 @@ export const tasksShowcase: FeatureShowcaseContent = {
     "habit-start": {
       heading: "Weave in Restorative Habits",
       description:
-        "After breaks, Pomotea suggests brief mindfulness practices, like meditation, to realign your focus gently.",
+        "After breaks, pomotea suggests brief mindfulness practices, like meditation, to realign your focus gently.",
       listItems: [
         "Habit seamless blending",
         "Guided wellness moments",
@@ -233,7 +233,7 @@ export const tasksShowcase: FeatureShowcaseContent = {
     "session-start-2": {
       heading: "Sustain Your Rhythm",
       description:
-        "Refreshed, Pomotea guides you to the next step, easing re-entry to maintain uninterrupted progress.",
+        "Refreshed, pomotea guides you to the next step, easing re-entry to maintain uninterrupted progress.",
       listItems: [
         "Next-task auto-queue",
         "Momentum preservation",

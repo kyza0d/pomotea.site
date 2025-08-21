@@ -2,6 +2,27 @@ import { mutation } from "../_generated/server";
 import { v } from "convex/values";
 
 const ACTIVE_SESSIONS_LIMIT = 100; // Can be made configurable via env vars
+const DEFAULT_HYPE_COUNT = 19; // Starting fake hype counter
+
+// Helper function to increment the hype counter
+const incrementHypeCounter = async (ctx: any) => {
+  const counter = await ctx.db
+    .query("waitlist_counter")
+    .withIndex("by_name", (q: any) => q.eq("name", "hype"))
+    .first();
+
+  if (counter) {
+    await ctx.db.patch(counter._id, {
+      count: counter.count + 1,
+    });
+  } else {
+    // Initialize counter with default value + 1 (since this is the first signup)
+    await ctx.db.insert("waitlist_counter", {
+      name: "hype",
+      count: DEFAULT_HYPE_COUNT + 1,
+    });
+  }
+};
 
 export const joinWaitlist = mutation({
   args: { 
@@ -48,6 +69,9 @@ export const joinWaitlist = mutation({
         .collect();
       position = waitingSessions.length + 1;
     }
+
+    // Increment the hype counter
+    await incrementHypeCounter(ctx);
 
     const session = await ctx.db.insert("waitlist_sessions", {
       sessionId: args.sessionId,
@@ -197,6 +221,9 @@ export const completeWaitlistSignup = mutation({
         .collect();
       position = waitingSessions.length + 1;
     }
+
+    // Increment the hype counter
+    await incrementHypeCounter(ctx);
 
     // Create complete waitlist entry
     const session = await ctx.db.insert("waitlist_sessions", {

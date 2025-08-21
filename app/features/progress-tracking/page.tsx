@@ -5,113 +5,138 @@ import Link from "next/link";
 
 export default function ProgressTrackingPage() {
   return (
-    <>
+    <article>
       {/* Header */}
-      <header className="mb-12">
+      <header>
         <div className="flex items-center gap-4 mb-6">
           <div className="w-16 h-16 bg-landing-accent/10 rounded-lg flex items-center justify-center">
-            <BarChart3 className="w-13 h-13 text-landing-muted" />
+            <BarChart3 className="w-12 h-12 text-landing-muted" aria-hidden="true" />
           </div>
           <div>
             <h1 className="font-normal text-landing-foreground leading-tight">
               Progress Tracking
             </h1>
             <p className="text-landing-muted mt-1">
-              Analytics that drive productivity insights
+              Analytics that turn focus into measurable progress
             </p>
           </div>
         </div>
       </header>
 
+      <hr />
+
       {/* Content */}
       <article className="prose prose-lg max-w-none">
         <p className="text-landing-foreground/90 leading-relaxed mb-8">
-          Turn your productivity data into actionable insights. Understand your patterns,
-          identify peak performance times, and optimize your workflow based on real evidence.
+          Transform activity into insight. See when you do your best work, what fuels momentum,
+          and where to adjust—so every session moves your goals forward.
         </p>
 
-        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Comprehensive Analytics</h2>
+        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Comprehensive analytics</h2>
         <p className="text-landing-foreground/90 leading-relaxed mb-6">
-          Our tracking system captures detailed data about your work patterns, focus quality,
-          and goal progress. Unlike simple time trackers, we measure the effectiveness and
-          impact of your work sessions.
+          Beyond time spent, Pomotea measures focus quality, energy patterns, and goal progress
+          across your day, week, and month. Get context-rich analytics that show effectiveness and impact.
         </p>
 
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Focus Quality Metrics</h3>
+        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Focus quality metrics</h3>
         <p className="text-landing-foreground/90 leading-relaxed mb-6">
-          Track not just time spent, but quality of focus. Metrics include session completion
-          rates, distraction frequency, and subjective focus ratings to give you a complete
-          picture of your concentration patterns.
+          Track completion rate, distraction frequency, session consistency, and self-rated focus to
+          understand how deeply you&rsquo;re working—not just how long.
         </p>
 
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Energy Pattern Analysis</h3>
+        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Energy pattern analysis</h3>
         <p className="text-landing-foreground/90 leading-relaxed mb-6">
-          Identify your natural energy rhythms throughout the day and week. Discover when
-          you're most productive for different types of work and schedule accordingly.
+          Surface your natural rhythms by hour and day. Schedule deep work when your energy peaks, and
+          save lighter tasks for low-energy windows.
         </p>
 
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Goal Progress Visualization</h3>
+        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Goal progress visualization</h3>
         <p className="text-landing-foreground/90 leading-relaxed mb-6">
-          See your progress toward long-term goals broken down by daily, weekly, and monthly
-          contributions. Understand which activities drive the most meaningful progress.
+          See contribution to goals over time with rollups by day, week, and month. Spot which activities
+          create outsized progress—and double down on what works.
         </p>
 
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Productivity Trends</h3>
+        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Productivity trends</h3>
         <p className="text-landing-foreground/90 leading-relaxed mb-6">
-          Track how your productivity changes over time. Identify factors that improve or
-          hinder your performance, from sleep patterns to work environment changes.
+          Monitor how variables like sleep, session length, and environment influence your performance.
+          Identify patterns, run small experiments, and improve with evidence.
         </p>
 
-        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Key Insights</h2>
+        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Works with Pomotea’s core features</h2>
+        <ul className="space-y-4 mb-2">
+          <li className="text-landing-foreground/90">
+            <strong>Productivity Agent.</strong> Your Agent keeps tasks organized and outcomes logged,
+            giving analytics clean, structured data.{" "}
+            <Link href="/features/productivity-agent" className="text-landing-accent underline hover:no-underline">
+              Learn more
+            </Link>
+            .
+          </li>
+          <li className="text-landing-foreground/90">
+            <strong>Flow.</strong> Single-task focus reduces context switching, so your metrics reflect
+            true deep work.{" "}
+            <Link href="/features/flow" className="text-landing-accent underline hover:no-underline">
+              Explore Flow
+            </Link>
+            .
+          </li>
+          <li className="text-landing-foreground/90">
+            <strong>Goal-centric.</strong> Every task rolls up to a goal, so dashboards show real movement
+            toward what matters.{" "}
+            <Link href="/features/goals" className="text-landing-accent underline hover:no-underline">
+              See goals
+            </Link>
+            .
+          </li>
+          <li className="text-landing-foreground/90">
+            <strong>Auto Sessions.</strong> Configurable sessions feed consistent, comparable metrics for
+            accurate trend analysis.{" "}
+            <Link href="/features/sessions" className="text-landing-accent underline hover:no-underline">
+              Customize sessions
+            </Link>
+            .
+          </li>
+        </ul>
 
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Peak Performance Windows</h3>
-        <p className="text-landing-foreground/90 leading-relaxed mb-4">
-          Discover your optimal times for different types of work based on completion rates
-          and quality metrics.
-        </p>
+        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Key insights</h2>
+        <ul className="space-y-3 mb-8">
+          <li className="text-landing-foreground/90">
+            <strong>Peak performance windows:</strong> Discover the best times for deep work vs. admin based on completion and quality.
+          </li>
+          <li className="text-landing-foreground/90">
+            <strong>Task complexity patterns:</strong> See how long different task types actually take to improve planning and estimates.
+          </li>
+          <li className="text-landing-foreground/90">
+            <strong>Break effectiveness:</strong> Learn which recovery activities restore focus and energy the fastest.
+          </li>
+          <li className="text-landing-foreground/90">
+            <strong>Goal achievement rate:</strong> Track success across goal types to refine how you set and pursue outcomes.
+          </li>
+        </ul>
 
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Task Complexity Patterns</h3>
-        <p className="text-landing-foreground/90 leading-relaxed mb-4">
-          Learn how long different types of tasks actually take you, improving future planning
-          and estimation accuracy.
-        </p>
-
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Break Effectiveness</h3>
-        <p className="text-landing-foreground/90 leading-relaxed mb-4">
-          Understand which break activities best restore your focus and energy for optimal
-          work-rest balance.
-        </p>
-
-        <h3 className="font-medium text-landing-foreground mt-8 mb-4">Goal Achievement Rate</h3>
-        <p className="text-landing-foreground/90 leading-relaxed mb-4">
-          Track your success rate with different types of goals to refine your goal-setting
-          and achievement strategies.
-        </p>
-
-        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Privacy First</h2>
+        <h2 className="font-medium text-landing-foreground mt-12 mb-6">Privacy‑first by design</h2>
         <p className="text-landing-foreground/90 leading-relaxed mb-6">
-          All analytics are generated from your activity patterns and performance data.
-          We don't track the content of your work—only how you work. Your productivity
-          insights remain private and are used solely to help you improve.
+          We analyze how you work—not what you work on. No content tracking, ever. Your activity and performance
+          data stay private and are used solely to generate your personal insights.
         </p>
 
         <h2 className="font-medium text-landing-foreground mt-12 mb-6">Benefits</h2>
         <ul className="space-y-3 mb-8">
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-landing-accent mt-3 flex-shrink-0"></div>
-            <span className="text-landing-foreground/90">Data-driven workflow optimization</span>
+            <span className="text-landing-foreground/90">Schedule around your peak energy and focus windows</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-landing-accent mt-3 flex-shrink-0"></div>
-            <span className="text-landing-foreground/90">Better understanding of personal productivity patterns</span>
+            <span className="text-landing-foreground/90">Plan with confidence using accurate time and complexity patterns</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-landing-accent mt-3 flex-shrink-0"></div>
-            <span className="text-landing-foreground/90">Improved planning and time estimation</span>
+            <span className="text-landing-foreground/90">Make evidence‑based adjustments to habits and routines</span>
           </li>
           <li className="flex items-start gap-3">
             <div className="w-2 h-2 rounded-full bg-landing-accent mt-3 flex-shrink-0"></div>
-            <span className="text-landing-foreground/90">Evidence-based adjustments to work habits</span>
+            <span className="text-landing-foreground/90">See clear progress toward goals—not just time spent</span>
           </li>
         </ul>
       </article>
@@ -119,14 +144,20 @@ export default function ProgressTrackingPage() {
       {/* Footer */}
       <footer className="mt-16 pt-8 border-t border-landing-borders">
         <div className="flex items-center justify-between">
-          <Link href="/features" className="text-landing-muted hover:text-landing-foreground underline hover:no-underline">
+          <Link
+            href="/features"
+            className="text-landing-muted hover:text-landing-foreground underline hover:no-underline"
+          >
             ← Back to Features
           </Link>
-          <Link href="/" className="text-landing-muted hover:text-landing-foreground underline hover:no-underline">
-            Get Started
+          <Link
+            href="/"
+            className="text-landing-muted hover:text-landing-foreground underline hover:no-underline"
+          >
+            Start tracking with Pomotea
           </Link>
         </div>
       </footer>
-    </>
+    </article>
   );
 }

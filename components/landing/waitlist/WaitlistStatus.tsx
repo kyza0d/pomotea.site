@@ -57,6 +57,8 @@ export const WaitlistStatus = ({ sessionId, onAccessGranted }: WaitlistStatusPro
     return (
       <div className="text-start space-y-4">
         <div>
+          <div className="bg-landing-borders/50 w-full h-45 rounded-xl">
+          </div>
           <Text variant="h2" size="xl" className="text-landing-foreground">
             You're on the waitlist!
           </Text>

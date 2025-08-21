@@ -14,8 +14,8 @@ export const HeroSection = () => {
   const [isWaitlistModalOpen, setIsWaitlistModalOpen] = useState(false);
   const [email, setEmail] = useState("");
 
-  const waitlistData = useQuery(api.waitlist.queries.getWaitlistCount);
-  const waitlistCount = waitlistData?.totalCount ?? 0; // Fallback to 28 while loading
+  const hypeCounter = useQuery(api.waitlist.queries.getHypeCounter);
+  const waitlistCount = hypeCounter?.count ?? 19; // Fallback to 19 while loading
 
   return (
     <>

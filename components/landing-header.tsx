@@ -70,7 +70,7 @@ export const LandingHeader = () => {
             {isFeatureDropdownOpen && <FeaturesDropdown />}
           </div>
           <div
-            className="relative z-50"
+            className="hidden relative z-50"
             onMouseEnter={() => setIsResourcesDropdownOpen(true)}
             onMouseLeave={() => setIsResourcesDropdownOpen(false)}
           >

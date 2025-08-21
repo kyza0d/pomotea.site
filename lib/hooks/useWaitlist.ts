@@ -13,6 +13,7 @@ export function useWaitlist(sessionId?: string) {
   );
 
   const waitlistStats = useQuery(api.waitlist.queries.getWaitlistStats);
+  const hypeCounter = useQuery(api.waitlist.queries.getHypeCounter);
 
   const joinWaitlistMutation = useMutation(api.waitlist.mutations.joinWaitlist);
   const refreshSessionMutation = useMutation(api.waitlist.mutations.refreshSession);
@@ -61,6 +62,7 @@ export function useWaitlist(sessionId?: string) {
   return {
     sessionStatus,
     waitlistStats,
+    hypeCounter,
     joinWaitlist,
     refreshSession,
     isRefreshing,

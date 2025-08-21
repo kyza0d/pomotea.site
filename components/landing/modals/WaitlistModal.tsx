@@ -185,15 +185,15 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-auto"
       onClick={handleBackdropClick}
     >
-      <div className="w-full max-w-md bg-landing-base border-4 border-landing-borders rounded-3xl overflow-hidden shadow-2xl mx-auto my-8 max-h-[calc(80vh-4rem)] flex flex-col">
+      <div className="w-full max-w-md bg-landing-base border-4 border-landing-borders rounded-3xl overflow-hidden shadow-2xl mx-auto my-8 h-[calc(85vh-4rem)] flex flex-col">
 
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-landing-borders">
           <div>
-            <Text size="xl" className="text-landing-headers!">
+            <Text size="xl" className="font-bold text-landing-headers">
               Join the Waitlist
             </Text>
-            <Text size="sm" className="mt-1 text-landing-foreground!">
+            <Text size="sm" className="text-landing-muted">
               {isCompleted
                 ? "Welcome to the waitlist!"
                 : "Be first to experience structured focus"
