@@ -129,7 +129,7 @@ export const LandingHeader = () => {
                 style={{ rotate: isResourcesDropdownOpen ? "180deg" : "0deg" }}
               />
             </div>
-            <ResourcesDropdown isOpen={isResourcesDropdownOpen} onToggle={toggleResourcesDropdown} />
+            <ResourcesDropdown />
           </div>
           <LandingThemeToggle />
         </nav>
