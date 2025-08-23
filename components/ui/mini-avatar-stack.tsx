@@ -1,7 +1,7 @@
 import { User, Users2 } from "lucide-react";
 
 interface MiniAvatarStackProps {
-  count: number;
+  count: number | null | undefined;
   className?: string;
 }
 
@@ -23,7 +23,14 @@ export const MiniAvatarStack = ({ count, className = "" }: MiniAvatarStackProps)
         </div>
       </div>
       <span className="text-sm text-landing-muted font-medium">
-        {count}+ People signed-up
+        {count === null || count === undefined ? (
+          <div className="flex items-center space-x-2">
+            <div className="w-4 h-4 border-2 border-landing-muted/30 border-t-landing-primary rounded-full animate-spin"></div>
+            <span>People signed-up</span>
+          </div>
+        ) : (
+          `${count}+ People signed-up`
+        )}
       </span>
     </div>
   );

@@ -15,8 +15,8 @@ export const HeroSection = () => {
   const [email, setEmail] = useState("");
 
   const hypeCounter = useQuery(api.waitlist.queries.getHypeCounter);
-  // const waitlistCount = hypeCounter?.count ?? 19; // Fallback to 19 while loading
-  const waitlistCount = 627
+  const waitlistCount = hypeCounter?.count;
+  // const waitlistCount = 627
 
   return (
     <>
