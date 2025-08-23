@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import { FaDiscord } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Text } from "@/components/ui/text";
 import { WaitlistStatus } from "../waitlist";
@@ -166,20 +165,6 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
 
   if (!isOpen) return null;
 
-  const Discord = () => {
-    return (
-      <Button
-        type="button"
-        variant="outline"
-        className="w-full hover:bg-[#5865F2] hover:border-[#5865F2] hover:text-white rounded-xl border-landing-borders text-landing-foreground py-3 px-4 flex items-center justify-center gap-2 transition-colors"
-        onClick={() => window.open('https://discord.gg/W8vrKhVJba', '_blank')}
-      >
-        <FaDiscord size={20} />
-        <span>Join our Discord</span>
-      </Button>
-    );
-  };
-
   return (
     <div
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-auto"
@@ -188,9 +173,9 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
       <div className="w-full max-w-md bg-landing-base border-4 border-landing-borders rounded-3xl overflow-hidden shadow-2xl mx-auto my-8 h-[calc(85vh-4rem)] flex flex-col">
 
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-landing-borders">
+        <div className="flex items-center justify-between p-6 border-b-2 border-landing-borders/50">
           <div>
-            <Text size="xl" className="font-bold text-landing-headers">
+            <Text size="xl" className="font-bold text-landing-headers mb-0!">
               Join the Waitlist
             </Text>
             <Text size="sm" className="text-landing-muted">
@@ -202,7 +187,7 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-landing-borders/30 rounded-xl transition-colors"
+            className="p-2 mb-auto hover:bg-landing-borders/30 rounded-xl transition-colors"
           >
             <X size={20} className="text-landing-foreground" />
           </button>
@@ -234,7 +219,7 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
         </div>
 
         {/* Fixed Footer for Navigation */}
-        <div className="border-t border-landing-borders bg-landing-base px-3 py-2 flex-shrink-0">
+        <div className="border-t-2 border-landing-borders/50 bg-landing-base px-3 py-2 flex-shrink-0">
           <div className="flex justify-between items-center">
             {/* Previous Button */}
             {!isCompleted && step > 1 && (
@@ -267,7 +252,7 @@ export const WaitlistModal = ({ isOpen, onClose, initialEmail = "" }: WaitlistMo
                 {/* <Discord /> */}
                 <Button
                   onClick={onClose}
-                  className=" flex items-center gap-2 rounded-xl bg-landing-primary transition-colors duration-300 border-2 py-3 px-4 text-landing-base ml-auto" >
+                  className="flex items-center gap-2 rounded-xl bg-landing-primary transition-colors duration-300 py-3 px-4 text-landing-base ml-auto" >
                   Close
                 </Button>
               </>

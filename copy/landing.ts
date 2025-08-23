@@ -33,7 +33,7 @@ export interface LandingCopy {
 
 export const landingCopy: LandingCopy = {
   hero: {
-    tagline: "Find your flow, effortlessly",
+    tagline: "Where structure creates flow",
     heading: {
       main: "Stop forcing discipline.",
       highlight: "Start building structure."

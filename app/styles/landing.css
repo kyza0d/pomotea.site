@@ -16,17 +16,17 @@
 
 @layer base {
   [data-theme="light"] {
-    --color-landing-primary: #8cbe8c;
-    --color-landing-secondary: #8cbe8c;
-    --color-landing-secondary-saturated: #7ab07a;
-    --color-landing-secondary-shaded: #333333;
-    --color-landing-headers: #333333;
-    --color-landing-foreground: #444444;
-    --color-landing-muted: #666666;
-    --color-landing-base: #f8f5ed;
-    --color-landing-base-darker: #edebe4;
-    --color-landing-base-secondary: #f0ede6;
-    --color-landing-borders: #C6C5C2;
+  --color-landing-primary: #8cbe8c;
+  --color-landing-secondary: #8cbe8c;
+  --color-landing-secondary-saturated: #7ab07a;
+  --color-landing-secondary-shaded: #333333;
+  --color-landing-headers: #333333;
+  --color-landing-foreground: #444444;
+  --color-landing-muted: #666666;
+  --color-landing-base: #f8f5ed;
+  --color-landing-base-darker: #edebe4;
+  --color-landing-base-secondary: #f0ede6;
+  --color-landing-borders: #C6C5C2;
 
     --landing-preview-image: url("/preview-light.png");
   }

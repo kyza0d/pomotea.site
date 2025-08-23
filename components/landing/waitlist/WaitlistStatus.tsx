@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Clock, Users } from "lucide-react";
 import { Text } from "@/components/ui/text";
 import { useWaitlist } from "@/lib/hooks/useWaitlist";
+import { Mascot } from "@/components/ui/mascot";
 
 interface WaitlistStatusProps {
   sessionId: string;
@@ -55,17 +56,16 @@ export const WaitlistStatus = ({ sessionId, onAccessGranted }: WaitlistStatusPro
 
   if (sessionStatus.status === "active") {
     return (
-      <div className="text-start space-y-4">
-        <div>
-          <div className="bg-landing-borders/50 w-full h-45 rounded-xl">
-          </div>
-          <Text variant="h2" size="xl" className="text-landing-foreground">
-            You're on the waitlist!
-          </Text>
-          <Text variant="body" size="sm" className="text-landing-foreground/70 mt-1">
-            We'll notify you when we launch!
-          </Text>
+      <div className="text-center max-w-md mx-auto p-6">
+        <div className="bg-landing-borders/20 w-full h-45 flex items-center justify-center rounded-xl mb-5">
+          <Mascot size={32} className="text-landing-muted opacity-45" />
         </div>
+        <Text variant="h2" size="xl" className="text-landing-foreground mb-0!">
+          You're on the waitlist!
+        </Text>
+        <Text variant="body" size="sm" className="text-landing-foreground/70 mb-4">
+          Thank you for joining! We'll notify you via email as soon as we launch. Stay tuned for exciting updates!
+        </Text>
       </div>
     );
   }

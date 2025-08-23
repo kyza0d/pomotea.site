@@ -1,5 +1,3 @@
-"use client";
-
 import { Zap, Workflow, BarChart3 } from "lucide-react";
 import { Mascot } from "../ui/mascot";
 import Link from "next/link";
@@ -35,15 +33,15 @@ const coreFeatures = [
   }
 ];
 
-export const FeaturesDropdown = () => {
+export const FeaturesDropdown = ({ isOpen, onToggle }: { isOpen: boolean; onToggle: () => void }) => {
   return (
-    <div className="absolute top-full left-1/2 transform -translate-x-1/2 pt-2 w-110">
-      <div className="p-1 bg-landing-base-darker border-2 border-landing-borders/60 rounded-xl shadow-xl">
+    <div className={`${isOpen ? 'block' : 'hidden'} fixed top-15 left-0 w-screen md:absolute md:top-full md:left-1/2 md:transform md:-translate-x-1/2 md:pt-2 md:w-110`}>
+      <div className="p-1 bg-landing-base-darker border-2 border-landing-borders/60 rounded-b-xl md:rounded-xl shadow-xl md:w-full">
         <div className="space-y-2">
           {coreFeatures.map((feature) => {
             const IconComponent = feature.icon;
             return (
-              <Link key={feature.id} href={`/features/${feature.slug}`} className="block">
+              <Link key={feature.id} href={`/features/${feature.slug}`} className="block" onClick={onToggle}>
                 <div className="flex items-start space-x-3 p-2 rounded-lg hover:bg-landing-borders/30 cursor-pointer group">
                   <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-landing-borders/50 flex items-center justify-center group-hover:bg-landing-borders/70">
                     <IconComponent className="w-5 h-5 text-landing-muted" />
@@ -61,7 +59,7 @@ export const FeaturesDropdown = () => {
             );
           })}
           <div className="border-t border-landing-borders/30 pt-2 mt-2">
-            <Link href="/features" className="block">
+            <Link href="/features" className="block" onClick={onToggle}>
               <div className="p-2 rounded-lg hover:bg-landing-borders/30 cursor-pointer group text-center">
                 <p className="text-xs text-landing-muted group-hover:text-landing-headers">
                   View All Features →

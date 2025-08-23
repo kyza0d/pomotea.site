@@ -3,11 +3,13 @@ article {
     @apply text-2xl
   }
   h2 {
-    @apply text-lg font-semibold text-landing-headers
+    @apply text-lg font-semibold text-landing-headers;
+    @apply mb-3 mt-8
   }
 
   h3 {
-    @apply font-semibold text-landing-headers
+    @apply font-semibold text-landing-headers;
+    @apply mb-2 mt-6
   }
 
   ul {
@@ -15,7 +17,7 @@ article {
   }
 
   ul > li {
-    @apply ml-4
+    @apply ml-4 mt-2
   }
 
   .quote {
@@ -27,6 +29,6 @@ article {
   }
 
   p {
-    @apply mb-4
+    @apply mb-2
   }
 }
